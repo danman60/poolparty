@@ -15,7 +15,8 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   env: {
-    NEXT_PUBLIC_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA,\n        BUILD_TIME: new Date().toISOString(),
+    NEXT_PUBLIC_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA,
+    BUILD_TIME: new Date().toISOString(),
   },
   async headers() {
     return [
@@ -28,7 +29,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-
-
 
