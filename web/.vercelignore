@@ -1,0 +1,12 @@
+node_modules
+.next
+tests/
+playwright-report/
+supabase/
+docs/
+scripts/
+*.test.*
+*.spec.*
+vitest.*
+playwright.config.ts
+
