@@ -4,9 +4,12 @@ tests/
 playwright-report/
 supabase/
 docs/
-scripts/
-*.test.*
-*.spec.*
+scripts/*.test.mjs
+scripts/*.spec.mjs
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
 vitest.*
 playwright.config.ts
 
