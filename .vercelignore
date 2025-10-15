@@ -2,7 +2,7 @@ node_modules
 .next
 tests/
 playwright-report/
-supabase/
+/supabase/
 docs/
 scripts/*.test.mjs
 scripts/*.spec.mjs
