@@ -1,4 +1,6 @@
 {
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
   "crons": [
     {
       "path": "/api/ingest/uniswap",
@@ -6,4 +8,3 @@
     }
   ]
 }
-
