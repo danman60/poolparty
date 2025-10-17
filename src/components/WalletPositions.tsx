@@ -122,16 +122,28 @@ function fmtNum(n: string | number) {
 }
 
 function fmtFees(p: Position) {
-  const f0 = Number(p.uncollectedFeesToken0 || 0);
-  const f1 = Number(p.uncollectedFeesToken1 || 0);
+  // Convert from wei to human-readable amounts using token decimals
+  const decimals0 = Number(p.token0.decimals || 18);
+  const decimals1 = Number(p.token1.decimals || 18);
+
+  const rawFee0 = BigInt(p.uncollectedFeesToken0 || '0');
+  const rawFee1 = BigInt(p.uncollectedFeesToken1 || '0');
+
+  const f0 = Number(rawFee0) / Math.pow(10, decimals0);
+  const f1 = Number(rawFee1) / Math.pow(10, decimals1);
+
   if (f0 === 0 && f1 === 0) return "—";
   return `${shortAmt(f0)} ${p.token0.symbol} / ${shortAmt(f1)} ${p.token1.symbol}`;
 }
 
 function shortAmt(n: number) {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-  if (n >= 1_000) return (n / 1_000).toFixed(1) + "k";
-  return n.toFixed(4);
+  if (!isFinite(n)) return "0";
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(2) + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(2) + "k";
+  if (n >= 1) return n.toFixed(4);
+  if (n >= 0.0001) return n.toFixed(6);
+  if (n === 0) return "0";
+  return n.toExponential(2); // Very small amounts in scientific notation
 }
 
 function shortId(id: string) {
