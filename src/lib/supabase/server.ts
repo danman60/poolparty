@@ -11,6 +11,6 @@ export function getServerSupabase() {
   return createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false },
     global: { headers: { 'x-application-name': 'poolparty' } },
+    db: { schema: 'poolparty' },
   });
 }
-

@@ -42,6 +42,9 @@ export default function PoolsTable() {
     },
     placeholderData: keepPreviousData,
     staleTime: 30_000,
+    refetchInterval: 60_000,
+    refetchOnWindowFocus: true,
+    refetchIntervalInBackground: true,
   });
 
   const rowsRaw = useMemo(() => data?.data ?? [], [data?.data]);

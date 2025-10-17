@@ -10,6 +10,5 @@ export function getBrowserSupabase() {
     console.warn("Supabase env not set; returning null client");
     return null as any;
   }
-  return createClient(supabaseUrl, supabaseAnonKey);
+  return createClient(supabaseUrl, supabaseAnonKey, { db: { schema: 'poolparty' } });
 }
-
