@@ -48,31 +48,49 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: errorMsg }, { status: 502 });
     }
 
+    // Helper to safely convert to BigInt (truncate decimals)
+    const toBigInt = (val: any): bigint => {
+      if (!val) return 0n;
+      const str = String(val);
+      // If it has a decimal point, truncate it
+      const intPart = str.includes('.') ? str.split('.')[0] : str;
+      // Parse as float first, then floor, then convert to bigint
+      try {
+        return BigInt(Math.floor(Math.abs(parseFloat(intPart))));
+      } catch {
+        return 0n;
+      }
+    };
+
     // Transform positions to flatten pool data and calculate fees
-    const positions = (json.data.positions || []).map((p: any) => ({
-      id: p.id,
-      token0: p.pool?.token0 || { id: '', symbol: '?', name: '', decimals: '18' },
-      token1: p.pool?.token1 || { id: '', symbol: '?', name: '', decimals: '18' },
-      feeTier: p.pool?.feeTier || '0',
-      liquidity: p.liquidity || '0',
-      depositedToken0: p.depositedToken0 || '0',
-      depositedToken1: p.depositedToken1 || '0',
-      collectedFeesToken0: p.collectedFeesToken0 || '0',
-      collectedFeesToken1: p.collectedFeesToken1 || '0',
-      // Calculate uncollected fees as deposited - withdrawn - collected
-      uncollectedFeesToken0: String(
-        BigInt(p.depositedToken0 || 0) -
-        BigInt(p.withdrawnToken0 || 0) -
-        BigInt(p.collectedFeesToken0 || 0)
-      ),
-      uncollectedFeesToken1: String(
-        BigInt(p.depositedToken1 || 0) -
-        BigInt(p.withdrawnToken1 || 0) -
-        BigInt(p.collectedFeesToken1 || 0)
-      ),
-      tickLower: p.tickLower,
-      tickUpper: p.tickUpper,
-    }));
+    const positions = (json.data.positions || []).map((p: any) => {
+      const deposited0 = toBigInt(p.depositedToken0);
+      const withdrawn0 = toBigInt(p.withdrawnToken0);
+      const collected0 = toBigInt(p.collectedFeesToken0);
+      const deposited1 = toBigInt(p.depositedToken1);
+      const withdrawn1 = toBigInt(p.withdrawnToken1);
+      const collected1 = toBigInt(p.collectedFeesToken1);
+
+      // Calculate uncollected = deposited - withdrawn - collected
+      const uncollected0 = deposited0 - withdrawn0 - collected0;
+      const uncollected1 = deposited1 - withdrawn1 - collected1;
+
+      return {
+        id: p.id,
+        token0: p.pool?.token0 || { id: '', symbol: '?', name: '', decimals: '18' },
+        token1: p.pool?.token1 || { id: '', symbol: '?', name: '', decimals: '18' },
+        feeTier: p.pool?.feeTier || '0',
+        liquidity: p.liquidity || '0',
+        depositedToken0: p.depositedToken0 || '0',
+        depositedToken1: p.depositedToken1 || '0',
+        collectedFeesToken0: p.collectedFeesToken0 || '0',
+        collectedFeesToken1: p.collectedFeesToken1 || '0',
+        uncollectedFeesToken0: String(uncollected0 < 0n ? 0n : uncollected0),
+        uncollectedFeesToken1: String(uncollected1 < 0n ? 0n : uncollected1),
+        tickLower: p.tickLower,
+        tickUpper: p.tickUpper,
+      };
+    });
 
     return NextResponse.json({ data: positions }, { status: 200 });
   } catch (e: any) {
