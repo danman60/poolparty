@@ -3,13 +3,38 @@ import APRCalculator from "@/components/APRCalculator";
 import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
+import { getServerSupabase } from "@/lib/supabase/server";
 
 type Props = { params: Promise<{ id: string }> };
 
 async function getData(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/pools/${id}`, { cache: "no-store" });
-  if (!res.ok) return { pool: null, snapshots: [] };
-  return res.json();
+  const supabase = getServerSupabase();
+  if (!supabase) {
+    return { pool: null, snapshots: [], warning: "Supabase env not set" };
+  }
+
+  const { data: pool, error: pErr } = await supabase
+    .from("pools")
+    .select(`
+      *,
+      token0:token0_id(symbol, name),
+      token1:token1_id(symbol, name)
+    `)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (pErr) return { pool: null, snapshots: [], warning: pErr.message };
+
+  const { data: snapshots, error: sErr } = await supabase
+    .from("pool_snapshots")
+    .select("pool_id, ts, tvl_usd, volume_usd_24h, fee_apr_annual")
+    .eq("pool_id", id)
+    .order("ts", { ascending: true })
+    .limit(200);
+
+  if (sErr) return { pool, snapshots: [], warning: sErr.message };
+
+  return { pool, snapshots };
 }
 
 export default async function PoolDetailPage({ params }: Props) {
