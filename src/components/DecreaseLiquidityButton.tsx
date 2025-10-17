@@ -74,57 +74,64 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
   }, [isSuccess, addToast, chainId, hash]);
 
   return (
-    <div className="inline-flex items-center gap-2">
+    <div className="space-y-2 relative">
       <Button
         variant="outline"
-        size="sm"
+        size="lg"
+        className="w-full text-base font-semibold"
         onClick={() => setOpen((v) => !v)}
         disabled={!isConnected}
-        title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : "Decrease Liquidity"}
+        title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : "Withdraw Liquidity"}
         aria-expanded={open}
         aria-controls={`decrease-${tokenId}`}
-        aria-label="Decrease liquidity"
+        aria-label="Withdraw liquidity"
       >
-        Decrease
+        💸 {open ? "Close" : "Withdraw Liquidity"}
       </Button>
       {open && (
-        <div id={`decrease-${tokenId}`} className="absolute z-20 mt-8 w-64 rounded-md border border-black/10 dark:border-white/10 bg-white dark:bg-black p-3 shadow" role="dialog" aria-modal="false" aria-label="Decrease liquidity dialog">
-          <div className="text-xs opacity-70 mb-2">Decrease Liquidity</div>
-          <div className="flex items-center gap-2">
+        <div id={`decrease-${tokenId}`} className="space-y-3 p-4 rounded-lg border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-gray-900" role="dialog" aria-modal="false" aria-label="Withdraw liquidity dialog">
+          <div className="text-sm font-medium">How much to withdraw?</div>
+          <div className="space-y-2">
             <input
-              type="number"
+              type="range"
               min={1}
               max={100}
               step={1}
               value={percent}
               onChange={(e) => setPercent(Number(e.target.value))}
-              className="w-20 rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
+              className="w-full"
             />
-            <span className="text-sm">%</span>
-            <Button onClick={submit} disabled={!canWrite || isPending || isConfirming} size="sm" className="ml-auto">
-              {isPending ? "Confirm…" : isConfirming ? "Pending…" : isSuccess ? "Done" : "Submit"}
-            </Button>
+            <div className="flex items-center justify-between">
+              <input
+                type="number"
+                min={1}
+                max={100}
+                step={1}
+                value={percent}
+                onChange={(e) => setPercent(Number(e.target.value))}
+                className="w-20 rounded border border-black/10 dark:border-white/10 px-3 py-2 text-sm bg-white dark:bg-black"
+              />
+              <span className="text-lg font-semibold">{percent}%</span>
+            </div>
           </div>
-          {error && <div className="mt-2 text-xs text-red-600">{error}</div>}
-          <div className="mt-2 text-[11px] opacity-60">
-            After decreasing, use Collect Fees to withdraw owed tokens.
+          <Button onClick={submit} disabled={!canWrite || isPending || isConfirming} size="lg" className="w-full">
+            {isPending ? "Confirm in Wallet…" : isConfirming ? "Withdrawing…" : isSuccess ? "✓ Withdrawn" : "Confirm Withdrawal"}
+          </Button>
+          {error && <div className="text-xs text-red-600 text-center">{error}</div>}
+          <div className="text-xs opacity-60 text-center">
+            After withdrawing, use "Collect Fees" to claim your tokens.
           </div>
-          <div className="mt-2 text-right">
-            <button className="text-xs opacity-70 hover:opacity-100" onClick={() => setOpen(false)}>
-              Close
-            </button>
-          </div>
+          {hash && (
+            <a
+              href={`${chainId === 1 ? 'https://etherscan.io' : 'https://sepolia.etherscan.io'}/tx/${hash}`}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-center text-xs underline opacity-70 hover:opacity-100"
+            >
+              View Transaction
+            </a>
+          )}
         </div>
-      )}
-      {hash && (
-        <a
-          href={`${chainId === 1 ? 'https://etherscan.io' : 'https://sepolia.etherscan.io'}/tx/${hash}`}
-          target="_blank"
-          rel="noreferrer"
-          className="text-xs underline"
-        >
-          View
-        </a>
       )}
     </div>
   );

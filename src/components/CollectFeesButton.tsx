@@ -65,28 +65,29 @@ export default function CollectFeesButton({ tokenId }: { tokenId: string }) {
   }
 
   return (
-    <div className="inline-flex items-center gap-2">
+    <div className="space-y-2">
       <Button
         onClick={onClick}
         disabled={!canWrite || isPending || isConfirming}
-        variant={canWrite ? "outline" : "outline"}
-        size="sm"
+        variant={isSuccess ? "default" : "outline"}
+        size="lg"
+        className="w-full text-base font-semibold"
         title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : "Collect accrued fees"}
         aria-label="Collect fees"
       >
-        {isPending ? "Confirm…" : isConfirming ? "Collecting…" : isSuccess ? "Collected" : "Collect Fees"}
+        💰 {isPending ? "Confirm Transaction…" : isConfirming ? "Collecting Fees…" : isSuccess ? "✓ Fees Collected" : "Collect Fees"}
       </Button>
       {hash && (
         <a
           href={`${chainId === 1 ? 'https://etherscan.io' : 'https://sepolia.etherscan.io'}/tx/${hash}`}
           target="_blank"
           rel="noreferrer"
-          className="text-xs underline"
+          className="block text-center text-xs underline opacity-70 hover:opacity-100"
         >
-          View
+          View Transaction
         </a>
       )}
-      {error && <span className="text-xs text-red-600">{error}</span>}
+      {error && <div className="text-xs text-red-600 text-center">{error}</div>}
     </div>
   );
 }

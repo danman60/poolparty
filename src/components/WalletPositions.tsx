@@ -70,34 +70,45 @@ export default function WalletPositions() {
       )}
 
       {!loading && !error && positions.length > 0 && (
-        <div className="rounded-lg border border-black/10 dark:border-white/10 overflow-x-auto">
-          <table className="w-full min-w-[700px] text-sm">
-            <thead className="bg-black/5 dark:bg-white/5">
-              <tr>
-                <th className="text-left px-3 py-2">Pair</th>
-                <th className="text-right px-3 py-2">Fee</th>
-                <th className="text-right px-3 py-2">Liquidity</th>
-                <th className="text-right px-3 py-2">Uncollected Fees</th>
-                <th className="text-right px-3 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {positions.map((p) => (
-                <tr key={p.id} className="border-t border-black/5 dark:border-white/5">
-                  <td className="px-3 py-2">{p.token0.symbol} / {p.token1.symbol}</td>
-                  <td className="px-3 py-2 text-right">{Number(p.feeTier) / 10000}%</td>
-                  <td className="px-3 py-2 text-right">{fmtNum(p.liquidity)}</td>
-                  <td className="px-3 py-2 text-right">{fmtFees(p)}</td>
-                  <td className="px-3 py-2 text-right">
-                    <div className="flex items-center gap-2 justify-end">
-                      <CollectFeesButton tokenId={p.id} />
-                      <DecreaseLiquidityButton tokenId={p.id} liquidity={p.liquidity} />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-4">
+          {positions.map((p) => (
+            <div key={p.id} className="rounded-lg border-2 border-black/10 dark:border-white/10 bg-gradient-to-br from-blue-50/30 to-purple-50/30 dark:from-blue-950/20 dark:to-purple-950/20 p-6 space-y-4">
+              {/* Position Info */}
+              <div className="space-y-3">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold">{p.token0.symbol} / {p.token1.symbol}</h3>
+                    <div className="text-xs opacity-60 mt-1">Fee: {Number(p.feeTier) / 10000}%</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs opacity-60">Position ID</div>
+                    <div className="text-xs font-mono">{shortId(p.id)}</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="space-y-1">
+                    <div className="text-xs opacity-60">Your Liquidity</div>
+                    <div className="font-medium">{fmtNum(p.liquidity)}</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-xs opacity-60">Uncollected Fees</div>
+                    <div className="font-medium">{fmtFees(p)}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-3 pt-2 border-t border-black/10 dark:border-white/10">
+                <div className="flex-1">
+                  <CollectFeesButton tokenId={p.id} />
+                </div>
+                <div className="flex-1">
+                  <DecreaseLiquidityButton tokenId={p.id} liquidity={p.liquidity} />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -121,4 +132,10 @@ function shortAmt(n: number) {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
   if (n >= 1_000) return (n / 1_000).toFixed(1) + "k";
   return n.toFixed(4);
+}
+
+function shortId(id: string) {
+  if (!id) return "—";
+  if (id.length <= 12) return id;
+  return `${id.slice(0, 8)}…${id.slice(-4)}`;
 }

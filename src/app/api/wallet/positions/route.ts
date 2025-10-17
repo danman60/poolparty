@@ -36,7 +36,12 @@ export async function GET(req: NextRequest) {
     });
     if (!res.ok) return NextResponse.json({ error: `subgraph ${res.status}` }, { status: 502 });
     const json = await res.json();
-    if (json.errors) return NextResponse.json({ error: json.errors }, { status: 502 });
+    if (json.errors) {
+      const errorMsg = Array.isArray(json.errors)
+        ? json.errors.map((e: any) => e.message || String(e)).join(", ")
+        : String(json.errors);
+      return NextResponse.json({ error: errorMsg }, { status: 502 });
+    }
     return NextResponse.json({ data: json.data.positions }, { status: 200 });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 });

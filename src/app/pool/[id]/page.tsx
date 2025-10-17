@@ -95,13 +95,17 @@ export default async function PoolDetailPage({ params }: Props) {
       <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
         <div className="text-sm opacity-70">APR Calculator</div>
         <APRCalculator initialTVL={pool?.tvl_usd ?? null} initialVolume24h={pool?.volume_usd_24h ?? null} feeBps={pool?.fee_tier ?? null} />
-        {FEATURE_MINT && (
-          <>
-            <div className="text-sm opacity-70">Provide Liquidity</div>
-            <MintPosition poolId={id} feeTier={pool?.fee_tier ?? null} token0={pool?.token0_id} token1={pool?.token1_id} />
-          </>
-        )}
       </div>
+
+      {FEATURE_MINT && pool && (
+        <div className="rounded-lg border-2 border-blue-500/50 dark:border-blue-400/50 bg-blue-50/30 dark:bg-blue-950/20 p-6 space-y-4">
+          <div className="space-y-2">
+            <h2 className="text-xl font-semibold">💧 Join This Pool</h2>
+            <p className="text-sm opacity-80">Provide liquidity to earn trading fees from {getTokenSymbols(pool)} swaps</p>
+          </div>
+          <MintPosition poolId={id} feeTier={pool?.fee_tier ?? null} token0={pool?.token0_id} token1={pool?.token1_id} />
+        </div>
+      )}
     </div>
   );
 }
