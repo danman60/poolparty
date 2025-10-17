@@ -4,7 +4,7 @@ import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{ id: string }> };
 
 async function getData(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/pools/${id}`, { cache: "no-store" });
@@ -13,7 +13,7 @@ async function getData(id: string) {
 }
 
 export default async function PoolDetailPage({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   const { pool, snapshots, warning } = await getData(id);
 
   return (
