@@ -129,11 +129,24 @@ Swap V3
 
 ---
 
+## Recent Updates (October 2025)
+
+### ✅ Completed Features
+- **Generated Pool Names**: Deterministic, memorable names for each pool (e.g., "SoakingHog", "PartyFox")
+- **Token Symbol Display**: Show token pairs with symbols instead of addresses (e.g., "USDC / WETH")
+- **Gradient Backgrounds**: Subtle page-wide gradients for both light and dark modes
+- **Enhanced Health Indicators**: Color-coded gradient banners for system status
+- **Cache Invalidation**: Refresh Data button now properly updates all indicators
+- **Next.js 15 Compatibility**: Fixed async params for pool detail pages
+- **E2E Production Tests**: Automated accessibility testing for production deployment
+
+---
+
 ## Community Requests
 
 Track and prioritize feature requests:
 1. Historical APR charts (high priority)
 2. Position simulator (high priority)
 3. Gas optimization tools (medium)
-4. Dark/light theme toggle (low)
+4. ~~Dark/light theme toggle~~ ✅ DONE (gradient backgrounds)
 5. Multiple wallet support (medium)

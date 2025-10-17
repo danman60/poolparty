@@ -28,18 +28,22 @@ View top Uniswap V3 pools sorted by TVL, volume, and APR.
 Deep dive into individual pool metrics and performance.
 
 **Features:**
+- Generated pool names (e.g., "SoakingHog", "PartyFox") for easy identification
 - Current pool state (TVL, Volume, Price)
-- Token pair information
-- Fee tier display
+- Token pair information with symbols (e.g., "USDC / WETH")
+- Fee tier display (formatted as percentage)
+- Full pool contract address display
 - Historical charts (TVL, Volume, Fees over time)
 - APR calculator (24h, 7d, 30d)
 - Price range visualization
+- Gradient page backgrounds (light & dark mode)
 
 **User Flow:**
 1. Click pool from dashboard
-2. View `/pool/[id]` page
-3. Analyze charts and metrics
-4. Use APR calculator for projections
+2. View `/pool/[id]` page with generated name
+3. See token symbols and full pool address
+4. Analyze charts and metrics
+5. Use APR calculator for projections
 
 ---
 
@@ -120,6 +124,13 @@ Hourly ingestion of pool data from Uniswap subgraph.
 
 Monitor system health and data freshness.
 
+**Features:**
+- Environment configuration banner with gradient indicators
+  - Red gradient: Missing configuration
+  - Green gradient: All systems OK
+- Manual data refresh with cache invalidation
+- Real-time freshness indicators
+
 **Endpoints:**
 - `/api/health/env` - Environment config
 - `/api/health/data` - Data freshness
@@ -133,6 +144,7 @@ Monitor system health and data freshness.
 2. View system health metrics
 3. Check data freshness
 4. Verify RPC connectivity
+5. Use "Refresh Data" button to manually update
 
 ---
 
@@ -259,11 +271,14 @@ const showCharts = process.env.NEXT_PUBLIC_FEATURE_CHARTS === 'true';
 |---------|------------|-----------|-----------|
 | Pool Dashboard | ✅ | ✅ | ✅ |
 | Pool Detail | ✅ | ✅ | ✅ |
+| Pool Names (Generated) | ✅ | ✅ | ✅ |
+| Token Symbol Display | ✅ | ✅ | ✅ |
 | Wallet Connect | ⚠️ | ✅ | ✅ |
 | Data Ingestion | ✅ | ⚠️ | ✅ |
 | Health Checks | ✅ | ✅ | ✅ |
 | APR Calculator | ✅ | ❌ | ✅ |
 | Position Minting | ❌ | ❌ | ❌ |
+| Production Page Tests | N/A | ✅ | ✅ |
 
 Legend:
 - ✅ Fully tested
