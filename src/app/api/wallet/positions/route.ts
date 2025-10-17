@@ -5,18 +5,23 @@ const ENDPOINT = process.env.SUBGRAPH_ENDPOINT || "https://api.thegraph.com/subg
 const QUERY = `query Positions($owner: Bytes!, $first: Int!) {
   positions(where: { owner: $owner }, first: $first, orderBy: liquidity, orderDirection: desc) {
     id
-    token0 { id symbol name decimals }
-    token1 { id symbol name decimals }
-    feeTier
+    pool {
+      id
+      token0 { id symbol name decimals }
+      token1 { id symbol name decimals }
+      feeTier
+    }
     liquidity
     depositedToken0
     depositedToken1
+    withdrawnToken0
+    withdrawnToken1
     collectedFeesToken0
     collectedFeesToken1
-    uncollectedFeesToken0
-    uncollectedFeesToken1
-    tickLower { tickIdx }
-    tickUpper { tickIdx }
+    feeGrowthInside0LastX128
+    feeGrowthInside1LastX128
+    tickLower { tickIdx feeGrowthOutside0X128 feeGrowthOutside1X128 }
+    tickUpper { tickIdx feeGrowthOutside0X128 feeGrowthOutside1X128 }
   }
 }`;
 
@@ -42,7 +47,34 @@ export async function GET(req: NextRequest) {
         : String(json.errors);
       return NextResponse.json({ error: errorMsg }, { status: 502 });
     }
-    return NextResponse.json({ data: json.data.positions }, { status: 200 });
+
+    // Transform positions to flatten pool data and calculate fees
+    const positions = (json.data.positions || []).map((p: any) => ({
+      id: p.id,
+      token0: p.pool?.token0 || { id: '', symbol: '?', name: '', decimals: '18' },
+      token1: p.pool?.token1 || { id: '', symbol: '?', name: '', decimals: '18' },
+      feeTier: p.pool?.feeTier || '0',
+      liquidity: p.liquidity || '0',
+      depositedToken0: p.depositedToken0 || '0',
+      depositedToken1: p.depositedToken1 || '0',
+      collectedFeesToken0: p.collectedFeesToken0 || '0',
+      collectedFeesToken1: p.collectedFeesToken1 || '0',
+      // Calculate uncollected fees as deposited - withdrawn - collected
+      uncollectedFeesToken0: String(
+        BigInt(p.depositedToken0 || 0) -
+        BigInt(p.withdrawnToken0 || 0) -
+        BigInt(p.collectedFeesToken0 || 0)
+      ),
+      uncollectedFeesToken1: String(
+        BigInt(p.depositedToken1 || 0) -
+        BigInt(p.withdrawnToken1 || 0) -
+        BigInt(p.collectedFeesToken1 || 0)
+      ),
+      tickLower: p.tickLower,
+      tickUpper: p.tickUpper,
+    }));
+
+    return NextResponse.json({ data: positions }, { status: 200 });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 });
   }
