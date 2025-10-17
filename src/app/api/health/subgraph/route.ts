@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const ENDPOINT = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
+const ENDPOINT = process.env.SUBGRAPH_ENDPOINT || 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
 
 export async function GET() {
   const query = `query { swaps(first: 1, orderBy: timestamp, orderDirection: desc) { timestamp } }`;
@@ -21,4 +21,3 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: e?.message || String(e) }, { status: 500 });
   }
 }
-

@@ -1,4 +1,4 @@
-const ENDPOINT = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
+const ENDPOINT = process.env.SUBGRAPH_ENDPOINT || 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
 
 export type SubgraphPool = {
   id: string;

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ENDPOINT = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
+const ENDPOINT = process.env.SUBGRAPH_ENDPOINT || 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3';
 
 export async function GET(_: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params;

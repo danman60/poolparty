@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ENDPOINT = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3";
+const ENDPOINT = process.env.SUBGRAPH_ENDPOINT || "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3";
 
 const QUERY = `query Positions($owner: Bytes!, $first: Int!) {
   positions(where: { owner: $owner }, first: $first, orderBy: liquidity, orderDirection: desc) {
@@ -42,4 +42,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 });
   }
 }
-
