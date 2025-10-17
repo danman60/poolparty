@@ -6,22 +6,23 @@
 
 ---
 
-## v0.2 - Transaction Support (Next)
+## v0.2 - Transaction Support (In Progress)
 **Target**: Q1 2025
+**Status**: 60% Complete
 
 ### Features
-- ✅ Token approvals
-- ✅ Mint LP positions
-- ✅ Collect fees
-- ✅ Increase liquidity
-- ✅ Decrease liquidity
-- ✅ Burn position NFTs
+- ✅ Token approvals (ApproveButton component)
+- ✅ Mint LP positions (MintPosition component with full UI)
+- ✅ Collect fees (CollectFeesButton working)
+- ✅ Decrease liquidity (DecreaseLiquidityButton working)
+- ⚠️ Increase liquidity (TODO: needs IncreaseLiquidityButton component)
+- ⚠️ Burn position NFTs (TODO: needs BurnPositionButton component)
 
 ### Technical Improvements
-- Transaction state management
-- Gas estimation UI
-- Error handling refinement
-- Batch operations support
+- ✅ Transaction state management (wagmi hooks)
+- ⚠️ Gas estimation UI (basic, could be improved)
+- ✅ Error handling refinement (toast notifications)
+- ❌ Batch operations support (not yet implemented)
 
 ---
 

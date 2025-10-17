@@ -6,7 +6,7 @@ function toBool(v: string | undefined, d = false) {
 
 export const FEATURE_STATUS = toBool(process.env.NEXT_PUBLIC_FEATURE_STATUS, true);
 export const FEATURE_CHARTS = toBool(process.env.NEXT_PUBLIC_FEATURE_CHARTS, true);
-export const FEATURE_MINT = toBool(process.env.NEXT_PUBLIC_FEATURE_MINT, false);
+export const FEATURE_MINT = toBool(process.env.NEXT_PUBLIC_FEATURE_MINT, true); // Enable for testing
 
 export function isEnabled(name: string, defaultValue = false) {
   return toBool(process.env[name], defaultValue);

@@ -68,29 +68,30 @@ Connect Ethereum wallets via wagmi/MetaMask.
 ---
 
 ### 4. Liquidity Position Management
-**Status**: ⚠️ Partial
+**Status**: ✅ Implemented
 
 View and manage Uniswap V3 LP positions.
 
 **Implemented:**
-- View active positions
-- Position list with key metrics
-- Balance checking
+- ✅ View active positions from subgraph
+- ✅ Position list with liquidity, fees, token pairs
+- ✅ Mint new positions (full UI with tick range controls)
+- ✅ Collect accrued fees (working button)
+- ✅ Decrease liquidity (working button)
 
-**TODO:**
-- Mint new positions
-- Add liquidity to existing positions
-- Collect accrued fees
-- Remove liquidity
-- Close positions (burn NFT)
+**Not Yet Built:**
+- ❌ Increase liquidity (add to existing position)
+- ❌ Burn position NFTs (close positions)
+- ❌ Historical PnL tracking
+- ❌ Position performance analytics
 
-**User Flow (Planned):**
+**User Flow:**
 1. Connect wallet
 2. Navigate to `/wallet`
-3. View all LP positions
-4. Click "Collect Fees" or "Add Liquidity"
-5. Approve transaction in wallet
-6. Confirm on-chain
+3. View all LP positions with liquidity & fees
+4. Click "Collect Fees" to claim earnings
+5. Click "Decrease Liquidity" to remove liquidity
+6. On pool detail page: Use "Provide Liquidity" to mint new positions
 
 ---
 
@@ -175,12 +176,15 @@ Control feature availability via environment variables:
 |------|---------|-------------|
 | `NEXT_PUBLIC_FEATURE_STATUS` | `true` | Show /status page |
 | `NEXT_PUBLIC_FEATURE_CHARTS` | `true` | Show pool charts |
-| `NEXT_PUBLIC_FEATURE_MINT` | `false` | Show mint position UI |
+| `NEXT_PUBLIC_FEATURE_MINT` | `true` | Show mint position UI (NOW ENABLED) |
 
 **Usage:**
 ```typescript
 const showCharts = process.env.NEXT_PUBLIC_FEATURE_CHARTS === 'true';
 ```
+
+**Recent Changes:**
+- October 2025: Enabled FEATURE_MINT by default for testing minting positions
 
 ---
 

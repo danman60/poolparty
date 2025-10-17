@@ -92,12 +92,6 @@ export default function WalletPositions() {
                     <div className="flex items-center gap-2 justify-end">
                       <CollectFeesButton tokenId={p.id} />
                       <DecreaseLiquidityButton tokenId={p.id} liquidity={p.liquidity} />
-                      <button className="px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs opacity-60" disabled>
-                        Add Liquidity
-                      </button>
-                      <button className="px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs opacity-60" disabled>
-                        Remove
-                      </button>
                     </div>
                   </td>
                 </tr>
