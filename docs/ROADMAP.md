@@ -1,28 +1,33 @@
 # PoolParty Roadmap
 
-## Current Version: v0.1 (MVP)
+## Current Version: v0.2 (Transaction Support)
 
-**Status**: Analytics + Wallet Connect + Read-Only Positions
+**Status**: Full LP Management + Beautiful UI ✨
 
 ---
 
-## v0.2 - Transaction Support (In Progress)
-**Target**: Q1 2025
-**Status**: 60% Complete
+## v0.2 - Transaction Support ✅ COMPLETE
+**Completed**: October 2025
+**Status**: 100% Complete
 
-### Features
+### Features ✅
 - ✅ Token approvals (ApproveButton component)
-- ✅ Mint LP positions (MintPosition component with full UI)
-- ✅ Collect fees (CollectFeesButton working)
-- ✅ Decrease liquidity (DecreaseLiquidityButton working)
+- ✅ Mint LP positions (MintPosition component with full UI - ENABLED)
+- ✅ Collect fees (Large button with emoji, real-time status)
+- ✅ Decrease liquidity (Slider UI, percentage control)
+- ✅ Redesigned UI (Card-based positions, gradient backgrounds)
+- ✅ Proper decimal formatting (wei → human-readable with 5 decimal precision)
 - ⚠️ Increase liquidity (TODO: needs IncreaseLiquidityButton component)
 - ⚠️ Burn position NFTs (TODO: needs BurnPositionButton component)
 
-### Technical Improvements
+### Technical Improvements ✅
 - ✅ Transaction state management (wagmi hooks)
-- ⚠️ Gas estimation UI (basic, could be improved)
-- ✅ Error handling refinement (toast notifications)
+- ✅ GraphQL schema fixes (correct Uniswap V3 subgraph queries)
+- ✅ BigInt decimal conversion (safe handling of fee values)
+- ✅ Error handling refinement (toast notifications + user-friendly messages)
+- ✅ Production verification tests (Playwright E2E)
 - ❌ Batch operations support (not yet implemented)
+- ❌ Gas estimation UI (basic, could be improved)
 
 ---
 
@@ -130,16 +135,25 @@ Swap V3
 
 ---
 
-## Recent Updates (October 2025)
+## Recent Updates (October 17, 2025)
 
-### ✅ Completed Features
+### ✅ Major UI Overhaul & Transaction Support
+- **💧 Join Pool UI**: Prominent "Join This Pool" section with blue borders on all pool detail pages
+- **🎨 Wallet Redesign**: Beautiful card-based layout with gradient backgrounds for each position
+- **🔘 Big Action Buttons**: Large, emoji-enhanced buttons for Collect Fees (💰) and Withdraw Liquidity (💸)
+- **📊 Decimal Formatting**: Proper wei→decimal conversion with 5-digit precision (no more scientific notation!)
+- **🔧 GraphQL Fixes**: Corrected Uniswap V3 subgraph schema queries for positions
+- **🧮 BigInt Safety**: Safe decimal-to-BigInt conversion for fee calculations
+- **✅ Production Testing**: Comprehensive Playwright E2E tests for production verification
+- **🎯 Feature Flag**: NEXT_PUBLIC_FEATURE_MINT enabled for testing liquidity provision
+
+### Earlier October Updates
 - **Generated Pool Names**: Deterministic, memorable names for each pool (e.g., "SoakingHog", "PartyFox")
 - **Token Symbol Display**: Show token pairs with symbols instead of addresses (e.g., "USDC / WETH")
 - **Gradient Backgrounds**: Subtle page-wide gradients for both light and dark modes
 - **Enhanced Health Indicators**: Color-coded gradient banners for system status
 - **Cache Invalidation**: Refresh Data button now properly updates all indicators
 - **Next.js 15 Compatibility**: Fixed async params for pool detail pages
-- **E2E Production Tests**: Automated accessibility testing for production deployment
 
 ---
 

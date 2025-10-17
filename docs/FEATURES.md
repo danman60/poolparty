@@ -68,16 +68,18 @@ Connect Ethereum wallets via wagmi/MetaMask.
 ---
 
 ### 4. Liquidity Position Management
-**Status**: ✅ Implemented
+**Status**: ✅ Fully Implemented
 
-View and manage Uniswap V3 LP positions.
+View and manage Uniswap V3 LP positions with beautiful UI.
 
 **Implemented:**
-- ✅ View active positions from subgraph
-- ✅ Position list with liquidity, fees, token pairs
-- ✅ Mint new positions (full UI with tick range controls)
-- ✅ Collect accrued fees (working button)
-- ✅ Decrease liquidity (working button)
+- ✅ View active positions from subgraph (card-based layout)
+- ✅ Gradient position cards with token pairs, liquidity, and fees
+- ✅ Mint new positions (full UI with tick range controls + "💧 Join This Pool" section)
+- ✅ Collect accrued fees (large 💰 button with real-time status)
+- ✅ Decrease liquidity (💸 button with slider UI and percentage control)
+- ✅ Proper decimal formatting (wei → human-readable with 5-digit precision)
+- ✅ BigInt-safe fee calculations
 
 **Not Yet Built:**
 - ❌ Increase liquidity (add to existing position)
@@ -88,10 +90,10 @@ View and manage Uniswap V3 LP positions.
 **User Flow:**
 1. Connect wallet
 2. Navigate to `/wallet`
-3. View all LP positions with liquidity & fees
-4. Click "Collect Fees" to claim earnings
-5. Click "Decrease Liquidity" to remove liquidity
-6. On pool detail page: Use "Provide Liquidity" to mint new positions
+3. View positions in beautiful gradient cards
+4. Click "💰 Collect Fees" to claim earnings
+5. Click "💸 Withdraw Liquidity" to remove liquidity with slider control
+6. On pool detail page: Scroll to "💧 Join This Pool" section to add liquidity
 
 ---
 
@@ -225,13 +227,15 @@ const showCharts = process.env.NEXT_PUBLIC_FEATURE_CHARTS === 'true';
 
 ## Known Limitations
 
-1. **No Position Minting**: UI skeleton exists but not fully implemented
+1. ~~**No Position Minting**~~ ✅ FIXED: Full UI implemented and enabled
 2. **Single Chain**: Only Ethereum supported (Arbitrum TODO)
 3. **No Historical Backtesting**: Can't simulate past performance
 4. **No Alerts**: No notifications for out-of-range or fee spikes
 5. **No IL Calculator**: Impermanent loss not calculated
-6. **No Portfolio View**: Can't aggregate multiple positions
-7. **Read-Only Positions**: Can view but not modify (except collect)
+6. **Limited Portfolio Features**: Can't aggregate PnL across positions
+7. ~~**Read-Only Positions**~~ ✅ FIXED: Can mint, collect fees, and decrease liquidity
+8. **No Increase Liquidity**: Can't add to existing positions yet
+9. **No Burn Position**: Can't close/burn position NFTs yet
 
 ---
 
