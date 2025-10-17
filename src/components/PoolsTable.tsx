@@ -41,8 +41,8 @@ export default function PoolsTable() {
       return res.json();
     },
     placeholderData: keepPreviousData,
-    staleTime: 30_000,
-    refetchInterval: 60_000,
+    staleTime: 15_000,
+    refetchInterval: 15_000,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
   });

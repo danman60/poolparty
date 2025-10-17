@@ -11,7 +11,9 @@ export default function IngestBadge() {
       const res = await fetch("/api/health/ingest", { cache: "no-store" });
       return res.json();
     },
-    staleTime: 60_000,
+    staleTime: 15_000,
+    refetchInterval: 15_000,
+    refetchOnWindowFocus: true,
   });
   if (!data) return null;
   if (data.dryRun) return null;
