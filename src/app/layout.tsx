@@ -4,6 +4,7 @@ import { Web3Providers } from "@/lib/wagmi";
 import ToastProvider from "@/components/ToastProvider";
 import { FEATURE_STATUS } from "@/lib/flags";
 import EnvBanner from "@/components/EnvBanner";
+import ApolloProviders from "@/components/providers/ApolloProviders";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -49,10 +50,12 @@ export default function RootLayout({
           </nav>
         </header>
         <Web3Providers>
-          <ToastProvider>
-            <EnvBanner />
-            <main id="main" className="mx-auto max-w-6xl px-4 py-6" role="main">{children}</main>
-          </ToastProvider>
+          <ApolloProviders>
+            <ToastProvider>
+              <EnvBanner />
+              <main id="main" className="mx-auto max-w-6xl px-4 py-6" role="main">{children}</main>
+            </ToastProvider>
+          </ApolloProviders>
         </Web3Providers>
       </body>
     </html>
