@@ -14,7 +14,7 @@ export async function POST() {
     .is("volume_usd_24h", null);
 
   if (poolsToDelete && poolsToDelete.length > 0) {
-    const poolIds = poolsToDelete.map((p) => p.id);
+    const poolIds = poolsToDelete.map((p: { id: string }) => p.id);
 
     // Delete snapshots first (foreign key constraint)
     const { error: snapErr } = await supabase
