@@ -21,14 +21,7 @@ export async function GET(req: NextRequest) {
   let query = supabase
     .from("pools")
     .select(`
-      id,
-      chain,
-      fee_tier,
-      tvl_usd,
-      volume_usd_24h,
-      token0_id,
-      token1_id,
-      updated_at,
+      *,
       token0:token0_id(symbol, name),
       token1:token1_id(symbol, name)
     `, { count: "exact" });

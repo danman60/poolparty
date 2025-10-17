@@ -1,14 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ManualIngestButton() {
   const [pending, setPending] = useState(false);
+  const queryClient = useQueryClient();
 
   async function onClick() {
     try {
       setPending(true);
       await fetch("/api/ingest/trigger", { method: "POST", cache: "no-store" });
+      // Invalidate all relevant queries to trigger refetch
+      await queryClient.invalidateQueries({ queryKey: ["pools"] });
+      await queryClient.invalidateQueries({ queryKey: ["freshness"] });
     } finally {
       setPending(false);
     }

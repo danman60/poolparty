@@ -6,18 +6,11 @@ export async function GET(_: Request, ctx: { params: Promise<{ id: string }> }) 
   if (!supabase) {
     return NextResponse.json({ pool: null, snapshots: [], warning: "Supabase env not set" }, { status: 200 });
   }
-  const { id } = await ctx.params;
+  const { id} = await ctx.params;
   const { data: pool, error: pErr } = await supabase
     .from("pools")
     .select(`
-      id,
-      chain,
-      token0_id,
-      token1_id,
-      fee_tier,
-      tvl_usd,
-      volume_usd_24h,
-      updated_at,
+      *,
       token0:token0_id(symbol, name),
       token1:token1_id(symbol, name)
     `)
