@@ -8,6 +8,8 @@ type PoolRow = {
   chain: string;
   token0_id: string;
   token1_id: string;
+  token0: { symbol: string; name: string } | null;
+  token1: { symbol: string; name: string } | null;
   fee_tier: number | null;
   tvl_usd: number | null;
   volume_usd_24h: number | null;
@@ -131,8 +133,13 @@ export default function PoolsTable() {
             )}
             {!isLoading && !error && rows.map((p) => (
               <tr key={p.id} className="border-t border-black/5 dark:border-white/5">
-                <td className="px-3 py-2"><a className="hover:underline" href={`/pool/${p.id}`}>{short(p.token0_id)} / {short(p.token1_id)}</a></td>
-                <td className="px-3 py-2 text-right">{p.fee_tier ?? "—"}</td>
+                <td className="px-3 py-2">
+                  <a className="hover:underline" href={`/pool/${p.id}`}>
+                    <div className="font-medium">{getPoolName(p)}</div>
+                    <div className="text-xs opacity-60 font-mono">{getTokenPair(p)}</div>
+                  </a>
+                </td>
+                <td className="px-3 py-2 text-right">{fmtFeeTier(p.fee_tier)}</td>
                 <td className="px-3 py-2 text-right">{fmtUsd(p.tvl_usd)}</td>
                 <td className="px-3 py-2 text-right">{fmtUsd(p.volume_usd_24h)}</td>
                 <td className="px-3 py-2 text-right">{fmtApr(p)}</td>
@@ -157,6 +164,50 @@ export default function PoolsTable() {
 function short(addr: string) {
   if (!addr) return "—";
   return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+}
+
+// Generate a fun, deterministic pool name from pool ID
+function generatePoolName(poolId: string): string {
+  const adjectives = [
+    "Soaking", "Dancing", "Happy", "Bouncing", "Sparkling", "Golden", "Silver",
+    "Mystic", "Cosmic", "Turbo", "Swift", "Mighty", "Gentle", "Wild", "Calm",
+    "Blazing", "Frozen", "Electric", "Quantum", "Stellar", "Lucky", "Bold",
+    "Clever", "Rapid", "Silent", "Loud", "Bright", "Dark", "Shiny", "Fluffy"
+  ];
+  const animals = [
+    "Hog", "Fox", "Bear", "Bull", "Whale", "Shark", "Dolphin", "Eagle",
+    "Tiger", "Lion", "Panda", "Koala", "Otter", "Badger", "Raccoon", "Wolf",
+    "Hawk", "Falcon", "Dragon", "Phoenix", "Unicorn", "Pegasus", "Griffin",
+    "Kraken", "Narwhal", "Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
+  ];
+
+  // Use pool ID to deterministically select words
+  const hash = poolId.toLowerCase().replace(/[^0-9a-f]/g, '');
+  const adjIndex = parseInt(hash.slice(2, 10), 16) % adjectives.length;
+  const animalIndex = parseInt(hash.slice(10, 18), 16) % animals.length;
+
+  return `${adjectives[adjIndex]}${animals[animalIndex]}`;
+}
+
+function getPoolName(pool: PoolRow): string {
+  // Always return the fun generated name
+  return generatePoolName(pool.id);
+}
+
+function getTokenPair(pool: PoolRow): string {
+  const token0Symbol = pool.token0?.symbol;
+  const token1Symbol = pool.token1?.symbol;
+  const feeTier = pool.fee_tier ? ` • ${(pool.fee_tier / 10000).toFixed(2)}%` : '';
+
+  if (token0Symbol && token1Symbol) {
+    return `${token0Symbol} / ${token1Symbol}${feeTier}`;
+  }
+  return `${short(pool.token0_id)} / ${short(pool.token1_id)}${feeTier}`;
+}
+
+function fmtFeeTier(feeTier: number | null): string {
+  if (feeTier == null) return "—";
+  return `${(feeTier / 10000).toFixed(2)}%`;
 }
 
 function fmtUsd(n?: number | null) {

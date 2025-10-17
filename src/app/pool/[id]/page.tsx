@@ -18,9 +18,16 @@ export default async function PoolDetailPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Pool Detail</h1>
-        <span className="text-xs opacity-60 break-all">{id}</span>
+      <div>
+        <h1 className="text-2xl font-semibold mb-2">{pool ? generatePoolName(id) : "Pool Detail"}</h1>
+        {pool && (
+          <div className="space-y-1">
+            <div className="text-sm opacity-80">
+              {getTokenSymbols(pool)} • Fee: {fmtFeeTier(pool.fee_tier)}
+            </div>
+            <div className="text-xs opacity-60 break-all font-mono">Pool Address: {id}</div>
+          </div>
+        )}
       </div>
 
       {!pool && (
@@ -32,12 +39,15 @@ export default async function PoolDetailPage({ params }: Props) {
       {pool && (
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-1">
-            <div className="text-xs opacity-60">Tokens</div>
-            <div className="font-mono text-sm">{short(pool.token0_id)} / {short(pool.token1_id)}</div>
+            <div className="text-xs opacity-60">Token Pair</div>
+            <div className="text-sm font-medium">{getTokenSymbols(pool)}</div>
+            <div className="text-xs opacity-60 font-mono">
+              {short(pool.token0_id)} / {short(pool.token1_id)}
+            </div>
           </div>
           <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-1">
             <div className="text-xs opacity-60">Fee Tier</div>
-            <div className="text-sm">{pool.fee_tier ?? "—"}</div>
+            <div className="text-sm">{fmtFeeTier(pool.fee_tier)}</div>
           </div>
           <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-1">
             <div className="text-xs opacity-60">TVL (latest)</div>
@@ -79,4 +89,42 @@ function short(addr: string) {
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
   return v === 0 ? "—" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+}
+
+function fmtFeeTier(feeTier: number | null | undefined): string {
+  if (feeTier == null) return "—";
+  return `${(feeTier / 10000).toFixed(2)}%`;
+}
+
+// Generate a fun, deterministic pool name from pool ID
+function generatePoolName(poolId: string): string {
+  const adjectives = [
+    "Soaking", "Dancing", "Happy", "Bouncing", "Sparkling", "Golden", "Silver",
+    "Mystic", "Cosmic", "Turbo", "Swift", "Mighty", "Gentle", "Wild", "Calm",
+    "Blazing", "Frozen", "Electric", "Quantum", "Stellar", "Lucky", "Bold",
+    "Clever", "Rapid", "Silent", "Loud", "Bright", "Dark", "Shiny", "Fluffy"
+  ];
+  const animals = [
+    "Hog", "Fox", "Bear", "Bull", "Whale", "Shark", "Dolphin", "Eagle",
+    "Tiger", "Lion", "Panda", "Koala", "Otter", "Badger", "Raccoon", "Wolf",
+    "Hawk", "Falcon", "Dragon", "Phoenix", "Unicorn", "Pegasus", "Griffin",
+    "Kraken", "Narwhal", "Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
+  ];
+
+  // Use pool ID to deterministically select words
+  const hash = poolId.toLowerCase().replace(/[^0-9a-f]/g, '');
+  const adjIndex = parseInt(hash.slice(2, 10), 16) % adjectives.length;
+  const animalIndex = parseInt(hash.slice(10, 18), 16) % animals.length;
+
+  return `${adjectives[adjIndex]}${animals[animalIndex]}`;
+}
+
+function getTokenSymbols(pool: any): string {
+  const token0Symbol = pool.token0?.symbol;
+  const token1Symbol = pool.token1?.symbol;
+
+  if (token0Symbol && token1Symbol) {
+    return `${token0Symbol} / ${token1Symbol}`;
+  }
+  return `${short(pool.token0_id)} / ${short(pool.token1_id)}`;
 }

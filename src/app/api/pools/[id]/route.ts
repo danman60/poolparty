@@ -9,7 +9,18 @@ export async function GET(_: Request, ctx: { params: Promise<{ id: string }> }) 
   const { id } = await ctx.params;
   const { data: pool, error: pErr } = await supabase
     .from("pools")
-    .select("id, chain, token0_id, token1_id, fee_tier, tvl_usd, volume_usd_24h, updated_at")
+    .select(`
+      id,
+      chain,
+      token0_id,
+      token1_id,
+      fee_tier,
+      tvl_usd,
+      volume_usd_24h,
+      updated_at,
+      token0:token0_id(symbol, name),
+      token1:token1_id(symbol, name)
+    `)
     .eq("id", id)
     .maybeSingle();
   if (pErr) return NextResponse.json({ error: pErr.message }, { status: 500 });
