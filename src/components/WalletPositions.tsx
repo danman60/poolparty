@@ -141,9 +141,9 @@ function shortAmt(n: number) {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(2) + "M";
   if (n >= 1_000) return (n / 1_000).toFixed(2) + "k";
   if (n >= 1) return n.toFixed(4);
-  if (n >= 0.0001) return n.toFixed(6);
+  if (n >= 0.00001) return n.toFixed(5);
   if (n === 0) return "0";
-  return n.toExponential(2); // Very small amounts in scientific notation
+  return "~0"; // Amounts smaller than 0.00001 are negligible
 }
 
 function shortId(id: string) {
