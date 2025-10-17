@@ -10,8 +10,16 @@ export type SubgraphPool = {
 };
 
 export async function fetchTopPools(limit = 50): Promise<SubgraphPool[]> {
-  const query = `query TopPools($first: Int!) {
-    pools(first: $first, orderBy: totalValueLockedUSD, orderDirection: desc) {
+  const query = `query TopPools($first: Int!, $minVolume: BigDecimal!, $maxTvl: BigDecimal!) {
+    pools(
+      first: $first,
+      orderBy: totalValueLockedUSD,
+      orderDirection: desc,
+      where: {
+        volumeUSD_gt: $minVolume,
+        totalValueLockedUSD_lt: $maxTvl
+      }
+    ) {
       id feeTier totalValueLockedUSD volumeUSD
       token0 { id symbol name decimals }
       token1 { id symbol name decimals }
@@ -20,7 +28,14 @@ export async function fetchTopPools(limit = 50): Promise<SubgraphPool[]> {
   const res = await fetch(ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query, variables: { first: limit } }),
+    body: JSON.stringify({
+      query,
+      variables: {
+        first: limit,
+        minVolume: "1000000",      // $1M+ total volume
+        maxTvl: "10000000000"       // < $10B TVL (filter out spam with inflated TVL)
+      }
+    }),
     // avoid edge cache surprises during development
     cache: 'no-store',
   });

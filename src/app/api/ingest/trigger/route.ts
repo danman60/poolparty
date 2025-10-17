@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   }
   try {
     const origin = new URL(req.url).origin;
-    const url = `${origin}/api/ingest/uniswap?limit=50`;
+    const url = `${origin}/api/ingest/uniswap?limit=100`;
     const res = await fetch(url, {
       method: "GET",
       headers: { authorization: `Bearer ${secret}` },

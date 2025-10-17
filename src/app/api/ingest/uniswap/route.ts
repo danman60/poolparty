@@ -35,10 +35,17 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, dryRun: true, count: pools.length });
   }
 
-  // Prepare upserts
+  // Fetch last 24h day data for volume/fees
+  const sinceSec = Math.floor(Date.now() / 1000) - 24 * 3600;
+  const dayData = await fetchPoolDayData(pools.map((p) => p.id), sinceSec);
+
+  // Filter out pools without recent 24h volume data (spam/inactive pools)
+  const activePools = pools.filter((p) => dayData[p.id] && dayData[p.id].volume24h > 0);
+
+  // Prepare upserts (only for active pools)
   const chain = "ethereum";
   const tokens = new Map<string, { id: string; chain: string; address: string; symbol: string; name: string; decimals: number }>();
-  for (const p of pools) {
+  for (const p of activePools) {
     tokens.set(p.token0.id, {
       id: p.token0.id,
       chain,
@@ -57,11 +64,7 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  // Fetch last 24h day data for volume/fees
-  const sinceSec = Math.floor(Date.now() / 1000) - 24 * 3600;
-  const dayData = await fetchPoolDayData(pools.map((p) => p.id), sinceSec);
-
-  const poolsRows = pools.map((p) => {
+  const poolsRows = activePools.map((p) => {
     const dd = dayData[p.id];
     const tvl = Number(p.totalValueLockedUSD);
     const volume24 = dd?.volume24h ?? null;
@@ -77,7 +80,7 @@ export async function GET(req: NextRequest) {
     };
   });
 
-  const snapshotRows = pools.map((p) => {
+  const snapshotRows = activePools.map((p) => {
     const dd = dayData[p.id];
     const tvl = Number(p.totalValueLockedUSD);
     const feeRate = Number(p.feeTier) / 1_000_000;
