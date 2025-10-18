@@ -60,6 +60,16 @@ function previewRating(p: PoolRow): number {
 
 export default function PoolsTable() {
   const [fee, setFee] = useState<FeeFilter>("all");
+  // Persist rating/sort in URL (fallback if next/navigation hooks unavailable)
+  let router: any = null as any;
+  let search: URLSearchParams | null = null;
+  try {
+    const nav = require('next/navigation');
+    router = nav?.useRouter?.();
+    if (typeof window !== 'undefined') {
+      search = new URLSearchParams(window.location.search);
+    }
+  } catch {}
   const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("tvl");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [ratingMin, setRatingMin] = useState<"all" | "good" | "excellent">("all");
@@ -82,6 +92,16 @@ export default function PoolsTable() {
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
   });
+
+  // Initialize from URL on first render (cheap guard)
+  try {
+    const sk = search?.get("sort");
+    const od = search?.get("order");
+    const rm = search?.get("rating");
+    if (sk && ["pool","fee","tvl","volume","apr","rating","updated"].includes(sk) && sortKey !== sk) setSortKey(sk as any);
+    if (od && ["asc","desc"].includes(od) && sortDir !== od) setSortDir(od as any);
+    if (rm && ["all","good","excellent"].includes(rm) && ratingMin !== rm) setRatingMin(rm as any);
+  } catch {}
 
   const rowsRaw = useMemo(() => data?.data ?? [], [data?.data]);
   const rows = useMemo(() => {
@@ -147,6 +167,14 @@ export default function PoolsTable() {
     }
     // Reset to first page on sort change
     setPage(1);
+    try {
+      if (router) {
+        const params = search || new URLSearchParams();
+        params.set("sort", nextKey);
+        params.set("order", sortDir === "asc" && sortKey === nextKey ? "desc" : "asc");
+        router.replace(`/?${params.toString()}`);
+      }
+    } catch {}
   }
 
   function headerAria(key: typeof sortKey) {
@@ -385,6 +413,7 @@ function renderVtvlBadge(p: PoolRow) {
     </div>
   );
 }
+
 
 
 
