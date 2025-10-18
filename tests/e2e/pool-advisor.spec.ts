@@ -26,5 +26,9 @@ test('pool page shows Advisor insights and rating', async ({ page }) => {
 
   // Pool Rating section present
   await expect(page.getByText(/Pool Rating/i)).toBeVisible()
-})
 
+  // Momentum reflects rising 7d vs prior 7d (~50.0%)
+  await expect(page.getByText(/Volume momentum \(7d\)/i)).toBeVisible()
+  await expect(page.getByText(/rising/i)).toBeVisible()
+  await expect(page.getByText(/50\.0% vs prev 7d/i)).toBeVisible()
+})
