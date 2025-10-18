@@ -43,6 +43,7 @@ export default function WalletPositions() {
   const [positions, setPositions] = useState<Position[]>([]);
   const [prices, setPrices] = useState<PriceMap | undefined>(undefined);
   const [onlyFees, setOnlyFees] = useState(false);
+  const [showStats, setShowStats] = useState<boolean>(FEATURE_WALLET_STATS);
 
   useEffect(() => {
     let cancelled = false;
@@ -146,6 +147,16 @@ export default function WalletPositions() {
             </button>
           </div>
         )}
+        {FEATURE_TRENDS && (
+          <label className="inline-flex items-center gap-2">
+            <input type="checkbox" checked={showTrends} onChange={(e) => setShowTrends(e.target.checked)} aria-label="Toggle activity trends" />
+            <span className="opacity-80">Show trends</span>
+          </label>
+        )}
+        <label className="inline-flex items-center gap-2">
+          <input type="checkbox" checked={showStats} onChange={(e) => setShowStats(e.target.checked)} aria-label="Toggle wallet stats" />
+          <span className="opacity-80">Show stats</span>
+        </label>
         {!!prices && (
           <div className="text-xs opacity-60">
             Visible fees: {visibleFeesUsd <= 0 ? '-' : visibleFeesUsd.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })}
@@ -181,40 +192,38 @@ export default function WalletPositions() {
       )}
 
       {!loading && !error && positions.length > 0 && (
-        <>
-          {FEATURE_WALLET_STATS && (
-            <WalletAtGlance positions={visiblePositions} prices={prices} />
-          )}
+  <>
+    {FEATURE_WALLET_STATS && showStats && (
+      <WalletAtGlance positions={visiblePositions} prices={prices} />
+    )}
 
-          <div className="grid gap-3 md:grid-cols-2">
-            <PortfolioSummary positions={positions} prices={prices} />
-            <PortfolioEarnings positions={positions} prices={prices} />
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-2">
-            <RecentActivity />
-            <ServerActivity />
-          </div>
-          {FEATURE_TRENDS && <WalletActivityTrends />}
-
-          <div className="flex flex-wrap gap-3 items-center px-1">
-            <ExportPositionsCsvButton positions={visiblePositions} prices={prices} label={`Export Positions CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
-            <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={`Export Fees CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
-            <BatchCollectFeesButton positions={visiblePositions} />
-            <BatchClosePositionsButton positions={visiblePositions} />
-          </div>
-
-          <div className="space-y-3 mt-2">
-            {FEATURE_WALLET_STATS && (
-              <WalletVisibleStats positions={visiblePositions} prices={prices} />
-            )}
-            {visiblePositions.map((p) => (
-              <PositionCard key={p.id} position={p} prices={prices} />
-            ))}
-          </div>
-        </>
-      )}
+    <div className=\"grid gap-3 md:grid-cols-2\">
+      <PortfolioSummary positions={positions} prices={prices} />
+      <PortfolioEarnings positions={positions} prices={prices} />
     </div>
-  );
-}
 
+    <div className=\"grid gap-3 md:grid-cols-2\">
+      <RecentActivity />
+      <ServerActivity />
+    </div>
+    {FEATURE_TRENDS && showTrends && <WalletActivityTrends />}
+
+    <div className=\"flex flex-wrap gap-3 items-center px-1\">
+      <MetricTooltip label=\"Batch actions\">Collect fees from or close all currently visible positions. Use the filter to limit the set.</MetricTooltip>
+      <ExportPositionsCsvButton positions={visiblePositions} prices={prices} label={Export Positions CSV} disabled={visiblePositions.length === 0} />
+      <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={Export Fees CSV} disabled={visiblePositions.length === 0} />
+      <BatchCollectFeesButton positions={visiblePositions} />
+      <BatchClosePositionsButton positions={visiblePositions} />
+    </div>
+
+    <div className=\"space-y-3 mt-2\">
+      {FEATURE_WALLET_STATS && showStats && (
+        <WalletVisibleStats positions={visiblePositions} prices={prices} />
+      )}
+      {visiblePositions.map((p) => (
+        <PositionCard key={p.id} position={p} prices={prices} />
+      ))}
+    </div>
+  </>
+)}
+\n    </div>\r\n  );\r\n}\r\n
