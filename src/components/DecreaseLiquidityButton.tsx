@@ -70,6 +70,8 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
       const href = txUrl(chainId, hash as any);
       addToast("Liquidity decreased", "success", href, hash as any);
       setOpen(false);
+      try { window.dispatchEvent(new CustomEvent('pp:activity', { detail: { type: 'decrease', tokenId, hash, chainId } })); } catch {}
+      try { fetch('/api/wallet/activity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ wallet: address, tokenId, action: 'decrease', hash, chain: chainId }) }); } catch {}
     }
   }, [isSuccess, addToast, chainId, hash]);
 
@@ -86,7 +88,7 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
         aria-controls={`decrease-${tokenId}`}
         aria-label="Withdraw liquidity"
       >
-        ðŸ’¸ {open ? "Close" : "Withdraw Liquidity"}
+        {open ? "Close" : "Withdraw Liquidity"}
       </Button>
       {open && (
         <div id={`decrease-${tokenId}`} className="space-y-3 p-4 rounded-lg border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-gray-900" role="dialog" aria-modal="false" aria-label="Withdraw liquidity dialog">
@@ -115,7 +117,7 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
             </div>
           </div>
           <Button onClick={submit} disabled={!canWrite || isPending || isConfirming} size="lg" className="w-full">
-            {isPending ? "Confirm in Walletâ€¦" : isConfirming ? "Withdrawingâ€¦" : isSuccess ? "âœ“ Withdrawn" : "Confirm Withdrawal"}
+            {isPending ? "Confirm in Wallet..." : isConfirming ? "Withdrawing..." : isSuccess ? "Withdrawn" : "Confirm Withdrawal"}
           </Button>
           {error && <div className="text-xs text-red-600 text-center">{error}</div>}
           <div className="text-xs opacity-60 text-center">
@@ -136,4 +138,3 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
     </div>
   );
 }
-

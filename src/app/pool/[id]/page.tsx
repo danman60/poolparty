@@ -4,6 +4,7 @@ import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
 import PoolRating from "@/components/advisor/PoolRating";
 import PoolAdvisor from "@/components/advisor/PoolAdvisor";
+import PoolAprBadge from "@/components/PoolAprBadge";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
 import { getServerSupabase } from "@/lib/supabase/server";
 
@@ -95,6 +96,12 @@ export default async function PoolDetailPage({ params }: Props) {
       )}
 
       {pool && (
+        <div className="rounded-lg border border-black/10 dark:border-white/10 p-4">
+          <PoolAprBadge poolId={id} />
+        </div>
+      )}
+
+      {pool && (
         <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
           <div className="text-sm opacity-70">APR Calculator</div>
           <APRCalculator initialTVL={pool?.tvl_usd ?? null} initialVolume24h={pool?.volume_usd_24h ?? null} feeBps={pool?.fee_tier ?? null} />
@@ -167,4 +174,3 @@ function getTokenSymbols(pool: any): string {
   }
   return `${short(pool.token0_id)} / ${short(pool.token1_id)}`;
 }
-

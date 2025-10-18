@@ -1,14 +1,18 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import CollectFeesButton from "./CollectFeesButton";
 import DecreaseLiquidityButton from "./DecreaseLiquidityButton";
+import RemoveLiquidityButton from "./RemoveLiquidityButton";
 import IncreaseLiquidityButton from "./IncreaseLiquidityButton";
 import { calculateHealthScore } from "@/lib/lifeguard/healthScore";
 import AdvisorBadge from "./advisor/AdvisorBadge";
+import PositionHistory from "./PositionHistory";
+import PositionAprSparkline from "./PositionAprSparkline";
 
 type Position = {
   id: string;
+  poolId?: string;
   token0: { id: string; symbol: string; decimals: string };
   token1: { id: string; symbol: string; decimals: string };
   feeTier: string;
@@ -25,9 +29,10 @@ type Position = {
 
 interface PositionCardProps {
   position: Position;
+  prices?: Record<string, number>;
 }
 
-export default function PositionCard({ position }: PositionCardProps) {
+export default function PositionCard({ position, prices }: PositionCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   // Calculate Lifeguard health score using full algorithm
@@ -73,6 +78,12 @@ export default function PositionCard({ position }: PositionCardProps) {
                   {getFeesDisplay(position)}
                 </div>
               </div>
+              {prices && (
+                <div className="flex-1">
+                  <div className="text-xs opacity-60">PnL (approx)</div>
+                  <div className="font-medium">{fmtPnlUsd(position, prices)}</div>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -118,6 +129,17 @@ export default function PositionCard({ position }: PositionCardProps) {
               <div className="text-xs opacity-60">Uncollected Fees</div>
               <div className="font-medium">{fmtFees(position)}</div>
             </div>
+            {position.poolId && (
+              <div className="space-y-1 col-span-2">
+                <PositionAprSparkline poolId={position.poolId} />
+              </div>
+            )}
+            {prices && (
+              <div className="space-y-1">
+                <div className="text-xs opacity-60">PnL (approx)</div>
+                <div className="font-medium">{fmtPnlUsd(position, prices)}</div>
+              </div>
+            )}
             <div className="space-y-1">
               <div className="text-xs opacity-60">Position ID</div>
               <div className="font-mono text-xs">{shortId(position.id)}</div>
@@ -137,6 +159,12 @@ export default function PositionCard({ position }: PositionCardProps) {
               token0={{ address: position.token0.id as `0x${string}`, symbol: position.token0.symbol, decimals: Number(position.token0.decimals) }}
               token1={{ address: position.token1.id as `0x${string}`, symbol: position.token1.symbol, decimals: Number(position.token1.decimals) }}
             />
+            <RemoveLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
+          </div>
+
+          {/* Position history */}
+          <div className="pt-2">
+            <PositionHistory tokenId={position.id} />
           </div>
         </div>
       )}
@@ -177,6 +205,20 @@ function fmtFees(p: Position) {
   return `${shortAmt(f0)} ${p.token0.symbol} / ${shortAmt(f1)} ${p.token1.symbol}`;
 }
 
+function fmtPnlUsd(p: Position, prices: Record<string, number>) {
+  const dec0 = Number(p.token0.decimals || 18);
+  const dec1 = Number(p.token1.decimals || 18);
+  const totalFees0 = BigInt(p.collectedFeesToken0 || '0') + BigInt(p.uncollectedFeesToken0 || '0');
+  const totalFees1 = BigInt(p.collectedFeesToken1 || '0') + BigInt(p.uncollectedFeesToken1 || '0');
+  const f0 = Number(totalFees0) / Math.pow(10, dec0);
+  const f1 = Number(totalFees1) / Math.pow(10, dec1);
+  const px0 = prices[p.token0.id.toLowerCase()] || 0;
+  const px1 = prices[p.token1.id.toLowerCase()] || 0;
+  const usd = f0 * px0 + f1 * px1;
+  if (!isFinite(usd) || usd <= 0) return '-';
+  return usd.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+}
+
 function shortAmt(n: number) {
   if (!isFinite(n)) return "0";
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(2) + "M";
@@ -190,7 +232,7 @@ function shortAmt(n: number) {
 function shortId(id: string) {
   if (!id) return "-";
   if (id.length <= 12) return id;
-  return `${id.slice(0, 6)}…${id.slice(-4)}`;
+  return `${id.slice(0, 6)}â€¦${id.slice(-4)}`;
 }
 
 function getProfitabilityDisplay(position: Position, score: number) {
@@ -227,4 +269,3 @@ function getProfitabilityDisplay(position: Position, score: number) {
     </span>
   );
 }
-

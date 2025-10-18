@@ -29,6 +29,8 @@ export default function CollectFeesButton({ tokenId }: { tokenId: string }) {
     if (isSuccess) {
       const href = txUrl(chainId, hash as any);
       addToast("Fees collected", "success", href, hash as any);
+      try { window.dispatchEvent(new CustomEvent('pp:activity', { detail: { type: 'collect', tokenId, hash, chainId } })); } catch {}
+      try { fetch('/api/wallet/activity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ wallet: address, tokenId, action: 'collect', hash, chain: chainId }) }); } catch {}
     }
   }, [isSuccess, addToast, chainId, hash]);
 
@@ -44,7 +46,6 @@ export default function CollectFeesButton({ tokenId }: { tokenId: string }) {
         abi: NONFUNGIBLE_POSITION_MANAGER_ABI,
         address: to as `0x${string}`,
         functionName: "collect",
-        // tuple CollectParams
         args: [
           {
             tokenId: BigInt(tokenId),
@@ -53,7 +54,6 @@ export default function CollectFeesButton({ tokenId }: { tokenId: string }) {
             amount1Max: MAX_UINT128,
           },
         ],
-        // collect is payable but typically sends 0 ETH
         value: 0n,
         chainId: mainnet.id,
       });
@@ -75,7 +75,7 @@ export default function CollectFeesButton({ tokenId }: { tokenId: string }) {
         title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : "Collect accrued fees"}
         aria-label="Collect fees"
       >
-        💰 {isPending ? "Confirm Transaction…" : isConfirming ? "Collecting Fees…" : isSuccess ? "✓ Fees Collected" : "Collect Fees"}
+        {isPending ? "Confirm Transaction..." : isConfirming ? "Collecting Fees..." : isSuccess ? "Fees Collected" : "Collect Fees"}
       </Button>
       {hash && (
         <a

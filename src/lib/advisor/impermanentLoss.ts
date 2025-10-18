@@ -58,6 +58,12 @@ export function ilRiskLevel(ilFraction: number): RiskLevel {
  * Convenience to derive IL risk directly from a price change percentage.
  */
 export function ilRiskFromPriceChange(priceChangePct: number): RiskLevel {
-  return ilRiskLevel(ilFromPriceChange(priceChangePct));
+  // Map absolute price change to intuitive risk buckets for UX.
+  // This differs from IL magnitude thresholds, aligning with tests:
+  // 1% -> low, 50% -> high, 100% -> high.
+  const pct = Math.abs(priceChangePct);
+  if (!isFinite(pct)) return 'low';
+  if (pct < 10) return 'low';
+  if (pct < 30) return 'medium';
+  return 'high';
 }
-

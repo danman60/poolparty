@@ -93,6 +93,8 @@ export default function IncreaseLiquidityButton({ tokenId, token0, token1 }: { t
       setOpen(false);
       setAmount0("");
       setAmount1("");
+      try { window.dispatchEvent(new CustomEvent('pp:activity', { detail: { type: 'increase', tokenId, hash, chainId } })); } catch {}
+      try { fetch('/api/wallet/activity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ wallet: address, tokenId, action: 'increase', hash, chain: chainId }) }); } catch {}
     }
   }, [isSuccess, addToast, chainId, hash]);
 

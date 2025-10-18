@@ -1,4 +1,6 @@
+import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import PoolsTable from './PoolsTable'
 
 describe('PoolsTable', () => {
@@ -7,11 +9,15 @@ describe('PoolsTable', () => {
       ok: true,
       json: async () => ({ data: [] }),
     } as any)
-    render(<PoolsTable />)
+    const qc = new QueryClient()
+    render(
+      <QueryClientProvider client={qc}>
+        <PoolsTable />
+      </QueryClientProvider>
+    )
     expect(screen.getByText(/Loading pools/i)).toBeInTheDocument()
     await waitFor(() => expect(mock).toHaveBeenCalled())
-    expect(screen.getByText(/No data yet/i)).toBeInTheDocument()
+    await waitFor(() => expect(screen.getByText(/No data yet/i)).toBeInTheDocument())
     mock.mockRestore()
   })
 })
-

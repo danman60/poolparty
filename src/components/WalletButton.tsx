@@ -19,7 +19,7 @@ export default function WalletButton() {
   return (
     <div className="flex items-center gap-3">
       <span className="text-xs opacity-70">
-        {address?.slice(0, 6)}�{address?.slice(-4)} {chainId ? `(chain ${chainId})` : ""}
+        {address?.slice(0, 6)}...{address?.slice(-4)} {chainId ? `(chain ${chainId})` : ""}
       </span>
       <Button variant="outline" size="sm" onClick={() => disconnect()} aria-label="Disconnect Wallet">
         Disconnect

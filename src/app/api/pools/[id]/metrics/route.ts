@@ -34,3 +34,4 @@ export async function GET(_: NextRequest, ctx: { params: Promise<{ id: string }>
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 });
   }
 }
+

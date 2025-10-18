@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import React from "react";
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import AdvisorBadge from "./advisor/AdvisorBadge";
@@ -189,7 +190,7 @@ export default function PoolsTable() {
 
   function caret(key: typeof sortKey) {
     if (sortKey !== key) return "";
-    return sortDir === "asc" ? "â–²" : "â–¼";
+    return sortDir === "asc" ? "▲" : "▼";
   }
 
   const total = data?.meta?.total ?? 0;
@@ -268,7 +269,7 @@ export default function PoolsTable() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={6} className="px-3 py-6 text-center opacity-70">Loading pools...€¦</td>
+                <td colSpan={6} className="px-3 py-6 text-center opacity-70">Loading pools...��</td>
               </tr>
             )}
             {error && !isLoading && (
@@ -323,8 +324,8 @@ export default function PoolsTable() {
 }
 
 function short(addr: string) {
-  if (!addr) return "â€”";
-  return `${addr.slice(0, 6)}â€¦${addr.slice(-4)}`;
+  if (!addr) return "—";
+  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
 }
 
 // Generate a fun, deterministic pool name from pool ID
@@ -358,7 +359,7 @@ function getPoolName(pool: PoolRow): string {
 function getTokenPair(pool: PoolRow): string {
   const token0Symbol = pool.token0?.symbol;
   const token1Symbol = pool.token1?.symbol;
-  const feeTier = pool.fee_tier ? ` â€¢ ${(pool.fee_tier / 10000).toFixed(2)}%` : '';
+  const feeTier = pool.fee_tier ? ` • ${(pool.fee_tier / 10000).toFixed(2)}%` : '';
 
   if (token0Symbol && token1Symbol) {
     return `${token0Symbol} / ${token1Symbol}${feeTier}`;
@@ -367,17 +368,17 @@ function getTokenPair(pool: PoolRow): string {
 }
 
 function fmtFeeTier(feeTier: number | null): string {
-  if (feeTier == null) return "â€”";
+  if (feeTier == null) return "—";
   return `${(feeTier / 10000).toFixed(2)}%`;
 }
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v === 0 ? "â€”" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v === 0 ? "—" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
 function fmtTime(iso?: string | null) {
-  if (!iso) return "â€”";
+  if (!iso) return "—";
   try {
     const d = new Date(iso);
     return d.toLocaleString();
@@ -396,13 +397,13 @@ function aprValue(p: PoolRow) {
 
 function fmtApr(p: PoolRow) {
   const v = aprValue(p);
-  if (v <= 0) return "â€”";
+  if (v <= 0) return "—";
   return (v * 100).toLocaleString(undefined, { maximumFractionDigits: 2 }) + "%";
 }
 
 function renderVtvlBadge(p: PoolRow) {
   const tvl = p.tvl_usd ?? 0;
-  if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL â€”</div>;
+  if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL —</div>;
   const vol = p.volume_usd_24h ?? 0;
   const { score, rating } = scoreVolumeToTVL(vol, tvl);
   const status = score >= 9 ? 'excellent' : score >= 7 ? 'good' : score >= 5 ? 'warning' : score >= 3 ? 'danger' : 'critical';

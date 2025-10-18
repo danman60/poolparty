@@ -27,3 +27,13 @@ create table if not exists pool_snapshots (
   primary key (pool_id, ts)
 );
 
+-- Wallet activity (optional)
+create table if not exists position_actions (
+  id bigserial primary key,
+  wallet text,
+  token_id text,
+  action text,
+  tx_hash text,
+  chain int,
+  created_at timestamptz default now()
+);
