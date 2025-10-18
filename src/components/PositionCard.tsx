@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import CollectFeesButton from "./CollectFeesButton";
@@ -58,8 +58,6 @@ export default function PositionCard({ position }: PositionCardProps) {
             {/* Lifeguard Health Badge */}
             <div className="flex items-center gap-2 flex-shrink-0">
               <AdvisorBadge status={healthStatus.color as any} score={healthScore} />
-              <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
-              <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
             </div>
           </div>
           {/* Quick Stats - Collapsed View */}
@@ -154,14 +152,14 @@ function getFeesDisplay(position: Position): string {
   const rawFee1 = BigInt(position.uncollectedFeesToken1 || '0');
   const f0 = Number(rawFee0) / Math.pow(10, decimals0);
   const f1 = Number(rawFee1) / Math.pow(10, decimals1);
-  if (f0 === 0 && f1 === 0) return "—";
+  if (f0 === 0 && f1 === 0) return "-";
   const total = f0 + f1;
   return shortAmt(total);
 }
 
 function fmtNum(n: string | number) {
   const v = typeof n === "string" ? Number(n) : n;
-  if (!isFinite(v) || v === 0) return "â€”";
+  if (!isFinite(v) || v === 0) return "-";
   return v.toLocaleString();
 }
 
@@ -175,7 +173,7 @@ function fmtFees(p: Position) {
   const f0 = Number(rawFee0) / Math.pow(10, decimals0);
   const f1 = Number(rawFee1) / Math.pow(10, decimals1);
 
-  if (f0 === 0 && f1 === 0) return "â€”";
+  if (f0 === 0 && f1 === 0) return "-";
   return `${shortAmt(f0)} ${p.token0.symbol} / ${shortAmt(f1)} ${p.token1.symbol}`;
 }
 
@@ -190,9 +188,9 @@ function shortAmt(n: number) {
 }
 
 function shortId(id: string) {
-  if (!id) return "â€”";
+  if (!id) return "-";
   if (id.length <= 12) return id;
-  return `${id.slice(0, 6)}â€¦${id.slice(-4)}`;
+  return `${id.slice(0, 6)}…${id.slice(-4)}`;
 }
 
 function getProfitabilityDisplay(position: Position, score: number) {
@@ -212,13 +210,13 @@ function getProfitabilityDisplay(position: Position, score: number) {
   let emoji = '';
   if (score >= 75) {
     color = 'var(--lifeguard-good)';
-    emoji = 'âœ…';
+    emoji = '';
   } else if (score >= 60) {
     color = 'var(--lifeguard-warning)';
-    emoji = 'âš ï¸';
+    emoji = '';
   } else if (score < 60) {
     color = 'var(--lifeguard-danger)';
-    emoji = 'âš ï¸';
+    emoji = '';
   }
 
   if (totalFees === 0) return <span className="opacity-60">No fees yet</span>;
@@ -229,9 +227,4 @@ function getProfitabilityDisplay(position: Position, score: number) {
     </span>
   );
 }
-
-
-
-
-
 
