@@ -87,25 +87,12 @@ export default function WalletPositions() {
 
       {/* Empty state */}
       {!loading && !error && positions.length === 0 && (
-      {!loading && !error && positions.length === 0 && (
         <div className="card-pool p-8 text-center space-y-3">
           <div className="text-4xl">🛟</div>
           <div className="text-sm opacity-70">
             <div className="font-semibold mb-1">No positions yet</div>
-            <div className="text-xs">
-              Jump into a pool to start earning fees!
-            </div>
+            <div className="text-xs">Jump into a pool to start earning fees!</div>
           </div>
-        </div>
-      )}
-
-
-      {/* Position cards - Mobile optimized, collapsible */}
-      {!loading && !error && positions.length > 0 && (
-        <div className="space-y-3">
-          {positions.map((p) => (
-            <PositionCard key={p.id} position={p} />
-          ))}
         </div>
       )}
 
@@ -121,3 +108,4 @@ export default function WalletPositions() {
     </div>
   );
 }
+
