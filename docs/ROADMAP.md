@@ -41,7 +41,9 @@
 - Chain switching UI
 - Cross-chain position view
 
-### Technical Improvements
+_Update (Oct 18, 2025): Increase Liquidity implemented with IncreaseLiquidityButton._
+
+### Technical Improvements 
 - Abstract chain logic
 - Multi-RPC management
 - Per-chain configuration
