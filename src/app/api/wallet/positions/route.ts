@@ -77,6 +77,7 @@ export async function GET(req: NextRequest) {
 
       return {
         id: p.id,
+        poolId: p.pool?.id || '',
         token0: p.pool?.token0 || { id: '', symbol: '?', name: '', decimals: '18' },
         token1: p.pool?.token1 || { id: '', symbol: '?', name: '', decimals: '18' },
         feeTier: p.pool?.feeTier || '0',

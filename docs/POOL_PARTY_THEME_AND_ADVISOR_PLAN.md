@@ -2592,3 +2592,9 @@ export function calculateSafePositionSize(
 ---
 
 
+
+### Session Log (latest)
+- Added poolId to wallet positions API for IL/V:TVL plumbing
+- V:TVL AdvisorBadge live on PoolsTable
+- Pre-push build checker in place
+
