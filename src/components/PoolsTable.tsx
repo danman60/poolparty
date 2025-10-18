@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 
 type PoolRow = {
   id: string;
@@ -138,6 +139,7 @@ export default function PoolsTable() {
                     <div className="font-medium">{getPoolName(p)}</div>
                     <div className="text-xs opacity-60 font-mono">{getTokenPair(p)}</div>
                   </a>
+                  {renderVtvlText(p)}
                 </td>
                 <td className="px-3 py-2 text-right">{fmtFeeTier(p.fee_tier)}</td>
                 <td className="px-3 py-2 text-right">{fmtUsd(p.tvl_usd)}</td>
@@ -237,6 +239,14 @@ function fmtApr(p: PoolRow) {
   const v = aprValue(p);
   if (v <= 0) return "—";
   return (v * 100).toLocaleString(undefined, { maximumFractionDigits: 2 }) + "%";
+}
+
+function renderVtvlText(p: PoolRow) {
+  const tvl = p.tvl_usd ?? 0;
+  if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL —</div>;
+  const vol = p.volume_usd_24h ?? 0;
+  const { rating } = scoreVolumeToTVL(vol, tvl);
+  return <div className="mt-1 text-[11px] opacity-70">V:TVL {rating}</div>;
 }
 
 
