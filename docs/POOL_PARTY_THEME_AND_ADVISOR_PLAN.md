@@ -7,6 +7,17 @@
 
 ---
 
+### Recent Updates (October 18, 2025)
+
+- Implemented Add Liquidity flow using NonfungiblePositionManager.increaseLiquidity
+  - New: `src/components/IncreaseLiquidityButton.tsx`
+  - Integrated into `src/components/PositionCard.tsx`
+  - Approvals, slippage, confirmations, and success toasts
+- Added sortable columns to the main Dashboard table
+  - Click headers to sort by Pool, Fee, TVL, Vol 24h, APR, Updated
+  - Toggle ascending/descending; pagination and fee filters preserved
+  - Caret indicators standardized (ASCII) for compatibility
+
 ## ðŸ“Š PROGRESS TRACKER
 
 ### âœ… Phase 1: Theme Foundation (Week 1-2) - **COMPLETE**
