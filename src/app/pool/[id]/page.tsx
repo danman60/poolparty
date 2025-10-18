@@ -1,7 +1,8 @@
-import PoolSparkline from "@/components/PoolSparkline";
+﻿import PoolSparkline from "@/components/PoolSparkline";
 import APRCalculator from "@/components/APRCalculator";
 import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
+import PoolRating from "@/components/advisor/PoolRating";
 import PoolAdvisor from "@/components/advisor/PoolAdvisor";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
 import { getServerSupabase } from "@/lib/supabase/server";
@@ -49,7 +50,7 @@ export default async function PoolDetailPage({ params }: Props) {
         {pool && (
           <div className="space-y-1">
             <div className="text-sm opacity-80">
-              {getTokenSymbols(pool)} • Fee: {fmtFeeTier(pool.fee_tier)}
+              {getTokenSymbols(pool)} â€¢ Fee: {fmtFeeTier(pool.fee_tier)}
             </div>
             <div className="text-xs opacity-60 break-all font-mono">Pool Address: {id}</div>
           </div>
@@ -107,7 +108,7 @@ export default async function PoolDetailPage({ params }: Props) {
       {FEATURE_MINT && pool && (
         <div className="rounded-lg border-2 border-blue-500/50 dark:border-blue-400/50 bg-blue-50/30 dark:bg-blue-950/20 p-6 space-y-4">
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold">💧 Join This Pool</h2>
+            <h2 className="text-xl font-semibold">ðŸ’§ Join This Pool</h2>
             <p className="text-sm opacity-80">Provide liquidity to earn trading fees from {getTokenSymbols(pool)} swaps</p>
           </div>
           <MintPosition poolId={id} feeTier={pool?.fee_tier ?? null} token0={pool?.token0_id} token1={pool?.token1_id} />
@@ -118,17 +119,17 @@ export default async function PoolDetailPage({ params }: Props) {
 }
 
 function short(addr: string) {
-  if (!addr) return "—";
-  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+  if (!addr) return "â€”";
+  return `${addr.slice(0, 6)}â€¦${addr.slice(-4)}`;
 }
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v === 0 ? "—" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v === 0 ? "â€”" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
 function fmtFeeTier(feeTier: number | null | undefined): string {
-  if (feeTier == null) return "—";
+  if (feeTier == null) return "â€”";
   return `${(feeTier / 10000).toFixed(2)}%`;
 }
 
@@ -164,3 +165,8 @@ function getTokenSymbols(pool: any): string {
   }
   return `${short(pool.token0_id)} / ${short(pool.token1_id)}`;
 }
+
+
+
+
+
