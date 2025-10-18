@@ -2,6 +2,7 @@ import PoolSparkline from "@/components/PoolSparkline";
 import APRCalculator from "@/components/APRCalculator";
 import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
+import PoolAdvisor from "@/components/advisor/PoolAdvisor";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
 import { getServerSupabase } from "@/lib/supabase/server";
 
@@ -96,6 +97,12 @@ export default async function PoolDetailPage({ params }: Props) {
         <div className="text-sm opacity-70">APR Calculator</div>
         <APRCalculator initialTVL={pool?.tvl_usd ?? null} initialVolume24h={pool?.volume_usd_24h ?? null} feeBps={pool?.fee_tier ?? null} />
       </div>
+
+      {pool && (
+        <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
+          <PoolAdvisor tvlUsd={pool?.tvl_usd ?? null} volume24hUsd={pool?.volume_usd_24h ?? null} feeTier={pool?.fee_tier ?? null} />
+        </div>
+      )}
 
       {FEATURE_MINT && pool && (
         <div className="rounded-lg border-2 border-blue-500/50 dark:border-blue-400/50 bg-blue-50/30 dark:bg-blue-950/20 p-6 space-y-4">
