@@ -48,7 +48,7 @@ export default function BatchCollectFeesButton({ positions, onComplete }: { posi
     for (let i = 0; i < targets.length; i++) {
       const p = targets[i];
       try {
-        const { hash } = await writeContract({
+        writeContract({
           abi: NONFUNGIBLE_POSITION_MANAGER_ABI,
           address: to,
           functionName: "collect",
