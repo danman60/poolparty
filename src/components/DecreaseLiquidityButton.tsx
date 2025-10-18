@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useAccount, useChainId, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { NONFUNGIBLE_POSITION_MANAGER_ABI, NONFUNGIBLE_POSITION_MANAGER_ADDRESS } from "@/lib/abis/NonfungiblePositionManager";
@@ -86,7 +86,7 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
         aria-controls={`decrease-${tokenId}`}
         aria-label="Withdraw liquidity"
       >
-        💸 {open ? "Close" : "Withdraw Liquidity"}
+        ðŸ’¸ {open ? "Close" : "Withdraw Liquidity"}
       </Button>
       {open && (
         <div id={`decrease-${tokenId}`} className="space-y-3 p-4 rounded-lg border border-black/10 dark:border-white/10 bg-gray-50 dark:bg-gray-900" role="dialog" aria-modal="false" aria-label="Withdraw liquidity dialog">
@@ -115,7 +115,7 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
             </div>
           </div>
           <Button onClick={submit} disabled={!canWrite || isPending || isConfirming} size="lg" className="w-full">
-            {isPending ? "Confirm in Wallet…" : isConfirming ? "Withdrawing…" : isSuccess ? "✓ Withdrawn" : "Confirm Withdrawal"}
+            {isPending ? "Confirm in Walletâ€¦" : isConfirming ? "Withdrawingâ€¦" : isSuccess ? "âœ“ Withdrawn" : "Confirm Withdrawal"}
           </Button>
           {error && <div className="text-xs text-red-600 text-center">{error}</div>}
           <div className="text-xs opacity-60 text-center">
@@ -136,3 +136,4 @@ export default function DecreaseLiquidityButton({ tokenId, liquidity }: { tokenI
     </div>
   );
 }
+
