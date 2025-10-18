@@ -1,5 +1,5 @@
 /**
- * 🛡️ The Lifeguard - Intelligent Position Health Scoring
+ * The Lifeguard - Intelligent Position Health Scoring
  *
  * Calculates a 0-100 health score for Uniswap V3 positions based on:
  * 1. Profitability (40% weight) - Total fees vs potential IL
@@ -172,11 +172,11 @@ function calculateRiskMetrics(position: Position): number {
  * Get health status based on overall score
  */
 export function getHealthStatus(score: number): HealthStatus {
-  if (score >= 90) return { color: 'excellent', emoji: '💎', label: 'Excellent' };
-  if (score >= 75) return { color: 'good', emoji: '🟢', label: 'Good' };
-  if (score >= 60) return { color: 'warning', emoji: '🟡', label: 'Fair' };
-  if (score >= 40) return { color: 'danger', emoji: '🟠', label: 'Risky' };
-  return { color: 'critical', emoji: '🔴', label: 'Critical' };
+  if (score >= 90) return { color: 'excellent', emoji: '', label: 'Excellent' };
+  if (score >= 75) return { color: 'good', emoji: '', label: 'Good' };
+  if (score >= 60) return { color: 'warning', emoji: '', label: 'Fair' };
+  if (score >= 40) return { color: 'danger', emoji: '', label: 'Risky' };
+  return { color: 'critical', emoji: '', label: 'Critical' };
 }
 
 /**
@@ -219,9 +219,10 @@ export function getHealthBreakdown(position: Position) {
 
 // Safer status mapper without encoding issues
 export function getHealthStatusSafe(score: number): HealthStatus {
-  if (score >= 90) return { color: 'excellent', emoji: '💎', label: 'Excellent' };
-  if (score >= 75) return { color: 'good', emoji: '🟢', label: 'Good' };
-  if (score >= 60) return { color: 'warning', emoji: '🟡', label: 'Fair' };
-  if (score >= 40) return { color: 'danger', emoji: '🟠', label: 'Risky' };
-  return { color: 'critical', emoji: '🔴', label: 'Critical' };
+  if (score >= 90) return { color: 'excellent', emoji: '', label: 'Excellent' };
+  if (score >= 75) return { color: 'good', emoji: '', label: 'Good' };
+  if (score >= 60) return { color: 'warning', emoji: '', label: 'Fair' };
+  if (score >= 40) return { color: 'danger', emoji: '', label: 'Risky' };
+  return { color: 'critical', emoji: '', label: 'Critical' };
 }
+
