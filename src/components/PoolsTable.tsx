@@ -3,7 +3,9 @@
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import AdvisorBadge from "./advisor/AdvisorBadge";
+import MetricTooltip from "@/components/advisor/MetricTooltip";
 import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
+import { ilFromPriceChange, ilRiskLevel } from "@/lib/advisor/impermanentLoss";
 
 type PoolRow = {
   id: string;
@@ -28,9 +30,37 @@ type ApiResponse = {
 const FEE_TIERS = ["all", "500", "3000", "10000"] as const;
 type FeeFilter = (typeof FEE_TIERS)[number];
 
+type Status = 'excellent' | 'good' | 'warning' | 'danger' | 'critical';
+
+function toStatus(score: number): Status {
+  if (score >= 85) return 'excellent';
+  if (score >= 70) return 'good';
+  if (score >= 55) return 'warning';
+  if (score >= 40) return 'danger';
+  return 'critical';
+}
+
+function previewRating(p: PoolRow): number {
+  const tvl = p.tvl_usd ?? 0;
+  const vol = p.volume_usd_24h ?? 0;
+  const feeRate = (p.fee_tier ?? 0) / 1_000_000; // 3000 -> 0.003
+  // Volume:TVL score (0-10) -> 0-100
+  const ratio = tvl > 0 ? vol / tvl : 0;
+  let vScore = 1;
+  if (ratio > 1.0) vScore = 10; else if (ratio > 0.5) vScore = 9; else if (ratio > 0.3) vScore = 7; else if (ratio > 0.15) vScore = 5; else if (ratio > 0.05) vScore = 3; else vScore = 1;
+  let score = vScore * 10;
+  // IL penalty at 10% move (heuristic, pool-agnostic)
+  const il = ilFromPriceChange(10);
+  const risk = ilRiskLevel(il);
+  if (risk === 'medium') score -= 5; else if (risk === 'high') score -= 15; else if (risk === 'extreme') score -= 30;
+  // Fee tier bonus
+  if (feeRate >= 0.01) score += 5; else if (feeRate >= 0.003) score += 2;
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
 export default function PoolsTable() {
   const [fee, setFee] = useState<FeeFilter>("all");
-  const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "updated">("tvl");
+  const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("tvl");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -82,6 +112,11 @@ export default function PoolsTable() {
         case "apr": {
           const av = aprValue(a);
           const bv = aprValue(b);
+          return (av - bv) * dir;
+        }
+        case "rating": {
+          const av = previewRating(a);
+          const bv = previewRating(b);
           return (av - bv) * dir;
         }
         case "updated": {
@@ -143,7 +178,7 @@ export default function PoolsTable() {
       </div>
 
       <div className="rounded-lg border border-black/10 dark:border-white/10 overflow-x-auto">
-        <table className="w-full min-w-[780px] text-sm" role="table" aria-label="Top pools table">
+        <table className="w-full min-w-[920px] text-sm" role="table" aria-label="Top pools table">
           <caption className="sr-only">Top pools by TVL, Volume and APR</caption>
           <thead className="bg-black/5 dark:bg-white/5">
             <tr>
@@ -170,6 +205,11 @@ export default function PoolsTable() {
               <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("apr")}>
                 <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("apr")}>
                   Fee APR (est) <span>{sortCaret("apr")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("rating")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("rating")}>
+                  Rating <span>{sortCaret("rating")}</span>
                 </button>
               </th>
               <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("updated")}>
@@ -208,6 +248,16 @@ export default function PoolsTable() {
                 <td className="px-3 py-2 text-right">{fmtUsd(p.tvl_usd)}</td>
                 <td className="px-3 py-2 text-right">{fmtUsd(p.volume_usd_24h)}</td>
                 <td className="px-3 py-2 text-right">{fmtApr(p)}</td>
+                <td className="px-3 py-2 text-right">
+                  {(() => { const sc = previewRating(p); const st = toStatus(sc); return (
+                    <div className="inline-flex items-center gap-1 justify-end">
+                      <AdvisorBadge status={st as any} score={sc} />
+                      <MetricTooltip label="Preview">
+                        Quick rating uses Volume:TVL, fee tier bonus, and a 10% IL penalty. Open pool for full advisor insights.
+                      </MetricTooltip>
+                    </div>
+                  ); })()}
+                </td>
                 <td className="px-3 py-2 text-right">{fmtTime(p.updated_at)}</td>
               </tr>
             ))}
