@@ -77,7 +77,7 @@
 
 ---
 
-### ⏳ Phase 2: Advisor Metrics Engine (Week 3-4) - **NEXT**
+### ⏳ Phase 2: Advisor Metrics Engine (Week 3-4) - **IN PROGRESS**
 
 **Status:** In Progress
 **Target Start:** October 18, 2025
