@@ -67,8 +67,8 @@ export default function WalletPositions() {
       {/* Loading state with shimmer */}
       {loading && (
         <div className="space-y-3">
-          <div className="skeleton h-24 w-full"></div>
-          <div className="skeleton h-24 w-full"></div>
+          <div className="skeleton h-24 w-full">💧</div>
+          <div className="skeleton h-24 w-full">💧</div>
           <div className="text-sm opacity-70 text-center py-2">
             Loading your pool party...
           </div>
