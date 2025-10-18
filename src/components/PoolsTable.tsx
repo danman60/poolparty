@@ -190,7 +190,7 @@ export default function PoolsTable() {
 
   function caret(key: typeof sortKey) {
     if (sortKey !== key) return "";
-    return sortDir === "asc" ? "â–²" : "â–¼";
+    return sortDir === "asc" ? "?–²" : "â–¼";
   }
 
   const total = data?.meta?.total ?? 0;
@@ -414,6 +414,7 @@ function renderVtvlBadge(p: PoolRow) {
     </div>
   );
 }
+
 
 
 
