@@ -63,14 +63,14 @@ export default function BatchCollectFeesButton({ positions, onComplete }: { posi
           value: 0n,
           chainId: mainnet.id,
         });
-        addToast(`Collect submitted for #${p.id.slice(0, 6)}...`, "success", (chainId === 1 ? "https://etherscan.io" : "https://sepolia.etherscan.io") + "/tx/" + hash, hash as any);
+        addToast(`Collect submitted for #${p.id.slice(0, 6)}...`, "success");
         success++;
       } catch (e: any) {
         addToast(e?.shortMessage || e?.message || `Failed to collect for #${p.id}`, "error");
       }
       setProgress(i + 1);
     }
-    addToast(`Batch collect complete (${success}/${targets.length})`, success === targets.length ? "success" : "warning");
+    addToast(`Batch collect complete (${success}/${targets.length})`, success === targets.length ? "success" : "info");
     setSubmitting(false);
     setProgress(0);
     onComplete?.();
