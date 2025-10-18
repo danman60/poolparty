@@ -94,7 +94,7 @@ export default function BatchClosePositionsButton({ positions, onComplete }: { p
 
       setProgress(i + 1);
     }
-    addToast(`Batch close complete (${success}/${targets.length})`, success === targets.length ? "success" : "warning");
+    addToast(`Batch close complete (${success}/${targets.length})`, success === targets.length ? "success" : "info");
     setSubmitting(false);
     setProgress(0);
     pendingTx.current = null;
@@ -117,4 +117,5 @@ export default function BatchClosePositionsButton({ positions, onComplete }: { p
     </div>
   );
 }
+
 
