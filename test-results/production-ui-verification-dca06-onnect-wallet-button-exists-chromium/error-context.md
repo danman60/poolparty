@@ -1,0 +1,176 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - navigation "Primary" [ref=e4]:
+      - generic [ref=e5]:
+        - link "PoolParty Home" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - text: PoolParty
+        - link "Dashboard" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Wallet" [ref=e8] [cursor=pointer]:
+          - /url: /wallet
+        - link "Status" [ref=e9] [cursor=pointer]:
+          - /url: /status
+      - generic [ref=e10]: "#ffb99b9"
+  - main [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - heading "Dashboard" [level=1] [ref=e14]
+        - generic [ref=e15]:
+          - generic "Updated 45m ago" [ref=e16]: Updated 45m ago
+          - generic "2025-10-17T19:33:30.761+00:00" [ref=e18]:
+            - text: "Ingest: 45m"
+            - generic [ref=e20]: "· Pools: 101"
+          - button "Refresh Data" [ref=e21]
+      - paragraph [ref=e22]: Browse top pools and filter by fee tier.
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]: Fee tier
+          - combobox [ref=e27]:
+            - option "All" [selected]
+            - option "500"
+            - option "3000"
+            - option "10000"
+          - generic [ref=e28]:
+            - generic [ref=e29]: Sort by
+            - button "TVL" [ref=e30]
+            - button "Volume 24h" [ref=e31]
+            - button "Fee APR" [ref=e32]
+        - table "Top pools table" [ref=e34]:
+          - caption [ref=e35]: Top pools by TVL, Volume and APR
+          - rowgroup [ref=e36]:
+            - row "Pool Fee TVL (USD) Vol 24h (USD) Fee APR (est) Updated" [ref=e37]:
+              - columnheader "Pool" [ref=e38]
+              - columnheader "Fee" [ref=e39]
+              - columnheader "TVL (USD)" [ref=e40]
+              - columnheader "Vol 24h (USD)" [ref=e41]
+              - columnheader "Fee APR (est)" [ref=e42]
+              - columnheader "Updated" [ref=e43]
+          - rowgroup [ref=e44]:
+            - row "DancingNarwhal ease.org / ez-cvxsteCRV • 0.01% 0.01% $1,110,167,010,696 — — 10/17/2025, 3:33:30 PM" [ref=e45]:
+              - cell "DancingNarwhal ease.org / ez-cvxsteCRV • 0.01%" [ref=e46]:
+                - link "DancingNarwhal ease.org / ez-cvxsteCRV • 0.01%" [ref=e47] [cursor=pointer]:
+                  - /url: /pool/0x277667eb3e34f134adf870be9550e9f323d0dc24
+                  - generic [ref=e48]: DancingNarwhal
+                  - generic [ref=e49]: ease.org / ez-cvxsteCRV • 0.01%
+              - cell "0.01%" [ref=e50]
+              - cell "$1,110,167,010,696" [ref=e51]
+              - cell "—" [ref=e52]
+              - cell "—" [ref=e53]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e54]
+            - row "SoakingDolphin ease.org / ez-yvCurve-IronBank • 0.01% 0.01% $1,432,077,483 — — 10/17/2025, 3:33:30 PM" [ref=e55]:
+              - cell "SoakingDolphin ease.org / ez-yvCurve-IronBank • 0.01%" [ref=e56]:
+                - link "SoakingDolphin ease.org / ez-yvCurve-IronBank • 0.01%" [ref=e57] [cursor=pointer]:
+                  - /url: /pool/0x8c0411f2ad5470a66cb2e9c64536cfb8dcd54d51
+                  - generic [ref=e58]: SoakingDolphin
+                  - generic [ref=e59]: ease.org / ez-yvCurve-IronBank • 0.01%
+              - cell "0.01%" [ref=e60]
+              - cell "$1,432,077,483" [ref=e61]
+              - cell "—" [ref=e62]
+              - cell "—" [ref=e63]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e64]
+            - row "LuckyWhale ease.org / ez-SLP-WBTC-WETH • 0.01% 0.01% $1,322,031,014 — — 10/17/2025, 3:33:30 PM" [ref=e65]:
+              - cell "LuckyWhale ease.org / ez-SLP-WBTC-WETH • 0.01%" [ref=e66]:
+                - link "LuckyWhale ease.org / ez-SLP-WBTC-WETH • 0.01%" [ref=e67] [cursor=pointer]:
+                  - /url: /pool/0x055284a4ca6532ecc219ac06b577d540c686669d
+                  - generic [ref=e68]: LuckyWhale
+                  - generic [ref=e69]: ease.org / ez-SLP-WBTC-WETH • 0.01%
+              - cell "0.01%" [ref=e70]
+              - cell "$1,322,031,014" [ref=e71]
+              - cell "—" [ref=e72]
+              - cell "—" [ref=e73]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e74]
+            - row "GoldenBadger USDC / WETH • 0.05% 0.05% $456,760,551 $68,643,292 2.74% 10/17/2025, 3:33:30 PM" [ref=e75]:
+              - cell "GoldenBadger USDC / WETH • 0.05%" [ref=e76]:
+                - link "GoldenBadger USDC / WETH • 0.05%" [ref=e77] [cursor=pointer]:
+                  - /url: /pool/0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640
+                  - generic [ref=e78]: GoldenBadger
+                  - generic [ref=e79]: USDC / WETH • 0.05%
+              - cell "0.05%" [ref=e80]
+              - cell "$456,760,551" [ref=e81]
+              - cell "$68,643,292" [ref=e82]
+              - cell "2.74%" [ref=e83]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e84]
+            - row "BrightDolphin USDC / WETH • 0.30% 0.30% $409,658,248 $46,810,642 12.51% 10/17/2025, 3:33:30 PM" [ref=e85]:
+              - cell "BrightDolphin USDC / WETH • 0.30%" [ref=e86]:
+                - link "BrightDolphin USDC / WETH • 0.30%" [ref=e87] [cursor=pointer]:
+                  - /url: /pool/0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8
+                  - generic [ref=e88]: BrightDolphin
+                  - generic [ref=e89]: USDC / WETH • 0.30%
+              - cell "0.30%" [ref=e90]
+              - cell "$409,658,248" [ref=e91]
+              - cell "$46,810,642" [ref=e92]
+              - cell "12.51%" [ref=e93]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e94]
+            - row "CleverTiger WETH / USDT • 0.30% 0.30% $347,624,931 $69,256,963 21.82% 10/17/2025, 3:33:30 PM" [ref=e95]:
+              - cell "CleverTiger WETH / USDT • 0.30%" [ref=e96]:
+                - link "CleverTiger WETH / USDT • 0.30%" [ref=e97] [cursor=pointer]:
+                  - /url: /pool/0x4e68ccd3e89f51c3074ca5072bbac773960dfa36
+                  - generic [ref=e98]: CleverTiger
+                  - generic [ref=e99]: WETH / USDT • 0.30%
+              - cell "0.30%" [ref=e100]
+              - cell "$347,624,931" [ref=e101]
+              - cell "$69,256,963" [ref=e102]
+              - cell "21.82%" [ref=e103]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e104]
+            - row "CalmFox WBTC / WETH • 0.30% 0.30% $317,747,705 $3,447,040 1.19% 10/17/2025, 3:33:30 PM" [ref=e105]:
+              - cell "CalmFox WBTC / WETH • 0.30%" [ref=e106]:
+                - link "CalmFox WBTC / WETH • 0.30%" [ref=e107] [cursor=pointer]:
+                  - /url: /pool/0xcbcdf9626bc03e24f779434178a73a0b4bad62ed
+                  - generic [ref=e108]: CalmFox
+                  - generic [ref=e109]: WBTC / WETH • 0.30%
+              - cell "0.30%" [ref=e110]
+              - cell "$317,747,705" [ref=e111]
+              - cell "$3,447,040" [ref=e112]
+              - cell "1.19%" [ref=e113]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e114]
+            - row "CosmicDolphin WBTC / USDC • 0.30% 0.30% $256,165,899 $113,428,864 48.49% 10/17/2025, 3:33:30 PM" [ref=e115]:
+              - cell "CosmicDolphin WBTC / USDC • 0.30%" [ref=e116]:
+                - link "CosmicDolphin WBTC / USDC • 0.30%" [ref=e117] [cursor=pointer]:
+                  - /url: /pool/0x99ac8ca7087fa4a2a1fb6357269965a2014abc35
+                  - generic [ref=e118]: CosmicDolphin
+                  - generic [ref=e119]: WBTC / USDC • 0.30%
+              - cell "0.30%" [ref=e120]
+              - cell "$256,165,899" [ref=e121]
+              - cell "$113,428,864" [ref=e122]
+              - cell "48.49%" [ref=e123]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e124]
+            - row "QuantumPhoenix WBTC / WETH • 0.05% 0.05% $154,343,018 $128,337,219 15.17% 10/17/2025, 3:33:30 PM" [ref=e125]:
+              - cell "QuantumPhoenix WBTC / WETH • 0.05%" [ref=e126]:
+                - link "QuantumPhoenix WBTC / WETH • 0.05%" [ref=e127] [cursor=pointer]:
+                  - /url: /pool/0x4585fe77225b41b697c938b018e2ac67ac5a20c0
+                  - generic [ref=e128]: QuantumPhoenix
+                  - generic [ref=e129]: WBTC / WETH • 0.05%
+              - cell "0.05%" [ref=e130]
+              - cell "$154,343,018" [ref=e131]
+              - cell "$128,337,219" [ref=e132]
+              - cell "15.17%" [ref=e133]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e134]
+            - row "BoldDolphin WETH / USDT • 0.05% 0.05% $90,333,090 $17,364,763 3.51% 10/17/2025, 3:33:30 PM" [ref=e135]:
+              - cell "BoldDolphin WETH / USDT • 0.05%" [ref=e136]:
+                - link "BoldDolphin WETH / USDT • 0.05%" [ref=e137] [cursor=pointer]:
+                  - /url: /pool/0x11b815efb8f581194ae79006d24e0d814b7697f6
+                  - generic [ref=e138]: BoldDolphin
+                  - generic [ref=e139]: WETH / USDT • 0.05%
+              - cell "0.05%" [ref=e140]
+              - cell "$90,333,090" [ref=e141]
+              - cell "$17,364,763" [ref=e142]
+              - cell "3.51%" [ref=e143]
+              - cell "10/17/2025, 3:33:30 PM" [ref=e144]
+        - generic [ref=e145]:
+          - button "Previous page" [disabled] [ref=e146]: Prev
+          - generic [ref=e147]: Page 1 of 11
+          - button "Next page" [ref=e148]: Next
+        - paragraph [ref=e149]:
+          - text: "Tip: Use"
+          - code [ref=e150]: /api/ingest/uniswap?limit=50
+          - text: to seed data. If Supabase env is missing, the endpoint responds with
+          - code [ref=e151]: "dryRun: true"
+          - text: .
+  - alert [ref=e152]
+```

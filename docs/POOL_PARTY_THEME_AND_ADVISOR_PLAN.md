@@ -1,8 +1,202 @@
 # 🏊 PoolParty Theme & Advisor Feature - Master Plan
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** October 17, 2025
-**Status:** Planning Phase
+**Status:** Phase 1 Complete - In Active Development
+**Last Updated:** October 17, 2025 23:59 UTC
+
+---
+
+## 📊 PROGRESS TRACKER
+
+### ✅ Phase 1: Theme Foundation (Week 1-2) - **COMPLETE**
+
+**Status:** 100% Complete
+**Completed:** October 17, 2025
+
+#### Files Created:
+1. **`src/lib/lifeguard/healthScore.ts`** (232 lines) - ✅ COMPLETE
+   - Comprehensive 4-factor health scoring algorithm
+   - Weights: Profitability (40%), Fee Performance (30%), Liquidity Utilization (20%), Risk Metrics (10%)
+   - 5-tier status system (Excellent, Good, Fair, Risky, Critical)
+   - Health breakdown export function
+
+2. **`src/components/PositionCard.tsx`** (232 lines) - ✅ COMPLETE
+   - Mobile-first collapsible card component
+   - Tap-to-expand interaction pattern
+   - Real-time Lifeguard health score integration
+   - Detailed health breakdown grid (4 factors with weights)
+   - Profitability display with color-coded indicators
+   - Touch-optimized buttons (44px minimum)
+   - Ripple and splash animations
+
+#### Files Modified:
+1. **`src/app/globals.css`** (388 lines) - ✅ COMPLETE
+   - Pool Party color palette (aqua blues, lifeguard status colors)
+   - 60+ CSS custom properties
+   - 6 keyframe animations (wave, ripple, splash, float, shimmer, none for reduced motion)
+   - Mobile-specific utilities (touch targets, safe areas, bottom nav)
+   - Dark mode support
+   - Accessibility features (prefers-reduced-motion, focus-visible)
+
+2. **`src/components/WalletPositions.tsx`** - ✅ COMPLETE
+   - Replaced old card layout with new PositionCard component
+   - Added "🏊 Your Pools" header with Pool Party branding
+   - Skeleton loading states with shimmer animation
+   - Styled error states with Lifeguard alert styling
+   - Empty state with pool emoji
+   - Lifeguard tip box at bottom
+
+#### Achievements:
+- ✅ Pool Party theme system with aqua blue color palette
+- ✅ Lifeguard status colors (5-tier system)
+- ✅ Mobile-first responsive design (Chrome Android optimized)
+- ✅ CSS animations (wave, ripple, splash, float, shimmer)
+- ✅ Touch-friendly interactions (44px minimum targets)
+- ✅ Real health scoring algorithm (no mocks)
+- ✅ Collapsible position cards with detailed health breakdown
+- ✅ Dark mode support
+- ✅ Accessibility features
+
+#### Dev Server Status:
+- ✅ Running successfully at http://localhost:3004
+- ✅ No TypeScript errors
+- ✅ No build errors
+- ✅ Hot reload working
+
+---
+
+### ⏳ Phase 2: Advisor Metrics Engine (Week 3-4) - **NEXT**
+
+**Status:** 0% Complete
+**Target Start:** October 18, 2025
+
+#### Planned Files to Create:
+1. **`src/lib/advisor/impermanentLoss.ts`** - ⏳ PENDING
+   - IL calculation formulas
+   - Volume-to-offset-IL calculator
+   - IL risk assessment (low/medium/high/extreme)
+   - Break-even volume analysis
+
+2. **`src/lib/advisor/volumeAnalysis.ts`** - ⏳ PENDING
+   - Volume-to-TVL ratio scoring (0-10 scale)
+   - Daily/weekly/monthly volume trends
+   - Activity classification
+
+3. **`src/lib/advisor/rangeOptimization.ts`** - ⏳ PENDING
+   - Optimal range calculation for blue-chip pairs (±8%)
+   - Stablecoin range calculator (±0.2%)
+   - Long-tail range calculator (±80%)
+   - Range efficiency evaluation
+
+4. **`src/lib/advisor/exitTriggers.ts`** - ⏳ PENDING
+   - Stablecoin depeg detection (>0.5%, >1%, >2%)
+   - Volatility spike detection
+   - Out of range duration evaluation
+   - PnL vs HODL stop-loss
+   - Pool health degradation monitoring
+
+5. **`src/lib/advisor/poolScreening.ts`** - ⏳ PENDING
+   - Pool safety scoring (0-100)
+   - Entry criteria validation
+   - Position sizing calculator
+   - Fee tier recommendation matrix
+
+6. **`src/components/advisor/PoolRating.tsx`** - ⏳ PENDING
+   - Pool health badge component
+   - Star rating display (1-5 stars)
+
+7. **`src/components/advisor/MetricTooltip.tsx`** - ⏳ PENDING
+   - Interactive tooltip component
+   - Educational explanations
+   - Contextual examples
+
+8. **`src/components/advisor/AdvisorBadge.tsx`** - ⏳ PENDING
+   - Status badge component
+   - Color-coded indicators
+
+#### Key Metrics to Implement:
+- [ ] Volume-to-TVL ratio scoring
+- [ ] IL risk assessment
+- [ ] Fee tier analysis
+- [ ] Range efficiency calculation
+- [ ] Pool age & stability scoring
+- [ ] Concentration risk detection
+- [ ] Out of range detection
+
+---
+
+### 📅 Phase 3: Conditional Formatting (Week 5) - **PLANNED**
+
+**Status:** 0% Complete
+
+#### Tasks:
+- [ ] Color-coded pool cards based on health scores
+- [ ] Pulsing animations for warnings
+- [ ] Visual status indicators
+- [ ] Health bar visualizations
+- [ ] Dashboard filtering by health score
+
+---
+
+### 📅 Phase 4: Notification System (Week 6) - **PLANNED**
+
+**Status:** 0% Complete
+
+#### Planned Files:
+- [ ] `src/lib/notifications/monitor.ts`
+- [ ] `src/lib/notifications/templates.ts`
+- [ ] `src/components/NotificationCenter.tsx`
+- [ ] `src/components/NotificationToast.tsx`
+
+---
+
+### 📅 Phase 5: Polish & Testing (Week 7-8) - **PLANNED**
+
+**Status:** 0% Complete
+
+#### Tasks:
+- [ ] User testing & feedback
+- [ ] Animation refinement
+- [ ] Mobile Chrome Android device testing
+- [ ] Performance optimization
+- [ ] E2E tests for advisor features
+
+---
+
+## 🎯 DELEGATION HANDOFF NOTES
+
+### For Next Developer/Tool:
+
+**Current State:**
+- Phase 1 is fully complete and working
+- Dev server running on port 3004
+- All basic UI/UX foundation in place
+- Real health scoring implemented (not mocked)
+
+**Next Immediate Tasks (Phase 2):**
+1. Start with `src/lib/advisor/impermanentLoss.ts`
+2. Implement IL formulas from lines 1593-1661 of this document
+3. Create unit tests for IL calculations
+4. Integrate IL calculations into health scoring
+
+**Key Technical Context:**
+- TypeScript strict mode enabled
+- Using Next.js 15.5.5 with Turbopack
+- Tailwind CSS v4 with @theme inline syntax
+- Mobile-first design (Chrome Android primary target)
+- All calculations based on research from ADVISOR_RESEARCH_SOURCE.md
+
+**Important Files to Reference:**
+- `src/lib/lifeguard/healthScore.ts` - Current health scoring implementation
+- Lines 1453-2335 of this document - Complete Phase 2-5 specifications
+- Lines 1590-2193 - Research-based formulas and thresholds
+
+**Testing Strategy:**
+- Manual testing on Chrome Android
+- Unit tests for all advisor calculations
+- Integration tests for health scoring
+- E2E tests deferred to Phase 5
 
 ---
 
@@ -10,7 +204,62 @@
 
 Transform PoolParty into a **fun, beautiful, and intuitive** DeFi app with:
 1. **Pool Party Theme**: Festive summer outdoor vibe where each liquidity pool is a visual swimming pool
-2. **Built-in Advisor**: Smart guidance system with tooltips, warnings, and best practice recommendations
+2. **The Lifeguard System**: Intelligent risk management and optimization engine (formerly "Advisor")
+3. **Educational Scaffolding**: Learn-as-you-earn with contextual guidance
+
+**Core Philosophy**: *"Jump in the pool. We'll keep you safe."*
+
+Users control capital deployment; The Lifeguard optimizes everything else.
+
+---
+
+## 🏊‍♂️ The Lifeguard System
+
+The Lifeguard is PoolParty's intelligent protection system that actively monitors positions, suggests optimal settings, and protects users from common LP mistakes.
+
+```
+┌─────────────────────────────────────────────────┐
+│           THE LIFEGUARD SYSTEM                  │
+├─────────────────────────────────────────────────┤
+│                                                 │
+│  ┌──────────────┐      ┌──────────────┐       │
+│  │ Risk Monitor │      │  Optimizer   │       │
+│  └──────┬───────┘      └──────┬───────┘       │
+│         │                     │                │
+│         ├─────────┬───────────┤                │
+│         │         │           │                │
+│  ┌──────▼─────┐ ┌▼────────┐ ┌▼────────────┐  │
+│  │  Alerts    │ │Educator │ │ Auto-Adjust │  │
+│  └────────────┘ └─────────┘ └─────────────┘  │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+### Protection Layers
+
+**Layer 1: Pre-Entry Validation**
+- Protocol audit verification
+- TVL/Volume sanity checks
+- Rug pull risk assessment
+- Smart contract risk scoring (0-100)
+
+**Layer 2: Position Monitoring**
+- Real-time price tracking
+- IL calculation updates (every block)
+- Range efficiency monitoring
+- Gas cost tracking
+
+**Layer 3: Market Condition Analysis**
+- Volatility regime detection
+- Liquidity depth monitoring
+- Correlation analysis
+- Oracle price verification
+
+**Layer 4: Automated Response**
+- Alert generation (critical, warning, info)
+- Optimization suggestions
+- Emergency actions (if enabled)
+- Performance reporting
 
 ---
 
@@ -134,11 +383,16 @@ Transform PoolParty into a **fun, beautiful, and intuitive** DeFi app with:
 ### 🌊 Micro-Animations
 
 1. **Splash Effect**: When depositing/withdrawing
-2. **Ripples**: On pool card hover
+2. **Ripples**: On pool card hover (tap on mobile)
 3. **Waves**: Constant subtle movement on pool surfaces
 4. **Bubbles**: Rising bubbles for loading states
 5. **Sun Rays**: Shimmer effect on successful transactions
 6. **Floaties**: Drift across screen on page load
+
+**Mobile Performance:**
+- Reduce animation complexity on mobile (detect via `prefers-reduced-motion`)
+- Use CSS transforms instead of position changes
+- Limit simultaneous animations to 2-3 on mobile
 
 ---
 
@@ -148,36 +402,548 @@ Transform PoolParty into a **fun, beautiful, and intuitive** DeFi app with:
 - Gentle water ambiance (very subtle, toggle)
 - "Cha-ching" on fee collection
 
+**Note**: Sounds disabled by default on mobile
+
 ---
 
-## 🧠 Part 2: Built-in Advisor Feature
+## 📱 Mobile-First Design Strategy
+
+### Core Principles
+
+**Mobile is the primary monitoring interface, desktop is for management:**
+
+1. **Mobile Priorities**:
+   - Quick glances at portfolio health
+   - Critical alerts (prominent)
+   - Simple actions (collect fees, view details)
+   - Swipeable position cards
+   - Bottom navigation for quick access
+
+2. **Desktop Priorities**:
+   - Multi-position comparison
+   - Advanced analytics
+   - Complex transactions (minting, rebalancing)
+   - Deep configuration
+
+### Mobile Screen Hierarchy
+
+```
+┌─────────────────────────┐
+│ 🏊 Pool Party           │ ← Sticky header (minimal)
+├─────────────────────────┤
+│ Portfolio: $12,450  ↗️  │ ← Total value (large, prominent)
+│ +$45 (+0.36%) 24h       │
+├─────────────────────────┤
+│ 🔴 2 alerts             │ ← Critical alerts (expandable)
+│ 🟡 1 suggestion         │
+├─────────────────────────┤
+│ ┌───────────────────┐   │
+│ │ ETH/USDC 0.3%     │   │ ← Swipeable cards
+│ │ 🟢 78  $5,200     │   │   (swipe left = actions)
+│ │ +$23 fees         │   │
+│ └───────────────────┘   │
+│                         │
+│ ┌───────────────────┐   │
+│ │ USDC/DAI 0.01%    │   │
+│ │ 🟢 85  $7,250     │   │
+│ │ +$14 fees         │   │
+│ └───────────────────┘   │
+│                         │
+│        [...]            │
+├─────────────────────────┤
+│ [🏠] [💰] [🔔] [⚙️]    │ ← Bottom nav (fixed)
+└─────────────────────────┘
+```
+
+### Mobile Interactions
+
+**Swipe Gestures:**
+```typescript
+// Position cards
+SwipeLeft:  Show quick actions (Collect, Adjust, Details)
+SwipeRight: Dismiss quick actions
+PullDown:   Refresh data
+Tap:        Expand position details
+LongPress:  Show advanced menu
+```
+
+**Bottom Navigation:**
+```
+🏠 Home     - Dashboard with all positions
+💰 Pools    - Browse and join pools
+🔔 Alerts   - All notifications and suggestions
+⚙️ Settings - Preferences and automation
+```
+
+**Touch Targets:**
+- Minimum 44x44px for all interactive elements
+- Spacing: 8px minimum between targets
+- Large primary buttons: 56px height
+- Swipeable cards: Full width with padding
+
+### Mobile-Specific Components
+
+#### 1. Collapsible Position Cards
+```
+┌─────────────────────────┐
+│ ETH/USDC 0.3%      [˅]  │ ← Collapsed (default)
+│ 🟢 78  $5,200           │
+│ +$23 today              │
+└─────────────────────────┘
+
+    ↓ Tap to expand ↓
+
+┌─────────────────────────┐
+│ ETH/USDC 0.3%      [˄]  │ ← Expanded
+│ Lifeguard: 🟢 78/100    │
+├─────────────────────────┤
+│ Value: $5,200           │
+│ Range: 🟢 In range      │
+│ ├──●───┤ $3.2K - $3.8K  │
+│                         │
+│ Fees (7d): +$23         │
+│ IL: -$5                 │
+│ Net P&L: +$18 ✅        │
+├─────────────────────────┤
+│ [💰 Collect] [🔧 Adjust]│
+└─────────────────────────┘
+```
+
+#### 2. Slide-Up Modals (Not Full Page)
+```
+Action sheets for transactions:
+- Slide up from bottom (80% screen height)
+- Pull down to dismiss
+- Large "Continue" button at bottom
+- Easy to reach with thumb
+```
+
+#### 3. Simplified Metrics
+```
+Desktop: All 7 advisor metrics visible
+Mobile:  Top 3 metrics + "See more" button
+
+Prioritize on mobile:
+1. Health Score (aggregate)
+2. Profit Status (fees vs IL)
+3. Range Status (in/out/approaching)
+```
+
+### Mobile-Specific Alerts
+
+**Push Notifications:**
+```
+🚨 Pool Party Alert
+ETH/USDC out of range
+Tap to rebalance
+
+[Tap] → Opens app to position detail
+[Swipe] → Mark as read
+[Long press] → Snooze 1hr/3hr/6hr
+```
+
+**In-App Alert Cards:**
+```
+┌─────────────────────────┐
+│ 🔴 Out of Range         │ ← Color-coded border
+│ ETH/USDC • Just now     │
+│                         │
+│ Not earning fees        │
+│ Lifeguard suggests:     │
+│ Rebalance to $3.1K-$3.7K│
+│                         │
+│ [Rebalance] [Dismiss]   │ ← Full-width buttons
+└─────────────────────────┘
+```
+
+### Responsive Breakpoints
+
+```typescript
+// Tailwind-style breakpoints
+const breakpoints = {
+  mobile: '0px',      // Mobile first
+  mobileLg: '480px',  // Large phones
+  tablet: '768px',    // Tablets
+  desktop: '1024px',  // Desktop
+  wide: '1280px'      // Wide desktop
+};
+
+// Component visibility
+<LifeguardHealthDetail>
+  className="hidden md:block" // Desktop only
+</LifeguardHealthDetail>
+
+<LifeguardHealthSummary>
+  className="md:hidden" // Mobile only
+</LifeguardHealthSummary>
+```
+
+### Mobile Performance Optimizations
+
+**1. Lazy Loading:**
+```typescript
+// Load position details only when expanded
+const PositionCard = () => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <Card>
+      <CardHeader onClick={() => setExpanded(!expanded)} />
+      {expanded && (
+        <Suspense fallback={<Skeleton />}>
+          <PositionDetails /> {/* Lazy loaded */}
+        </Suspense>
+      )}
+    </Card>
+  );
+};
+```
+
+**2. Virtual Scrolling:**
+```typescript
+// For users with 100+ positions
+import { useVirtualizer } from '@tanstack/react-virtual';
+
+// Only render visible cards + buffer
+```
+
+**3. Image Optimization:**
+```typescript
+// Token logos
+<Image
+  src={tokenLogo}
+  width={32}
+  height={32}
+  loading="lazy"
+  placeholder="blur"
+/>
+```
+
+### Mobile-Specific Features
+
+**1. Quick Actions Widget (iOS/Android)**
+```
+Home Screen Widget:
+┌─────────────────┐
+│ Pool Party      │
+│ $12,450  +0.3% │
+│                 │
+│ 🔴 2 alerts    │
+│ [Open App]      │
+└─────────────────┘
+```
+
+**2. Face ID / Touch ID**
+```typescript
+// For transaction approvals on mobile
+if (isMobile && hasSecureAuth) {
+  await authenticateWithBiometrics();
+} else {
+  await confirmInWallet();
+}
+```
+
+**3. Haptic Feedback**
+```typescript
+// Subtle haptics for actions
+const haptic = {
+  success: 'notificationSuccess',    // Fee collected
+  warning: 'notificationWarning',    // Approaching range edge
+  error: 'notificationError',        // Out of range
+  selection: 'selectionChanged',     // Card tap
+  impact: 'impactLight'              // Button press
+};
+```
+
+### Mobile Testing Checklist
+
+**Browsers:**
+- [ ] Safari iOS (14+)
+- [ ] Chrome Android
+- [ ] Chrome iOS
+- [ ] Samsung Internet
+
+**Devices:**
+- [ ] iPhone SE (375px - smallest)
+- [ ] iPhone 14 Pro (393px)
+- [ ] Pixel 7 (412px)
+- [ ] Samsung S23 (360px)
+- [ ] iPad Mini (768px)
+
+**Features:**
+- [ ] Wallet connection (MetaMask mobile, WalletConnect)
+- [ ] Transaction signing
+- [ ] Push notifications
+- [ ] Offline mode (view cached data)
+- [ ] Dark mode
+- [ ] Landscape orientation
+- [ ] One-handed use (reachability)
+
+---
+
+## 🧠 Part 2: The Lifeguard Features (Intelligent Advisor)
 
 ### Overview
 
-The **PoolParty Advisor** is an intelligent guidance system that analyzes pool metrics and provides actionable insights based on DeFi liquidity provision best practices.
+The **Lifeguard** is Pool Party's intelligent protection and optimization system that combines risk management, education, and automation to help users succeed.
 
 ---
 
-### Advisor Scoring System
+### Pool Safety Scoring (Pre-Entry Validation)
 
-#### Pool Health Score (0-100)
+Before allowing deposits, The Lifeguard evaluates pools using a comprehensive safety framework:
 
-**Calculation:**
+#### Safety Score Algorithm (0-100)
+
+```typescript
+function calculatePoolSafetyScore(pool: Pool): {
+  score: number;
+  rating: 'A' | 'B' | 'C' | 'D' | 'F';
+  flags: string[];
+  recommendation: string;
+} {
+  let score = 100;
+  const flags: string[] = [];
+
+  // Protocol maturity (-20 if new, +5 if mature)
+  if (pool.protocolAge < 180) { // 6 months
+    score -= 20;
+    flags.push("New protocol - higher risk");
+  } else if (pool.protocolAge > 730) { // 2 years
+    score += 5;
+  }
+
+  // Audit status (critical)
+  if (!pool.hasAudit) {
+    score -= 30;
+    flags.push("⛔ No security audit");
+  } else if (pool.auditAge > 365) {
+    score -= 10;
+    flags.push("⚠️ Audit outdated");
+  }
+
+  // Liquidity checks
+  if (pool.tvl < 1_000_000) {
+    score -= 15;
+    flags.push("Low liquidity - high slippage risk");
+  }
+
+  // Volume/TVL ratio
+  const vToTvl = pool.volume24h / pool.tvl;
+  if (vToTvl < 0.1) {
+    score -= 10;
+    flags.push("Low utilization - fees may be insufficient");
+  }
+
+  // Smart contract risks
+  if (pool.hasAdminKeys) {
+    score -= 15;
+    flags.push("Admin keys present - rug pull risk");
+  }
+
+  if (pool.isUpgradeable) {
+    score -= 10;
+    flags.push("Upgradeable contract - governance risk");
+  }
+
+  // Historical issues
+  if (pool.pastExploits > 0) {
+    score -= 25;
+    flags.push("⛔ Protocol has been exploited before");
+  }
+
+  // Oracle dependencies
+  if (pool.usesExternalOracle && !pool.oracleValidated) {
+    score -= 10;
+    flags.push("Oracle manipulation risk");
+  }
+
+  score = Math.max(0, score);
+
+  return {
+    score,
+    rating: score >= 80 ? 'A' : score >= 60 ? 'B' : score >= 40 ? 'C' : score >= 20 ? 'D' : 'F',
+    flags,
+    recommendation:
+      score >= 70 ? "✅ Lifeguard approved for all users" :
+      score >= 50 ? "⚠️ Acceptable for experienced users" :
+      score >= 30 ? "⚠️ Only for risk-tolerant, experienced users" :
+      "⛔ Not recommended - significant risks"
+  };
+}
+```
+
+**UI Display:**
+```
+┌─────────────────────────────────────┐
+│ 🛡️ Lifeguard Safety Analysis       │
+├─────────────────────────────────────┤
+│                                     │
+│ Overall Score: 78/100 🟢            │
+│ Rating: B - Generally Safe          │
+│                                     │
+│ ✓ Audited by Trail of Bits (2024)  │
+│ ✓ 2+ years operational history      │
+│ ✓ $125M TVL (high liquidity)       │
+│ ⚠️ Admin keys present               │
+│ ⚠️ Upgradeable contract             │
+│                                     │
+│ Lifeguard Verdict:                  │
+│ Safe for most users. Admin keys are │
+│ controlled by 6-of-9 multisig with  │
+│ 48hr timelock.                      │
+│                                     │
+│ [See full report] [Proceed anyway]  │
+└─────────────────────────────────────┘
+```
+
+---
+
+### Position Health Monitoring (Real-Time)
+
+The Lifeguard continuously monitors each position across multiple health factors:
+
+#### Multi-Factor Health Score
+
+```typescript
+interface PositionHealthFactors {
+  // Factor 1: Profitability (40% weight)
+  profitHealth: {
+    formula: 'feesEarned / (impermanentLoss + gasCosts)',
+    thresholds: {
+      critical: number < 0.5,   // Losing money
+      warning: 0.5 - 1.2,       // Break-even zone
+      good: 1.2 - 2.0,          // Profitable
+      excellent: number > 2.0   // Very profitable
+    }
+  };
+
+  // Factor 2: Range Efficiency (30% weight)
+  rangeHealth: {
+    formula: 'timeInRange / totalTime',
+    thresholds: {
+      critical: number < 50%,   // Mostly out of range
+      warning: 50% - 70%,       // Suboptimal
+      good: 70% - 90%,          // Well positioned
+      excellent: number > 90%   // Optimal
+    }
+  };
+
+  // Factor 3: Capital Efficiency (20% weight)
+  efficiencyHealth: {
+    formula: 'effectiveLiquidity / providedLiquidity',
+    thresholds: {
+      critical: number < 1.5,   // Not using CL well
+      warning: 1.5 - 3.0,       // Suboptimal range
+      good: 3.0 - 10.0,         // Good concentration
+      excellent: number > 10    // Excellent concentration
+    }
+  };
+
+  // Factor 4: Protocol Health (10% weight)
+  protocolHealth: {
+    checks: [
+      'tvlNotDroppingRapidly',
+      'noNewVulnerabilities',
+      'oracleFunctioning',
+      'governanceActive'
+    ]
+    // Any failure = critical
+  };
+}
+
+function calculatePositionHealth(position: Position): {
+  score: number;           // 0-100 weighted aggregate
+  factors: HealthFactors;
+  primaryConcern: string;
+  recommendations: string[];
+} {
+  const weights = {
+    profitHealth: 0.4,
+    rangeHealth: 0.3,
+    efficiencyHealth: 0.2,
+    protocolHealth: 0.1
+  };
+
+  // Calculate individual factor scores
+  const profitScore = scoreProfit Health(position);
+  const rangeScore = scoreRangeHealth(position);
+  const efficiencyScore = scoreEfficiencyHealth(position);
+  const protocolScore = scoreProtocolHealth(position);
+
+  // Weighted aggregate
+  const weightedScore =
+    profitScore * weights.profitHealth +
+    rangeScore * weights.rangeHealth +
+    efficiencyScore * weights.efficiencyHealth +
+    protocolScore * weights.protocolHealth;
+
+  // Identify weakest factor
+  const factors = [
+    { name: 'Profitability', score: profitScore },
+    { name: 'Range Efficiency', score: rangeScore },
+    { name: 'Capital Efficiency', score: efficiencyScore },
+    { name: 'Protocol Health', score: protocolScore }
+  ];
+  const primaryConcern = factors.sort((a, b) => a.score - b.score)[0];
+
+  return {
+    score: weightedScore,
+    factors: {
+      profitHealth: profitScore,
+      rangeHealth: rangeScore,
+      efficiencyHealth: efficiencyScore,
+      protocolHealth: protocolScore
+    },
+    primaryConcern: primaryConcern.name,
+    recommendations: generateRecommendations(factors)
+  };
+}
+```
+
+**Position Card with Health Score:**
+```
+┌────────────────────────────────────┐
+│ ETH/USDC 0.3%  ⛓ Ethereum 🦄 V3   │
+│ Lifeguard Health: 🟢 78/100        │
+├────────────────────────────────────┤
+│ Value: $12,450                     │
+│                                    │
+│ Health Breakdown:                  │
+│ ├─ Profit: 🟢 85 (Excellent)       │
+│ ├─ Range: 🟡 72 (Good)             │
+│ ├─ Efficiency: 🟢 81 (Good)        │
+│ └─ Protocol: 🟢 95 (Excellent)     │
+│                                    │
+│ 💡 Lifeguard suggests:             │
+│ Widen range by 2% to improve       │
+│ in-range time from 72% to 85%      │
+│                                    │
+│ [Apply Suggestion] [Dismiss]       │
+└────────────────────────────────────┘
+```
+
+---
+
+### Pool Health Score (Aggregate)
+
+#### Calculation (Multi-Factor)
+
 ```typescript
 Pool Health =
   (30 × Volume/TVL ratio score) +
-  (20 × Stability score) +
-  (20 × Range efficiency score) +
+  (25 × Safety score) +
+  (20 × Range efficiency potential) +
   (15 × Fee tier appropriateness) +
-  (15 × Age/maturity score)
+  (10 × Age/maturity score)
 ```
 
 **Visual Representation:**
-- 90-100: ⭐⭐⭐⭐⭐ "Premium Pool - Dive In!"
-- 75-89: ⭐⭐⭐⭐ "Great Pool - Safe Waters"
-- 60-74: ⭐⭐⭐ "Good Pool - Watch Depth"
-- 40-59: ⭐⭐ "Risky Pool - Caution Advised"
-- 0-39: ⭐ "Dangerous Pool - Avoid!"
+- 90-100: ⭐⭐⭐⭐⭐ "💎 Premium Pool - Dive In!" (Blue glow)
+- 75-89: ⭐⭐⭐⭐ "🟢 Great Pool - Safe Waters" (Green glow)
+- 60-74: ⭐⭐⭐ "🟡 Good Pool - Watch Depth" (Yellow border)
+- 40-59: ⭐⭐ "🟠 Risky Pool - Caution Advised" (Orange border)
+- 0-39: ⭐ "🔴 Dangerous Pool - Avoid!" (Red warning)
 
 ---
 
@@ -460,84 +1226,458 @@ if (inRange && rangeEfficiency > 80) {
 
 ### Notification System
 
-#### Smart Alerts
+#### Smart Alerts (Lifeguard Categories)
 
-**Types:**
-
-1. **Out of Range Alert**
+**🔴 Critical Alerts** (Immediate Action Required):
+1. **Position Out of Range**
    ```
-   🚨 Your USDC/WETH position is out of range!
+   🚨 Lifeguard Alert: Position Not Earning!
+   Your USDC/WETH position is out of range
    Pool: SoakingHog | Fee Tier: 0.3%
    Current Price: $2,100 (above your $1,900 limit)
-   [View Position] [Adjust Range]
+   Earning: $0/day ❌
+   [Rebalance Now] [View Position]
    ```
 
-2. **High IL Risk Alert**
+2. **Depeg Detected**
    ```
-   ⚠️ Impermanent Loss Warning
-   Your WETH/LINK position has potential 5% IL
-   WETH up 15% vs LINK in 24h
-   [Check Position] [Learn More]
+   🔴 CRITICAL: Stablecoin Depeg Detected!
+   USDC trading at $0.985 (-1.5% from peg)
+   Duration: 8 minutes
+   Lifeguard recommends: EXIT IMMEDIATELY
+   [Emergency Exit] [Monitor]
    ```
 
-3. **Fee Collection Reminder**
+3. **Smart Contract Risk**
+   ```
+   ⛔ Security Alert
+   New vulnerability discovered in pool protocol
+   Severity: High
+   Recommended action: Withdraw liquidity
+   [View Details] [Withdraw Now]
+   ```
+
+**🟡 Warning Alerts** (Review Soon):
+4. **Approaching Range Edge**
+   ```
+   ⚠️ Lifeguard Notice: Getting Shallow!
+   Price nearing your range edge (18% away)
+   Current: $1,850 | Your Upper Limit: $1,900
+   Expected to exit range in: 2-4 hours
+   [Adjust Range] [Monitor] [Dismiss]
+   ```
+
+5. **Profitability Warning**
+   ```
+   ⚠️ Underwater Position
+   Fees < IL break-even for 8 days
+   Net P&L: -$23 (-0.5%)
+   Lifeguard suggests: Consider exiting or widening range
+   [View Analysis] [Adjust Strategy]
+   ```
+
+6. **Gas Optimization**
+   ```
+   ⏰ Optimal Rebalancing Window
+   Gas prices: 15 gwei (Low)
+   Estimated savings: $12 vs normal
+   Lifeguard suggests: Rebalance now
+   [Rebalance] [Schedule Later]
+   ```
+
+**🔵 Info Alerts** (FYI):
+7. **Fee Collection Reminder**
    ```
    💰 Fees Ready to Collect!
    You have $45.67 in uncollected fees across 3 pools
-   [Collect All] [View Breakdown]
+   Collecting now costs: $8 gas
+   Net benefit: $37.67
+   [Collect All] [View Breakdown] [Wait]
    ```
 
-4. **Pool Health Change**
+8. **Opportunity Detected**
    ```
-   📉 Pool Rating Downgrade
-   DancingNarwhal pool dropped to ⭐⭐ (was ⭐⭐⭐⭐)
-   Reason: Volume decreased 60%
-   [View Pool] [Consider Exiting]
-   ```
-
-5. **Opportunity Alert**
-   ```
-   🌟 New High-Quality Pool!
+   🌟 Lifeguard Found Better Pool!
    USDC/WETH 0.05% - Rating: ⭐⭐⭐⭐⭐
-   APR: 18.5% | Volume: High | IL Risk: Medium
-   [Explore Pool] [Dismiss]
+   APR: +3.2% vs your current position
+   Migration cost: $18 | Break-even: 28 days
+   [Compare Pools] [Migrate] [Dismiss]
    ```
+
+9. **Weekly Performance Summary**
+   ```
+   📊 Your Pool Party Week in Review
+   • Total fees earned: $127 (+23% vs last week)
+   • All positions healthy (avg: 78/100)
+   • Lifeguard prevented 1 out-of-range event
+   • 2 optimization suggestions available
+   [View Full Report]
+   ```
+
+**Smart Batching Logic:**
+```typescript
+const notificationRules = {
+  batchWindow: 15 minutes,
+  maxPerHour: 5,
+  quietHours: user.preferences.quietHours,
+
+  // Critical alerts bypass all limits
+  critical: {
+    immediate: true,
+    ignoreQuietHours: true,
+    delivery: ["in_app", "push", "email"],
+    retryUntilAcknowledged: true
+  },
+
+  // Group similar alerts
+  groupSimilar: true,  // "3 positions approaching range edge"
+  prioritySort: true   // Show highest value positions first
+};
+```
 
 **Notification Preferences:**
-- Email notifications (optional)
-- In-app notifications (default)
-- Browser push (optional)
-- Frequency: Real-time, Daily digest, Weekly summary
+- In-app: Always (Lifeguard core feature)
+- Push notifications: Configurable (critical only, all, or none)
+- Email: Digest options (immediate, daily, weekly)
+- SMS: Critical only (premium feature)
+- Webhook: For power users / bot integration
+
+---
+
+### Educational Scaffolding
+
+The Lifeguard educates users through contextual learning, not overwhelming documentation.
+
+#### Contextual Tooltips
+
+**Every DeFi term has an interactive tooltip:**
+```
+┌─────────────────────────────────┐
+│ Impermanent Loss (IL)     [?]  │
+├─────────────────────────────────┤
+│ 📚 Simple Explanation:          │
+│ IL happens when token prices    │
+│ change while you're providing   │
+│ liquidity. Think of it like     │
+│ automatically selling winners   │
+│ and buying losers.              │
+│                                 │
+│ 🏊 Pool Party Analogy:          │
+│ If you dive into a pool with    │
+│ equal amounts of two tokens,    │
+│ but one "floats up" (price ↑),  │
+│ you'll have less of it when you │
+│ get out.                        │
+│                                 │
+│ 💡 Lifeguard Protection:        │
+│ We help you pick pools where    │
+│ fees typically beat IL, and     │
+│ alert you if IL gets too high.  │
+│                                 │
+│ Current Position IL: -$12       │
+│ Fees Earned: +$47               │
+│ Net: +$35 ✅                    │
+│                                 │
+│ [See Example] [Learn More]      │
+└─────────────────────────────────┘
+```
+
+#### Onboarding Wizard
+
+**Step 1: Experience Level**
+```
+Welcome to Pool Party! 🏊‍♂️
+
+The Lifeguard wants to customize your experience.
+What's your DeFi experience level?
+
+○ New to DeFi
+  └─ We'll recommend safe options and explain everything
+
+○ Some experience
+  └─ You choose pools, Lifeguard guides and protects
+
+○ Experienced
+  └─ Full control with advanced features unlocked
+
+[Continue]
+```
+
+**Step 2: Risk Tolerance**
+```
+How much risk are you comfortable with?
+
+○ Conservative (Recommended for beginners)
+  └─ Stablecoins only
+  └─ Expected APR: 5-8%
+  └─ IL Risk: Very Low
+
+○ Balanced
+  └─ Mix of stable and volatile pairs
+  └─ Expected APR: 10-15%
+  └─ IL Risk: Medium
+
+○ Aggressive
+  └─ Volatile pairs for higher rewards
+  └─ Expected APR: 15-30%+
+  └─ IL Risk: High
+
+💡 You can change this later
+[Continue]
+```
+
+**Step 3: Time Commitment**
+```
+How much time can you dedicate to managing positions?
+
+○ Set and forget (Recommended)
+  └─ Lifeguard automation: ON
+  └─ Auto-rebalancing with approval
+  └─ Weekly check-ins suggested
+
+○ Weekly monitoring
+  └─ Manual rebalancing
+  └─ Lifeguard suggestions
+
+○ Active daily management
+  └─ Full manual control
+  └─ Advanced metrics
+
+[Continue]
+```
+
+**Step 4: Recommended Pool + Education**
+```
+Based on your answers, Lifeguard recommends:
+
+┌─────────────────────────────────────┐
+│ 🏊 Your First Pool: USDC/DAI       │
+│                                     │
+│ Why this pool?                      │
+│ ✓ Both tokens are stablecoins      │
+│   (prices stay near $1.00)          │
+│ ✓ Very low impermanent loss risk   │
+│   (<0.1% historically)              │
+│ ✓ Steady 5-8% APY                  │
+│ ✓ Battle-tested (3+ years)         │
+│ ✓ Lifeguard Safety Score: 85/100   │
+│                                     │
+│ Expected outcomes (for $1,000):     │
+│ • Monthly fees: ~$5-7               │
+│ • IL risk: Very low                 │
+│ • Time needed: 5 min/month          │
+│                                     │
+│ Risks to know:                      │
+│ ⚠️ Stablecoin depeg (rare)          │
+│ ⚠️ Smart contract risk (mitigated)  │
+│                                     │
+│ 🛡️ Lifeguard will:                  │
+│ ✓ Monitor for depeg 24/7            │
+│ ✓ Alert if anything changes         │
+│ ✓ Suggest optimal range             │
+│ ✓ Track all fees and IL             │
+└─────────────────────────────────────┘
+
+[Proceed with this pool] [See other options]
+```
+
+#### Real-Time Learning Moments
+
+**When IL Occurs:**
+```
+┌─────────────────────────────────┐
+│ 📚 Lifeguard Learning Moment    │
+├─────────────────────────────────┤
+│ Your ETH/USDC position just     │
+│ experienced impermanent loss.   │
+│                                 │
+│ What happened:                  │
+│ ETH moved from $3,400 to $3,600 │
+│ (+5.9%). Your LP automatically  │
+│ rebalanced, selling some ETH    │
+│ at lower prices.                │
+│                                 │
+│ The good news:                  │
+│ You earned $23 in fees during   │
+│ this move, covering 82% of IL.  │
+│ This is normal and expected!    │
+│                                 │
+│ 💡 Pro Tip:                     │
+│ If ETH returns to $3,400, the   │
+│ IL disappears completely. This  │
+│ is why it's called "impermanent"│
+│                                 │
+│ Your Position Status:           │
+│ IL: -$28                        │
+│ Fees: +$23                      │
+│ Net: -$5 (temporary)            │
+│                                 │
+│ [Got it] [Learn more] [Don't show again]│
+└─────────────────────────────────┘
+```
+
+---
+
+### Transaction Safety System
+
+Before every transaction, The Lifeguard performs comprehensive safety checks:
+
+#### Pre-Transaction Validation
+
+```typescript
+function validateTransactionSafety(tx: Transaction): {
+  safe: boolean;
+  checks: SafetyCheck[];
+  simulation: SimulationResult;
+  recommendation: string;
+} {
+  const checks: SafetyCheck[] = [];
+
+  // 1. Simulate transaction
+  const simulation = simulateTransaction(tx);
+  if (simulation.willFail) {
+    return {
+      safe: false,
+      reason: `Transaction will fail: ${simulation.error}`,
+      recommendation: '⛔ DO NOT PROCEED'
+    };
+  }
+
+  // 2. Check slippage
+  if (simulation.outputTokens < tx.minExpected * 0.95) {
+    checks.push({
+      severity: 'high',
+      issue: 'Slippage higher than expected',
+      details: `Expected ${tx.minExpected}, will receive ${simulation.outputTokens}`,
+      recommendation: 'Increase slippage tolerance or try later'
+    });
+  }
+
+  // 3. Check gas cost
+  if (simulation.gasCost > tx.gasLimit) {
+    checks.push({
+      severity: 'medium',
+      issue: 'High gas cost',
+      details: `$${simulation.gasCost.toFixed(2)} - peak hours`,
+      recommendation: 'Waiting 2-4 hours could save $3-5'
+    });
+  }
+
+  // 4. Malicious contract check
+  if (MALICIOUS_CONTRACTS.has(tx.targetAddress)) {
+    return {
+      safe: false,
+      reason: 'Target contract flagged as malicious',
+      recommendation: '⛔ DO NOT PROCEED - SCAM DETECTED'
+    };
+  }
+
+  // 5. Unlimited approval warning
+  if (tx.approvalAmount === UNLIMITED) {
+    checks.push({
+      severity: 'medium',
+      issue: 'Unlimited token approval',
+      details: 'Contract can spend any amount',
+      recommendation: 'Consider approving only required amount'
+    });
+  }
+
+  // 6. Oracle price verification
+  const oraclePrice = getOraclePrice(tx.pair);
+  if (Math.abs(simulation.effectivePrice - oraclePrice) > 0.02) {
+    checks.push({
+      severity: 'high',
+      issue: 'Price discrepancy detected',
+      details: 'On-chain price differs from oracle by >2%',
+      recommendation: 'Possible manipulation - review carefully'
+    });
+  }
+
+  const safe = checks.every(c => c.severity !== 'critical');
+
+  return {
+    safe,
+    checks,
+    simulation,
+    recommendation: generateSafetyRecommendation(checks)
+  };
+}
+```
+
+**Transaction Review Screen:**
+```
+┌─────────────────────────────────────────────┐
+│ 🛡️ Lifeguard Transaction Safety Review     │
+├─────────────────────────────────────────────┤
+│                                             │
+│ Action: Add liquidity to USDC/DAI          │
+│ Amount: 1,000 USDC + 1,000 DAI             │
+│                                             │
+│ Lifeguard Safety Checks:                   │
+│ ✅ Simulation successful                    │
+│ ✅ Gas cost reasonable ($8.42)              │
+│ ✅ Smart contract verified (Uniswap V3)     │
+│ ✅ Price within expected range              │
+│ ✅ No security flags                        │
+│ ⚠️  High gas period (peak hours)            │
+│    └─ Could save $3 by waiting 2-4 hours   │
+│                                             │
+│ You will receive:                           │
+│ • LP NFT #482,391                           │
+│ • Initial position value: $2,000            │
+│ • Estimated APY: 6.2% (30d average)         │
+│ • Range: 0.998 - 1.002 USDC per DAI         │
+│                                             │
+│ This transaction will:                      │
+│ 1. Approve USDC spending (if needed)        │
+│ 2. Approve DAI spending (if needed)          │
+│ 3. Deposit both tokens to pool             │
+│ 4. Mint LP NFT to your wallet              │
+│                                             │
+│ Total cost: ~$8.42 gas                      │
+│                                             │
+│ 🛡️ Lifeguard Verdict: SAFE TO PROCEED      │
+│                                             │
+│ [Cancel] [⏰ Schedule for off-peak] [Proceed]│
+└─────────────────────────────────────────────┘
+```
 
 ---
 
 ## 🏗️ Implementation Plan
 
-### Phase 1: Theme Foundation (Week 1-2)
+### Phase 1: Theme Foundation (Week 1-2) - ✅ **COMPLETE**
 
-**Tasks:**
-1. Create new color palette and design tokens
-2. Design pool card component mockups
-3. Implement wave/ripple animations
-4. Add pool emoji and naming enhancements
-5. Redesign wallet page with pool membership cards
+**Status:** ✅ 100% Complete (October 17, 2025)
 
-**Components to Create:**
-- `PoolCard.tsx` (with water animation)
-- `PoolHeroSection.tsx` (detail page header)
-- `WaterAnimation.tsx` (reusable component)
-- `PoolMembershipCard.tsx` (position card)
+See [Progress Tracker](#📊-progress-tracker) above for detailed completion status.
 
-**Files to Modify:**
-- `globals.css` (new theme variables)
-- `tailwind.config.js` (custom animations)
-- `src/app/page.tsx` (dashboard redesign)
-- `src/app/pool/[id]/page.tsx` (detail page)
-- `src/components/WalletPositions.tsx` (card redesign)
+**Tasks Completed:**
+1. ✅ Created Pool Party color palette and design tokens
+2. ✅ Implemented PositionCard component with collapsible UI
+3. ✅ Implemented wave/ripple/splash animations (CSS only)
+4. ✅ Added Pool Party branding (🏊 emoji, themed text)
+5. ✅ Redesigned wallet page with membership-style cards
+
+**Files Created:**
+- ✅ `src/lib/lifeguard/healthScore.ts` (full implementation)
+- ✅ `src/components/PositionCard.tsx` (mobile-first)
+
+**Files Modified:**
+- ✅ `src/app/globals.css` (complete Pool Party theme)
+- ✅ `src/components/WalletPositions.tsx` (card redesign)
+
+**Not Implemented (Deferred):**
+- ⏸️ `PoolCard.tsx` for dashboard (pool browsing) - Defer to Phase 3
+- ⏸️ `PoolHeroSection.tsx` - Defer to Phase 3
+- ⏸️ `WaterAnimation.tsx` - Using CSS animations instead
+- ⏸️ `src/app/page.tsx` dashboard redesign - Defer to Phase 3
+- ⏸️ `src/app/pool/[id]/page.tsx` - Defer to Phase 3
+- ⏸️ `tailwind.config.js` - Using CSS custom properties instead
 
 ---
 
-### Phase 2: Advisor Metrics Engine (Week 3-4)
+### Phase 2: Advisor Metrics Engine (Week 3-4) - ⏳ **IN PROGRESS**
 
 **Tasks:**
 1. Create advisor scoring algorithms
@@ -640,43 +1780,617 @@ CREATE TABLE pool_advisor_metrics (
 
 ---
 
-## 🎓 Best Practices Reference
+## 🎓 Best Practices Reference (Research-Based)
 
-### Key Principles (Research-Based)
+### Comprehensive Advisor Metrics & Formulas
 
-1. **Concentrated Liquidity Strategy**
-   - Narrow ranges (±10-20%) for stablecoins
-   - Medium ranges (±20-40%) for correlated assets
-   - Wide ranges (±50%+) for volatile pairs
+This section integrates detailed DeFi LP research into actionable metrics and thresholds.
 
-2. **Fee Tier Selection**
-   - 0.01%: Stablecoin pairs, very tight ranges
-   - 0.05%: Major pairs, some volatility
-   - 0.3%: Standard pairs, moderate volatility
-   - 1%: Exotic/volatile pairs
+---
 
-3. **Rebalancing Triggers**
-   - Out of range: Immediate action needed
-   - 90% to edge: Consider rebalancing
-   - Fees collected > gas cost: Claim fees
+#### 📐 Impermanent Loss (IL) Calculations
 
-4. **Risk Management**
-   - Never >20% of portfolio in single pool
-   - Diversify across fee tiers
-   - Monitor IL daily for volatile pairs
-   - Exit if health score drops below 40
+**Core IL Formula:**
+```typescript
+// For a 2-asset 50/50 pool when one asset's price changes by factor r
+function calculateIL(priceChangeRatio: number): number {
+  const r = priceChangeRatio;
+  return (2 * Math.sqrt(r)) / (1 + r) - 1;
+}
 
-5. **Entry Criteria**
-   - Pool age >30 days (unless blue-chip)
-   - Volume/TVL >0.15
-   - Health score >60
-   - Multiple active LPs (low concentration)
+// Example: If ETH doubles (r = 2), IL = -5.72%
+// Example: If ETH goes up 20% (r = 1.2), IL = -0.41%
+// Example: If ETH goes up 50% (r = 1.5), IL = -2.02%
+```
 
-6. **Exit Criteria**
-   - Health score <40
-   - Out of range >7 days
-   - Volume drop >50%
-   - Better opportunity available (>5% APR difference)
+**Expected IL Over Time:**
+```typescript
+// For small price changes over time with volatility σ
+function expectedIL(volatility: number, timeDays: number): number {
+  const t = timeDays / 365; // Convert to years
+  return 0.5 * Math.pow(volatility, 2) * t;
+}
+
+// Example: 80% annual volatility for 30 days
+// E[IL] = 0.5 * (0.8^2) * (30/365) = 2.6%
+```
+
+**IL Break-even Volume Requirements:**
+
+| Price Change | IL % | Volume Needed (0.05% fee) | Volume Needed (0.3% fee) | Volume Needed (1% fee) |
+|--------------|------|---------------------------|--------------------------|------------------------|
+| ±10% (r=1.1) | 0.41% | 2.2x TVL | 1.37x TVL | 0.41x TVL |
+| ±20% (r=1.2) | 0.41% | 8.2x TVL | 1.37x TVL | 0.41x TVL |
+| ±50% (r=1.5) | 2.02% | 40x TVL | 6.73x TVL | 2.02x TVL |
+| ±100% (r=2.0) | 5.72% | 114x TVL | 19.1x TVL | 5.72x TVL |
+
+**Implementation:**
+```typescript
+// src/lib/advisor/impermanentLoss.ts
+export function volumeToOffsetIL(
+  priceChangeRatio: number,
+  feeTier: number // e.g., 0.003 for 0.3%
+): number {
+  const il = Math.abs(calculateIL(priceChangeRatio));
+  return il / feeTier; // Returns multiple of TVL needed
+}
+
+// Alert user if expected price move requires unrealistic volume
+export function assessILRisk(
+  pool: Pool,
+  historicalVolatility: number
+): {
+  level: 'low' | 'medium' | 'high' | 'extreme';
+  expectedMove30d: number;
+  volumeNeeded: number;
+  isViable: boolean;
+} {
+  // Expected 30-day price move based on volatility
+  const expectedMove = 1 + (historicalVolatility * Math.sqrt(30 / 365));
+  const il = calculateIL(expectedMove);
+  const volumeNeeded = volumeToOffsetIL(expectedMove, pool.feeTier / 1_000_000);
+  const currentVolumeRatio = pool.volume24h / pool.tvl;
+  const viableVolume = volumeNeeded / 30; // Daily volume needed
+
+  return {
+    level: il < 0.01 ? 'low' : il < 0.03 ? 'medium' : il < 0.06 ? 'high' : 'extreme',
+    expectedMove30d: (expectedMove - 1) * 100,
+    volumeNeeded: volumeNeeded,
+    isViable: currentVolumeRatio > viableVolume
+  };
+}
+```
+
+---
+
+#### 📊 Volume-to-TVL Ratio Analysis
+
+**Scoring Thresholds (Daily Ratio):**
+```typescript
+export function scoreVolumeToTVL(dailyVolume: number, tvl: number): {
+  score: number; // 0-10
+  rating: string;
+  description: string;
+} {
+  const ratio = dailyVolume / tvl;
+
+  if (ratio > 1.0) return {
+    score: 10,
+    rating: 'Excellent',
+    description: 'Exceptional trading activity - premium fee generation'
+  };
+
+  if (ratio > 0.5) return {
+    score: 9,
+    rating: 'Excellent',
+    description: 'Very high volume - great for earning fees'
+  };
+
+  if (ratio > 0.3) return {
+    score: 7,
+    rating: 'Good',
+    description: 'Healthy trading activity'
+  };
+
+  if (ratio > 0.15) return {
+    score: 5,
+    rating: 'Fair',
+    description: 'Moderate activity - fees may not offset IL'
+  };
+
+  if (ratio > 0.05) return {
+    score: 3,
+    rating: 'Poor',
+    description: 'Low trading volume - poor fee generation'
+  };
+
+  return {
+    score: 1,
+    rating: 'Very Poor',
+    description: 'Stagnant pool - avoid'
+  };
+}
+```
+
+**Research Insight:**
+- Pools with >1.0 daily V:TVL ratio are exceptional (entire pool liquidity trades daily)
+- Pools with <0.1 ratio struggle to generate enough fees to offset IL
+- Target: >0.15 minimum for volatile pairs, >0.05 for stablecoins
+
+---
+
+#### 🎯 Range Width Optimization
+
+**Blueprint A: Blue-Chip Volatile Pairs (ETH/USDC, WBTC/USDC)**
+
+```typescript
+export function calculateOptimalRange(
+  currentPrice: number,
+  dailyVolatility: number, // e.g., 0.04 for 4%
+  strategyType: 'conservative' | 'moderate' | 'aggressive'
+): { lowerTick: number; upperTick: number; width: number } {
+
+  // Use ±2 standard deviations for ~95% coverage
+  const stdDevMultiplier = strategyType === 'conservative' ? 3 :
+                            strategyType === 'moderate' ? 2 : 1.5;
+
+  const rangeWidth = dailyVolatility * stdDevMultiplier * 2; // Both directions
+
+  const lowerPrice = currentPrice * (1 - rangeWidth / 2);
+  const upperPrice = currentPrice * (1 + rangeWidth / 2);
+
+  return {
+    lowerTick: priceToTick(lowerPrice),
+    upperTick: priceToTick(upperPrice),
+    width: rangeWidth * 100 // As percentage
+  };
+}
+
+// Example: ETH at $1600, daily vol = 4%
+// Moderate strategy: ±(4% × 2) = ±8% range
+// Range: $1,472 to $1,728
+```
+
+**Blueprint B: Stablecoin Pairs (USDC/DAI, USDC/USDT)**
+
+```typescript
+export function calculateStablecoinRange(): {
+  lowerPrice: number;
+  upperPrice: number;
+  depegThreshold: number;
+} {
+  return {
+    lowerPrice: 0.998,  // ±0.2% range
+    upperPrice: 1.002,
+    depegThreshold: 0.995 // Exit if <$0.995
+  };
+}
+```
+
+**Blueprint C: Long-Tail Tokens**
+
+```typescript
+export function calculateLongTailRange(currentPrice: number): {
+  lowerPrice: number;
+  upperPrice: number;
+} {
+  // Very wide range: ±80% to capture extreme volatility
+  return {
+    lowerPrice: currentPrice * 0.2,  // -80%
+    upperPrice: currentPrice * 3.0   // +200%
+  };
+}
+```
+
+**Range Efficiency Scoring:**
+
+```typescript
+export function evaluateRangeEfficiency(
+  position: Position,
+  optimalWidth: number
+): { score: number; recommendation: string } {
+  const actualWidth = (position.tickUpper - position.tickLower) / tickSpacing;
+  const deviation = Math.abs(actualWidth - optimalWidth) / optimalWidth;
+
+  if (deviation < 0.1) return {
+    score: 95,
+    recommendation: 'Perfect - range is optimally sized'
+  };
+
+  if (deviation < 0.25) return {
+    score: 80,
+    recommendation: 'Good - minor adjustment could improve'
+  };
+
+  if (deviation < 0.5) return {
+    score: 60,
+    recommendation: actualWidth > optimalWidth ?
+      'Too wide - narrowing could 3x fees' :
+      'Too narrow - risk of going out of range'
+  };
+
+  return {
+    score: 30,
+    recommendation: 'Poor range sizing - immediate adjustment needed'
+  };
+}
+```
+
+---
+
+#### 🚨 Exit Triggers & Warning Thresholds
+
+**1. Stablecoin Depeg Detection**
+```typescript
+export const DEPEG_THRESHOLDS = {
+  WARNING: 0.005,    // 0.5% deviation - prepare to exit
+  CRITICAL: 0.01,    // 1% deviation - exit immediately
+  EMERGENCY: 0.02    // 2% deviation - emergency exit (likely too late)
+};
+
+export function checkDepegRisk(stablecoinPrice: number): {
+  alert: 'none' | 'warning' | 'critical' | 'emergency';
+  action: string;
+} {
+  const deviation = Math.abs(1 - stablecoinPrice);
+
+  if (deviation > DEPEG_THRESHOLDS.EMERGENCY) return {
+    alert: 'emergency',
+    action: 'EXIT NOW - Severe depeg detected'
+  };
+
+  if (deviation > DEPEG_THRESHOLDS.CRITICAL) return {
+    alert: 'critical',
+    action: 'EXIT IMMEDIATELY - Withdraw all liquidity'
+  };
+
+  if (deviation > DEPEG_THRESHOLDS.WARNING) return {
+    alert: 'warning',
+    action: 'PREPARE TO EXIT - Monitor closely'
+  };
+
+  return { alert: 'none', action: 'Continue monitoring' };
+}
+```
+
+**2. Volatility Spike Detection**
+```typescript
+export function checkVolatilitySpike(
+  hourlyPriceChange: number,
+  annualizedVol: number
+): { shouldExit: boolean; reason: string } {
+  // Exit if hourly move >6-8%
+  if (Math.abs(hourlyPriceChange) > 0.07) return {
+    shouldExit: true,
+    reason: 'Extreme hourly volatility - IL risk too high'
+  };
+
+  // Exit if annualized vol >100%
+  if (annualizedVol > 1.0) return {
+    shouldExit: true,
+    reason: 'Volatility spike detected - pull liquidity until stabilizes'
+  };
+
+  return { shouldExit: false, reason: 'Volatility within acceptable range' };
+}
+```
+
+**3. Out of Range Duration**
+```typescript
+export function evaluateOutOfRangePosition(
+  position: Position,
+  hoursOutOfRange: number
+): { action: 'wait' | 'monitor' | 'adjust' | 'exit'; urgency: string } {
+
+  if (hoursOutOfRange < 6) return {
+    action: 'wait',
+    urgency: 'low'
+  };
+
+  if (hoursOutOfRange < 24) return {
+    action: 'monitor',
+    urgency: 'medium'
+  };
+
+  if (hoursOutOfRange < 168) return { // 7 days
+    action: 'adjust',
+    urgency: 'high'
+  };
+
+  return {
+    action: 'exit',
+    urgency: 'critical - earning zero fees for too long'
+  };
+}
+```
+
+**4. Position Value vs HODL Stop-Loss**
+```typescript
+export function calculatePnLvsHODL(
+  position: Position,
+  currentPrice: number,
+  feesEarned: number
+): { pnlVsHodl: number; shouldExit: boolean } {
+
+  const currentValue = calculatePositionValue(position, currentPrice) + feesEarned;
+  const hodlValue = position.initialToken0 * currentPrice + position.initialToken1;
+
+  const pnlVsHodl = ((currentValue - hodlValue) / hodlValue) * 100;
+
+  // Exit if 5% or more below HODL
+  return {
+    pnlVsHodl,
+    shouldExit: pnlVsHodl < -5
+  };
+}
+```
+
+**5. Pool Health Degradation**
+```typescript
+export const HEALTH_THRESHOLDS = {
+  EXIT: 40,          // Exit immediately
+  WARNING: 60,       // Monitor daily
+  GOOD: 75,          // Normal monitoring
+  EXCELLENT: 90      // Premium pool
+};
+```
+
+---
+
+#### 🎲 Rebalancing Decision Logic
+
+**Trigger Conditions:**
+```typescript
+export function shouldRebalance(
+  position: Position,
+  currentTick: number,
+  feesAccumulated: number,
+  positionValue: number
+): {
+  shouldRebalance: boolean;
+  reason: string;
+  priority: 'low' | 'medium' | 'high';
+} {
+
+  // 1. Out of range - highest priority
+  if (currentTick < position.tickLower || currentTick > position.tickUpper) {
+    return {
+      shouldRebalance: true,
+      reason: 'Position is out of range - earning zero fees',
+      priority: 'high'
+    };
+  }
+
+  // 2. Price near edge (within 5%)
+  const rangeWidth = position.tickUpper - position.tickLower;
+  const distanceToLower = currentTick - position.tickLower;
+  const distanceToUpper = position.tickUpper - currentTick;
+
+  if (distanceToLower < rangeWidth * 0.05 || distanceToUpper < rangeWidth * 0.05) {
+    return {
+      shouldRebalance: true,
+      reason: 'Price approaching range edge',
+      priority: 'medium'
+    };
+  }
+
+  // 3. Price drifted >50% of range width from center
+  const center = (position.tickLower + position.tickUpper) / 2;
+  const drift = Math.abs(currentTick - center) / rangeWidth;
+
+  if (drift > 0.25) {
+    return {
+      shouldRebalance: true,
+      reason: 'Price has drifted significantly - recentering optimal',
+      priority: 'medium'
+    };
+  }
+
+  // 4. Fees accumulated to meaningful threshold (0.5-2% of position)
+  const feeRatio = feesAccumulated / positionValue;
+  if (feeRatio > 0.02) { // 2% threshold for mainnet
+    return {
+      shouldRebalance: true,
+      reason: 'Significant fees accumulated - compound and recenter',
+      priority: 'low'
+    };
+  }
+
+  return {
+    shouldRebalance: false,
+    reason: 'Position is performing well',
+    priority: 'low'
+  };
+}
+```
+
+---
+
+#### 🏊 Pool Selection Framework
+
+**Entry Criteria Checklist:**
+
+```typescript
+export interface PoolScreeningCriteria {
+  // Security
+  contractAudited: boolean;          // REQUIRED
+  knownExploits: boolean;            // Must be false
+  adminCanDrain: boolean;            // Must be false
+
+  // Fundamentals
+  poolAgeDays: number;               // >30 days (or >7 for blue-chip)
+  volumeToTVL24h: number;            // >0.15 (>0.05 for stables)
+  healthScore: number;               // >60
+
+  // Risk
+  top10LPConcentration: number;      // <75%
+  hasUpcomingUnlocks: boolean;       // Prefer false
+  bridgedAssetRisk: boolean;         // Note if true
+
+  // IL Protection
+  expectedILMonthly: number;         // <fees expected
+  feeTierAppropriate: boolean;       // Validated
+}
+
+export function shouldEnterPool(pool: Pool, criteria: PoolScreeningCriteria): {
+  decision: 'enter' | 'watch' | 'avoid';
+  reasoning: string[];
+  maxAllocation: number; // % of portfolio
+} {
+  const issues: string[] = [];
+  const warnings: string[] = [];
+
+  // Security fails = avoid
+  if (!criteria.contractAudited) issues.push('No audit - contract risk');
+  if (criteria.knownExploits) issues.push('Known exploits exist');
+  if (criteria.adminCanDrain) issues.push('Admin can drain funds');
+
+  if (issues.length > 0) return {
+    decision: 'avoid',
+    reasoning: issues,
+    maxAllocation: 0
+  };
+
+  // Red flags = watch
+  if (criteria.healthScore < 60) warnings.push('Low health score');
+  if (criteria.volumeToTVL24h < 0.15) warnings.push('Low volume ratio');
+  if (criteria.top10LPConcentration > 0.75) warnings.push('Whale dominated');
+  if (criteria.poolAgeDays < 30 && !pool.isBlueChip) warnings.push('Pool too new');
+
+  if (warnings.length >= 2) return {
+    decision: 'watch',
+    reasoning: warnings,
+    maxAllocation: 5 // Small allocation only
+  };
+
+  // Calculate safe allocation based on score
+  const baseAllocation = criteria.healthScore >= 90 ? 20 :
+                          criteria.healthScore >= 75 ? 15 :
+                          criteria.healthScore >= 60 ? 10 : 5;
+
+  return {
+    decision: 'enter',
+    reasoning: ['Pool meets entry criteria'],
+    maxAllocation: warnings.length > 0 ? baseAllocation / 2 : baseAllocation
+  };
+}
+```
+
+---
+
+#### 💎 Fee Tier Selection Matrix
+
+```typescript
+export function selectOptimalFeeTier(
+  token0: Token,
+  token1: Token,
+  volatility30d: number
+): {
+  recommended: number; // e.g., 3000 for 0.3%
+  reasoning: string;
+  alternatives: number[];
+} {
+
+  const isStablePair = token0.isStable && token1.isStable;
+  const isCorrelated = calculateCorrelation(token0, token1) > 0.8;
+  const isBlueChip = token0.isBlueChip && token1.isBlueChip;
+
+  // Stablecoin pairs
+  if (isStablePair) {
+    return {
+      recommended: 100, // 0.01%
+      reasoning: 'Stablecoin pair - minimal volatility, use tightest tier',
+      alternatives: [500] // 0.05% if 0.01% has low liquidity
+    };
+  }
+
+  // Highly correlated (e.g., WETH/stETH)
+  if (isCorrelated) {
+    return {
+      recommended: 500, // 0.05%
+      reasoning: 'Correlated assets - low IL risk, lower fee acceptable',
+      alternatives: [3000]
+    };
+  }
+
+  // Blue-chip uncorrelated (e.g., WETH/USDC)
+  if (isBlueChip) {
+    if (volatility30d < 0.5) { // <50% annualized
+      return {
+        recommended: 500,
+        reasoning: 'Blue-chip pair, moderate volatility - 0.05% or 0.3%',
+        alternatives: [3000]
+      };
+    } else {
+      return {
+        recommended: 3000,
+        reasoning: 'Blue-chip but volatile - 0.3% to offset IL',
+        alternatives: [500]
+      };
+    }
+  }
+
+  // Long-tail / Exotic
+  return {
+    recommended: 10000, // 1%
+    reasoning: 'High volatility/exotic pair - need high fees for IL protection',
+    alternatives: [3000]
+  };
+}
+```
+
+---
+
+### Key Risk Thresholds Summary
+
+| Metric | Warning | Critical | Emergency Action |
+|--------|---------|----------|------------------|
+| **Stablecoin Depeg** | >0.5% off peg | >1% off peg | >2% off peg → EXIT NOW |
+| **Volatility (Hourly)** | >4% move | >6% move | >8% → Pull liquidity |
+| **Volatility (Annual)** | >80% | >100% | >150% → Exit position |
+| **Out of Range** | >6 hours | >24 hours | >7 days → Close position |
+| **PnL vs HODL** | -3% | -5% | -7% → Cut losses |
+| **Pool Health Score** | <60 | <50 | <40 → Exit immediately |
+| **Volume Drop** | -30% | -50% | -70% → Consider exit |
+| **TVL Drop** | -20% in week | -40% in week | -60% in day → Vampire attack |
+| **Whale Concentration** | >50% | >75% | >90% → High withdrawal risk |
+| **Pool Age (new)** | <7 days | <3 days | <1 day → Extreme risk |
+
+---
+
+### Position Sizing Framework
+
+```typescript
+export function calculateSafePositionSize(
+  totalPortfolio: number,
+  pool: Pool,
+  healthScore: number,
+  ilRiskLevel: 'low' | 'medium' | 'high' | 'extreme'
+): {
+  recommendedSize: number;
+  maxSize: number;
+  reasoning: string;
+} {
+
+  // Base allocation by health score
+  let basePercent = healthScore >= 90 ? 20 :
+                     healthScore >= 75 ? 15 :
+                     healthScore >= 60 ? 10 : 5;
+
+  // Adjust for IL risk
+  const ilMultiplier = ilRiskLevel === 'low' ? 1.0 :
+                        ilRiskLevel === 'medium' ? 0.7 :
+                        ilRiskLevel === 'high' ? 0.5 : 0.3;
+
+  const recommended = (totalPortfolio * basePercent / 100) * ilMultiplier;
+  const max = recommended * 1.5; // Max is 50% higher than recommended
+
+  return {
+    recommendedSize: recommended,
+    maxSize: Math.min(max, totalPortfolio * 0.20), // Never >20% in single pool
+    reasoning: `Based on health (${healthScore}) and IL risk (${ilRiskLevel})`
+  };
+}
 
 ---
 
@@ -726,18 +2440,154 @@ CREATE TABLE pool_advisor_metrics (
 
 ---
 
-## 🔗 References
+## 🔗 References & Research Foundation
 
-- [Uniswap V3 Whitepaper](https://uniswap.org/whitepaper-v3.pdf)
-- [IL Calculator Research](https://dailydefi.org/articles/impermanent-loss-explained/)
-- [Optimal Fee Tier Analysis](https://arxiv.org/abs/2111.09192)
-- Community feedback from Discord/Twitter
+### Primary Research Document
+📄 **[ADVISOR_RESEARCH_SOURCE.md](./ADVISOR_RESEARCH_SOURCE.md)** - Comprehensive 57,000+ word DeFi LP strategy research covering:
+- Executive summary of LP strategies across 5 chains
+- Pool screener framework with 20-pool shortlist
+- 8 sources of LP edge (concentrated range precision, active rebalancing, liquidity mining, stablecoin mean-reversion, etc.)
+- Detailed IL/LVR mathematics with break-even analysis
+- Position construction blueprints for 4 different pool types
+- Risk management frameworks and failure mode analysis
+- MEV protection strategies
+- Due diligence checklists
+- Tooling and automation recommendations
+
+### Integration Status
+✅ **Phase 1 Complete** (October 17, 2025): All key metrics, formulas, and thresholds from research integrated into this planning document:
+- Exact IL formulas and break-even tables
+- Volume-to-TVL scoring thresholds (>1.0 = excellent, <0.1 = poor)
+- Range width calculations for blue-chip (±8%), stable (±0.2%), and long-tail (±80%) pairs
+- Exit triggers: Depeg >0.5%, volatility >100%, out of range >7 days, PnL vs HODL <-5%
+- Rebalancing logic: Out of range, approaching edge (5%), drift (25% of range), or fees >2%
+- Position sizing: Max 20% in single pool, scaled by health score and IL risk
+- Fee tier matrix: Stable (0.01%), correlated (0.05%), blue-chip (0.3%), exotic (1%)
+
+### External References
+- [Uniswap V3 Whitepaper](https://uniswap.org/whitepaper-v3.pdf) - Concentrated liquidity mechanics
+- [Trail of Bits Audit](https://github.com/Uniswap/v3-core/blob/main/audits/tob/audit.pdf) - Uniswap V3 security
+- [DeFi Scientist - Rebalancing Strategies](https://medium.com/@DeFiScientist/rebalancing-vs-passive-strategies-for-uniswap-v3-liquidity-pools-754f033bdabc) - Active vs passive LP analysis
+- [Emergent Mind - CLMM Research](https://www.emergentmind.com/topics/concentrated-liquidity-market-makers-clmms) - Concentrated liquidity academic papers
+- [Uniswap Blog - JIT Liquidity](https://blog.uniswap.org/jit-liquidity) - MEV and just-in-time liquidity
+- [Coinbase Learn - IL Guide](https://www.coinbase.com/learn/crypto-glossary/what-is-impermanent-loss) - Educational IL resources
+
+### Implementation Priorities
+
+**Critical Path (Weeks 1-4):**
+1. Implement IL calculation engine with exact research formulas
+2. Build Volume-to-TVL scoring (>1.0 = 10/10, >0.5 = 9/10, etc.)
+3. Create range optimization algorithms (±2σ for volatile, ±0.2% for stable)
+4. Deploy exit trigger monitoring (depeg, volatility, out-of-range, PnL)
+
+**High Value (Weeks 5-6):**
+5. Rebalancing decision engine with multi-factor triggers
+6. Pool screening framework with entry/exit criteria
+7. Fee tier recommendation matrix
+8. Position sizing calculator (health score × IL risk multiplier)
+
+**Polish (Weeks 7-8):**
+9. Integrate all metrics into pool party theme UI
+10. Create interactive tooltips with specific thresholds
+11. Build notification system with research-based alerts
+12. Add advisor confidence scores and explanations
 
 ---
 
-**Next Steps:**
-1. Review and approve this plan
-2. Begin Phase 1 implementation
-3. Create detailed UI mockups
-4. Set up development sprints
+## 📋 Implementation Checklist
+
+**Phase 1: Theme Foundation & Basic Health Scoring** ✅ **COMPLETE**
+- [x] Extract IL formulas and break-even tables
+- [x] Define Volume-to-TVL thresholds
+- [x] Specify range width calculations
+- [x] Document exit triggers
+- [x] Create risk threshold matrix
+- [x] Implement Pool Party color palette and design tokens
+- [x] Create CSS animations (wave, ripple, splash, float, shimmer)
+- [x] Build mobile-first PositionCard component
+- [x] Implement basic 4-factor health scoring algorithm
+- [x] Create collapsible UI with health breakdown
+- [x] Redesign WalletPositions page with Pool Party theme
+
+**Phase 2: Advanced Advisor Metrics** ⏳ **NEXT**
+- [ ] Create `src/lib/advisor/impermanentLoss.ts` - IL calculations and risk assessment
+- [ ] Create `src/lib/advisor/volumeAnalysis.ts` - Volume-to-TVL scoring
+- [ ] Create `src/lib/advisor/rangeOptimization.ts` - Optimal range calculations
+- [ ] Create `src/lib/advisor/exitTriggers.ts` - Exit trigger detection
+- [ ] Create `src/lib/advisor/poolScreening.ts` - Pool safety scoring
+- [ ] Create `src/components/advisor/PoolRating.tsx` - Pool health badges
+- [ ] Create `src/components/advisor/MetricTooltip.tsx` - Educational tooltips
+- [ ] Create `src/components/advisor/AdvisorBadge.tsx` - Status badges
+
+**Phase 3: UI Integration & Conditional Formatting** 📅 **PLANNED**
+- [ ] Add health score badges to pool cards (dashboard)
+- [ ] Implement warning overlays for risky pools
+- [ ] Create exit trigger notifications
+- [ ] Build range efficiency visualizations
+- [ ] Add IL forecast tooltips
+- [ ] Color-coded pool cards based on health
+- [ ] Pulsing animations for critical warnings
+- [ ] Dashboard filtering by health score
+
+**Phase 4: Notification System** 📅 **PLANNED**
+- [ ] Build real-time position monitoring
+- [ ] Create notification infrastructure
+- [ ] Implement critical alert system (out of range, depeg, etc.)
+- [ ] Add warning alerts (approaching edge, profitability, gas optimization)
+- [ ] Create info alerts (fee collection, opportunities, weekly summaries)
+- [ ] Build notification preferences UI
+
+**Phase 5: Testing & Validation** 📅 **PLANNED**
+- [ ] Backtest IL calculations against historical data
+- [ ] Validate exit triggers with past depeg events
+- [ ] Test range recommendations on live pools
+- [ ] User acceptance testing with power users
+- [ ] Performance optimization for real-time monitoring
+- [ ] Mobile Chrome Android device testing
+- [ ] E2E tests for advisor features
+
+---
+
+## 📝 Quick Reference: What's Done vs What's Next
+
+**✅ DONE (Phase 1):**
+- Pool Party theme (aqua blues, lifeguard colors)
+- Mobile-first UI (Chrome Android optimized)
+- Collapsible position cards
+- Real health scoring (4 factors)
+- CSS animations (water effects)
+- Dark mode support
+
+**⏳ NEXT (Phase 2 - Start Here):**
+1. Create `src/lib/advisor/impermanentLoss.ts`
+   - Implement formulas from lines 1787-1853 of this document
+   - Add IL risk assessment function
+   - Add volume-to-offset-IL calculator
+
+2. Create `src/lib/advisor/volumeAnalysis.ts`
+   - Implement scoring from lines 1857-1903
+   - Add Volume-to-TVL ratio classification
+
+3. Create `src/lib/advisor/rangeOptimization.ts`
+   - Implement range calculators from lines 1907-1999
+   - Add range efficiency evaluation
+
+**📋 Development Workflow:**
+1. Read the function specifications in this document
+2. Implement in TypeScript with proper types
+3. Write unit tests
+4. Integrate with existing health scoring
+5. Test in dev environment (http://localhost:3004)
+
+**🔗 Key Document Sections:**
+- Lines 1787-1853: IL Calculations
+- Lines 1857-1903: Volume-to-TVL Ratio Analysis
+- Lines 1907-1999: Range Width Optimization
+- Lines 2003-2086: Exit Triggers & Warning Thresholds
+- Lines 2090-2156: Rebalancing Decision Logic
+- Lines 2160-2227: Pool Selection Framework
+- Lines 2231-2284: Fee Tier Selection Matrix
+- Lines 2288-2305: Risk Thresholds Summary
+
+---
 

@@ -1,27 +1,129 @@
 @import "tailwindcss";
 
+/* 🏊 Pool Party Theme - Mobile-First Design System */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --gradient-from: #f0f9ff;
-  --gradient-via: #fef3c7;
-  --gradient-to: #fce7f3;
+  /* Background colors */
+  --background: #f9fafb;
+  --foreground: #111827;
+
+  /* Pool Party aqua blues (light mode) */
+  --pool-blue-light: #e0f7ff;
+  --pool-blue: #00d4ff;
+  --pool-blue-mid: #0099cc;
+  --pool-blue-deep: #006b8c;
+
+  /* Accent colors */
+  --pool-coral: #ff6b9d;
+  --pool-sun: #ffd700;
+  --pool-lime: #32cd32;
+
+  /* Lifeguard status colors */
+  --lifeguard-excellent: #3b82f6;  /* Blue */
+  --lifeguard-good: #10b981;       /* Green */
+  --lifeguard-warning: #f59e0b;    /* Amber */
+  --lifeguard-danger: #ef4444;     /* Red */
+  --lifeguard-critical: #ff1493;   /* Hot pink */
+
+  /* Background gradients (subtle pool water) */
+  --gradient-from: #e0f7ff;
+  --gradient-via: #cceeff;
+  --gradient-to: #b3e5fc;
+
+  /* Position card gradients */
+  --card-gradient-from: rgba(0, 212, 255, 0.08);
+  --card-gradient-to: rgba(147, 51, 234, 0.08);
+
+  /* Surface colors */
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+
+  /* Border colors */
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
 }
 
 @theme inline {
+  /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+
+  /* Pool Party brand colors */
+  --color-pool-blue-light: var(--pool-blue-light);
+  --color-pool-blue: var(--pool-blue);
+  --color-pool-blue-mid: var(--pool-blue-mid);
+  --color-pool-blue-deep: var(--pool-blue-deep);
+  --color-pool-coral: var(--pool-coral);
+  --color-pool-sun: var(--pool-sun);
+  --color-pool-lime: var(--pool-lime);
+
+  /* Lifeguard status colors */
+  --color-lifeguard-excellent: var(--lifeguard-excellent);
+  --color-lifeguard-good: var(--lifeguard-good);
+  --color-lifeguard-warning: var(--lifeguard-warning);
+  --color-lifeguard-danger: var(--lifeguard-danger);
+  --color-lifeguard-critical: var(--lifeguard-critical);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Spacing scale (mobile-optimized) */
+  --spacing-touch-min: 44px;  /* Minimum touch target */
+  --spacing-thumb: 56px;      /* Comfortable thumb reach */
+
+  /* Border radius (rounded, friendly) */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Shadows (subtle depth) */
+  --shadow-pool: 0 4px 12px rgba(0, 212, 255, 0.15);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Animation durations (mobile-optimized - faster) */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+
+  /* Custom animations */
+  --animate-wave: wave 3s ease-in-out infinite;
+  --animate-ripple: ripple 0.6s ease-out;
+  --animate-splash: splash 0.4s ease-out;
+  --animate-float: float 4s ease-in-out infinite;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Dark mode adjustments */
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* Darker pool blues */
+    --pool-blue-light: #0c2b3d;
+    --pool-blue: #00a8cc;
+    --pool-blue-mid: #007799;
+    --pool-blue-deep: #005566;
+
+    /* Darker gradients */
     --gradient-from: #0c1120;
-    --gradient-via: #1a0f29;
+    --gradient-via: #0a1a28;
     --gradient-to: #0f1419;
+
+    /* Dark mode card gradients */
+    --card-gradient-from: rgba(0, 168, 204, 0.12);
+    --card-gradient-to: rgba(147, 51, 234, 0.12);
+
+    /* Dark surfaces */
+    --surface: #1a1a1a;
+    --surface-elevated: #242424;
+
+    /* Dark borders */
+    --border: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -29,14 +131,219 @@ body {
   background: linear-gradient(135deg, var(--gradient-from) 0%, var(--gradient-via) 50%, var(--gradient-to) 100%);
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  /* Mobile optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on Android */
+}
+
+/* 🌊 Water Animation Keyframes (Mobile-Optimized) */
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-4px) translateX(2px);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes splash {
+  0% {
+    transform: scale(0.95) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 📱 Mobile-First Utilities */
+
+/* Touch target minimum size (44x44px) */
+.touch-target {
+  min-height: var(--spacing-touch-min);
+  min-width: var(--spacing-touch-min);
+}
+
+/* Thumb-friendly button */
+.button-thumb {
+  height: var(--spacing-thumb);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Pool card gradient backgrounds */
+.card-pool {
+  background: linear-gradient(135deg, var(--card-gradient-from), var(--card-gradient-to));
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
+}
+
+/* Lifeguard status badges */
+.badge-excellent {
+  background-color: var(--lifeguard-excellent);
+  color: white;
+}
+
+.badge-good {
+  background-color: var(--lifeguard-good);
+  color: white;
+}
+
+.badge-warning {
+  background-color: var(--lifeguard-warning);
+  color: white;
+}
+
+.badge-danger {
+  background-color: var(--lifeguard-danger);
+  color: white;
+}
+
+.badge-critical {
+  background-color: var(--lifeguard-critical);
+  color: white;
+}
+
+/* Water wave effect */
+.wave {
+  animation: var(--animate-wave);
+}
+
+/* Ripple effect (for tap interactions) */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ripple:active::after {
+  animation: var(--animate-ripple);
+}
+
+/* Splash animation */
+.splash {
+  animation: var(--animate-splash);
+}
+
+/* Float animation */
+.float {
+  animation: var(--animate-float);
+}
+
+/* Shimmer effect for loading states */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--pool-blue-light) 50%,
+    var(--surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Mobile scroll snap (for swipeable cards) */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.scroll-snap-center {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* Safe area insets (for notched phones) */
+.safe-top {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.safe-left {
+  padding-left: max(0.5rem, env(safe-area-inset-left));
+}
+
+.safe-right {
+  padding-right: max(0.5rem, env(safe-area-inset-right));
+}
+
+/* Bottom navigation (fixed to bottom on mobile) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface-elevated);
+  border-top: 1px solid var(--border);
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  z-index: 50;
 }
 
 /* Accessibility: visible focus for keyboard users */
 :focus-visible {
-  outline: 2px solid #3b82f6; /* blue-500 */
+  outline: 2px solid var(--pool-blue);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Screen-reader only helper */
@@ -50,4 +357,31 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Skeleton loading (for lazy-loaded content) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--pool-blue-light) 50%,
+    var(--surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Mobile-specific: Hide on mobile, show on desktop */
+@media (max-width: 767px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+
+/* Mobile-specific: Show on mobile, hide on desktop */
+@media (min-width: 768px) {
+  .desktop-hidden {
+    display: none !important;
+  }
 }
