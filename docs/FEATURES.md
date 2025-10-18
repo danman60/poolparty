@@ -322,3 +322,9 @@ Track feature usage and performance:
 - Improve keyboard navigation
 - Test with screen readers
 - Add skip links
+
+### Recent Updates (2025-10-17 22:45)
+- AdvisorBadge component live (used for V:TVL on PoolsTable)
+- API plumbing: poolId included in wallet positions for IL computation
+- Pre-push build guard enabled (Husky) to keep builds green
+

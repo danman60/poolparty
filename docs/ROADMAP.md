@@ -165,3 +165,9 @@ Track and prioritize feature requests:
 3. Gas optimization tools (medium)
 4. ~~Dark/light theme toggle~~ ✅ DONE (gradient backgrounds)
 5. Multiple wallet support (medium)
+
+### Recent Updates (2025-10-17 22:45)
+- Phase 2 in progress: AdvisorBadge + V:TVL badge integrated on Pools view
+- Wallet positions API now includes poolId for per-position IL/V:TVL plumbing
+- Pre-push build hook added to block failing pushes
+
