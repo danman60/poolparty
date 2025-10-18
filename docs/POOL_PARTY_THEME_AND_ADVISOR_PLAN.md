@@ -1,27 +1,27 @@
-# 🏊 PoolParty Theme & Advisor Feature - Master Plan
+﻿# ðŸŠ PoolParty Theme & Advisor Feature - Master Plan
 
 **Version:** 1.1
 **Date:** October 17, 2025
-**Status:** Phase 1 Complete - In Active Development
+**Status:** In Progress
 **Last Updated:** October 17, 2025 23:59 UTC
 
 ---
 
-## 📊 PROGRESS TRACKER
+## ðŸ“Š PROGRESS TRACKER
 
-### ✅ Phase 1: Theme Foundation (Week 1-2) - **COMPLETE**
+### âœ… Phase 1: Theme Foundation (Week 1-2) - **COMPLETE**
 
-**Status:** 100% Complete
+**Status:** In Progress
 **Completed:** October 17, 2025
 
 #### Files Created:
-1. **`src/lib/lifeguard/healthScore.ts`** (232 lines) - ✅ COMPLETE
+1. **`src/lib/lifeguard/healthScore.ts`** (232 lines) - âœ… COMPLETE
    - Comprehensive 4-factor health scoring algorithm
    - Weights: Profitability (40%), Fee Performance (30%), Liquidity Utilization (20%), Risk Metrics (10%)
    - 5-tier status system (Excellent, Good, Fair, Risky, Critical)
    - Health breakdown export function
 
-2. **`src/components/PositionCard.tsx`** (232 lines) - ✅ COMPLETE
+2. **`src/components/PositionCard.tsx`** (232 lines) - âœ… COMPLETE
    - Mobile-first collapsible card component
    - Tap-to-expand interaction pattern
    - Real-time Lifeguard health score integration
@@ -31,7 +31,7 @@
    - Ripple and splash animations
 
 #### Files Modified:
-1. **`src/app/globals.css`** (388 lines) - ✅ COMPLETE
+1. **`src/app/globals.css`** (388 lines) - âœ… COMPLETE
    - Pool Party color palette (aqua blues, lifeguard status colors)
    - 60+ CSS custom properties
    - 6 keyframe animations (wave, ripple, splash, float, shimmer, none for reduced motion)
@@ -39,85 +39,85 @@
    - Dark mode support
    - Accessibility features (prefers-reduced-motion, focus-visible)
 
-2. **`src/components/WalletPositions.tsx`** - ✅ COMPLETE
+2. **`src/components/WalletPositions.tsx`** - âœ… COMPLETE
    - Replaced old card layout with new PositionCard component
-   - Added "🏊 Your Pools" header with Pool Party branding
+   - Added "ðŸŠ Your Pools" header with Pool Party branding
    - Skeleton loading states with shimmer animation
    - Styled error states with Lifeguard alert styling
    - Empty state with pool emoji
    - Lifeguard tip box at bottom
 
 #### Achievements:
-- ✅ Pool Party theme system with aqua blue color palette
-- ✅ Lifeguard status colors (5-tier system)
-- ✅ Mobile-first responsive design (Chrome Android optimized)
-- ✅ CSS animations (wave, ripple, splash, float, shimmer)
-- ✅ Touch-friendly interactions (44px minimum targets)
-- ✅ Real health scoring algorithm (no mocks)
-- ✅ Collapsible position cards with detailed health breakdown
-- ✅ Dark mode support
-- ✅ Accessibility features
+- âœ… Pool Party theme system with aqua blue color palette
+- âœ… Lifeguard status colors (5-tier system)
+- âœ… Mobile-first responsive design (Chrome Android optimized)
+- âœ… CSS animations (wave, ripple, splash, float, shimmer)
+- âœ… Touch-friendly interactions (44px minimum targets)
+- âœ… Real health scoring algorithm (no mocks)
+- âœ… Collapsible position cards with detailed health breakdown
+- âœ… Dark mode support
+- âœ… Accessibility features
 
 #### Dev Server Status:
-- ✅ Running successfully at http://localhost:3004
-- ✅ No TypeScript errors
-- ✅ No build errors
-- ✅ Hot reload working
+- âœ… Running successfully at http://localhost:3004
+- âœ… No TypeScript errors
+- âœ… No build errors
+- âœ… Hot reload working
 
 ---
 
-### ⏳ Phase 2: Advisor Metrics Engine (Week 3-4) - **NEXT**
+### â³ Phase 2: Advisor Metrics Engine (Week 3-4) - **NEXT**
 
-**Status:** 0% Complete
+**Status:** In Progress
 **Target Start:** October 18, 2025
 
 #### Planned Files to Create:
-1. **`src/lib/advisor/impermanentLoss.ts`** - ⏳ PENDING
+1. **`src/lib/advisor/impermanentLoss.ts`** - ✅ COMPLETE
    - IL calculation formulas
    - Volume-to-offset-IL calculator
    - IL risk assessment (low/medium/high/extreme)
    - Break-even volume analysis
 
-2. **`src/lib/advisor/volumeAnalysis.ts`** - ⏳ PENDING
+2. **`src/lib/advisor/volumeAnalysis.ts`** - â³ PENDING
    - Volume-to-TVL ratio scoring (0-10 scale)
    - Daily/weekly/monthly volume trends
    - Activity classification
 
-3. **`src/lib/advisor/rangeOptimization.ts`** - ⏳ PENDING
-   - Optimal range calculation for blue-chip pairs (±8%)
-   - Stablecoin range calculator (±0.2%)
-   - Long-tail range calculator (±80%)
+3. **`src/lib/advisor/rangeOptimization.ts`** - â³ PENDING
+   - Optimal range calculation for blue-chip pairs (Â±8%)
+   - Stablecoin range calculator (Â±0.2%)
+   - Long-tail range calculator (Â±80%)
    - Range efficiency evaluation
 
-4. **`src/lib/advisor/exitTriggers.ts`** - ⏳ PENDING
+4. **`src/lib/advisor/exitTriggers.ts`** - â³ PENDING
    - Stablecoin depeg detection (>0.5%, >1%, >2%)
    - Volatility spike detection
    - Out of range duration evaluation
    - PnL vs HODL stop-loss
    - Pool health degradation monitoring
 
-5. **`src/lib/advisor/poolScreening.ts`** - ⏳ PENDING
+5. **`src/lib/advisor/poolScreening.ts`** - â³ PENDING
    - Pool safety scoring (0-100)
    - Entry criteria validation
    - Position sizing calculator
    - Fee tier recommendation matrix
 
-6. **`src/components/advisor/PoolRating.tsx`** - ⏳ PENDING
+6. **`src/components/advisor/PoolRating.tsx`** - â³ PENDING
    - Pool health badge component
    - Star rating display (1-5 stars)
 
-7. **`src/components/advisor/MetricTooltip.tsx`** - ⏳ PENDING
+7. **`src/components/advisor/MetricTooltip.tsx`** - â³ PENDING
    - Interactive tooltip component
    - Educational explanations
    - Contextual examples
 
-8. **`src/components/advisor/AdvisorBadge.tsx`** - ⏳ PENDING
+8. **`src/components/advisor/AdvisorBadge.tsx`** - ✅ COMPLETE
    - Status badge component
    - Color-coded indicators
 
 #### Key Metrics to Implement:
-- [ ] Volume-to-TVL ratio scoring
-- [ ] IL risk assessment
+- [x] Volume-to-TVL ratio scoring
+- [x] IL risk assessment
 - [ ] Fee tier analysis
 - [ ] Range efficiency calculation
 - [ ] Pool age & stability scoring
@@ -126,9 +126,9 @@
 
 ---
 
-### 📅 Phase 3: Conditional Formatting (Week 5) - **PLANNED**
+### ðŸ“… Phase 3: Conditional Formatting (Week 5) - **PLANNED**
 
-**Status:** 0% Complete
+**Status:** In Progress
 
 #### Tasks:
 - [ ] Color-coded pool cards based on health scores
@@ -139,9 +139,9 @@
 
 ---
 
-### 📅 Phase 4: Notification System (Week 6) - **PLANNED**
+### ðŸ“… Phase 4: Notification System (Week 6) - **PLANNED**
 
-**Status:** 0% Complete
+**Status:** In Progress
 
 #### Planned Files:
 - [ ] `src/lib/notifications/monitor.ts`
@@ -151,9 +151,9 @@
 
 ---
 
-### 📅 Phase 5: Polish & Testing (Week 7-8) - **PLANNED**
+### ðŸ“… Phase 5: Polish & Testing (Week 7-8) - **PLANNED**
 
-**Status:** 0% Complete
+**Status:** In Progress
 
 #### Tasks:
 - [ ] User testing & feedback
@@ -164,7 +164,7 @@
 
 ---
 
-## 🎯 DELEGATION HANDOFF NOTES
+## ðŸŽ¯ DELEGATION HANDOFF NOTES
 
 ### For Next Developer/Tool:
 
@@ -200,7 +200,7 @@
 
 ---
 
-## 🎯 Vision
+## ðŸŽ¯ Vision
 
 Transform PoolParty into a **fun, beautiful, and intuitive** DeFi app with:
 1. **Pool Party Theme**: Festive summer outdoor vibe where each liquidity pool is a visual swimming pool
@@ -213,26 +213,26 @@ Users control capital deployment; The Lifeguard optimizes everything else.
 
 ---
 
-## 🏊‍♂️ The Lifeguard System
+## ðŸŠâ€â™‚ï¸ The Lifeguard System
 
 The Lifeguard is PoolParty's intelligent protection system that actively monitors positions, suggests optimal settings, and protects users from common LP mistakes.
 
 ```
-┌─────────────────────────────────────────────────┐
-│           THE LIFEGUARD SYSTEM                  │
-├─────────────────────────────────────────────────┤
-│                                                 │
-│  ┌──────────────┐      ┌──────────────┐       │
-│  │ Risk Monitor │      │  Optimizer   │       │
-│  └──────┬───────┘      └──────┬───────┘       │
-│         │                     │                │
-│         ├─────────┬───────────┤                │
-│         │         │           │                │
-│  ┌──────▼─────┐ ┌▼────────┐ ┌▼────────────┐  │
-│  │  Alerts    │ │Educator │ │ Auto-Adjust │  │
-│  └────────────┘ └─────────┘ └─────────────┘  │
-│                                                 │
-└─────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           THE LIFEGUARD SYSTEM                  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                 â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚ Risk Monitor â”‚      â”‚  Optimizer   â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜      â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚         â”‚                     â”‚                â”‚
+â”‚         â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤                â”‚
+â”‚         â”‚         â”‚           â”‚                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â” â”Œâ–¼â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚  Alerts    â”‚ â”‚Educator â”‚ â”‚ Auto-Adjust â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚                                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Protection Layers
@@ -263,7 +263,7 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 
 ---
 
-## 🎨 Part 1: Pool Party Theme UI/UX Overhaul
+## ðŸŽ¨ Part 1: Pool Party Theme UI/UX Overhaul
 
 ### Core Visual Identity
 
@@ -282,26 +282,26 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 
 ---
 
-### 🏊 Pool Visual Representations
+### ðŸŠ Pool Visual Representations
 
 #### Individual Pool Cards (Dashboard & Detail Pages)
 
 **Visual Elements:**
 ```
-┌─────────────────────────────────┐
-│   🌊 SoakingHog Pool 🌊         │  ← Pool name with wave emoji
-│   ┌───────────────────────┐     │
-│   │   ~ ~ ~ ~ ~ ~ ~ ~     │     │  ← Animated water surface
-│   │  💧 💧 💧 💧 💧 💧    │     │  ← Droplet/swimmer icons
-│   │   USDC / WETH         │     │  ← Token pair floating
-│   │   ~ ~ ~ ~ ~ ~ ~ ~     │     │
-│   └───────────────────────┘     │
-│                                  │
-│   Depth: $1.2M TVL   Temp: 68°F │  ← Pool "depth" = TVL, "temp" = APR
-│   Swimmers: 234      Fees: 0.3% │  ← # positions, fee tier
-│                                  │
-│   [🏊 Dive In] [📊 Pool Report] │  ← Action buttons
-└─────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚   ðŸŒŠ SoakingHog Pool ðŸŒŠ         â”‚  â† Pool name with wave emoji
+â”‚   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     â”‚
+â”‚   â”‚   ~ ~ ~ ~ ~ ~ ~ ~     â”‚     â”‚  â† Animated water surface
+â”‚   â”‚  ðŸ’§ ðŸ’§ ðŸ’§ ðŸ’§ ðŸ’§ ðŸ’§    â”‚     â”‚  â† Droplet/swimmer icons
+â”‚   â”‚   USDC / WETH         â”‚     â”‚  â† Token pair floating
+â”‚   â”‚   ~ ~ ~ ~ ~ ~ ~ ~     â”‚     â”‚
+â”‚   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â”‚
+â”‚                                  â”‚
+â”‚   Depth: $1.2M TVL   Temp: 68Â°F â”‚  â† Pool "depth" = TVL, "temp" = APR
+â”‚   Swimmers: 234      Fees: 0.3% â”‚  â† # positions, fee tier
+â”‚                                  â”‚
+â”‚   [ðŸŠ Dive In] [ðŸ“Š Pool Report] â”‚  â† Action buttons
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 **Depth Visualization:**
@@ -316,34 +316,34 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 - "Splash" animation when joining/leaving
 
 **Activity Indicators:**
-- Floating icons (🏊‍♂️ 🏄‍♀️ 🤿) representing number of LPs
+- Floating icons (ðŸŠâ€â™‚ï¸ ðŸ„â€â™€ï¸ ðŸ¤¿) representing number of LPs
 - More icons = more popular pool
 - Animated movement across the pool surface
 
 ---
 
-### 🎪 User Position Cards (Wallet Page)
+### ðŸŽª User Position Cards (Wallet Page)
 
 **Each Position Looks Like a Pool Membership Card:**
 
 ```
-┌─────────────────────────────────────┐
-│  🏖️ Your USDC/WETH Pool Pass 🏖️   │
-│  ┌─────────────────────────────┐   │
-│  │ Pool #812345  ⭐⭐⭐⭐⭐      │   │  ← Rating from advisor
-│  │ ┌───────────────────────┐   │   │
-│  │ │  ~ ACTIVE SWIMMER ~   │   │   │  ← Status (in range)
-│  │ │   💧 Your Spot 💧     │   │   │
-│  │ │  Current Depth: 75%   │   │   │  ← Range position
-│  │ └───────────────────────┘   │   │
-│  │                             │   │
-│  │ Your Share: 0.5%            │   │
-│  │ Collected: $12.34 🎉        │   │
-│  │ Uncollected: $5.67          │   │
-│  └─────────────────────────────┘   │
-│                                     │
-│  [💰 Collect Splashes] [🚪 Exit]  │
-└─────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ–ï¸ Your USDC/WETH Pool Pass ðŸ–ï¸   â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ Pool #812345  â­â­â­â­â­      â”‚   â”‚  â† Rating from advisor
+â”‚  â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚   â”‚
+â”‚  â”‚ â”‚  ~ ACTIVE SWIMMER ~   â”‚   â”‚   â”‚  â† Status (in range)
+â”‚  â”‚ â”‚   ðŸ’§ Your Spot ðŸ’§     â”‚   â”‚   â”‚
+â”‚  â”‚ â”‚  Current Depth: 75%   â”‚   â”‚   â”‚  â† Range position
+â”‚  â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚   â”‚
+â”‚  â”‚                             â”‚   â”‚
+â”‚  â”‚ Your Share: 0.5%            â”‚   â”‚
+â”‚  â”‚ Collected: $12.34 ðŸŽ‰        â”‚   â”‚
+â”‚  â”‚ Uncollected: $5.67          â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                                     â”‚
+â”‚  [ðŸ’° Collect Splashes] [ðŸšª Exit]  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 **Status Indicators:**
@@ -353,34 +353,34 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 
 ---
 
-### 🎯 Pool Detail Page Redesign
+### ðŸŽ¯ Pool Detail Page Redesign
 
 **Hero Section:**
 ```
-═══════════════════════════════════════════════
-       🏊 Welcome to SoakingHog Pool! 🏊
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       ðŸŠ Welcome to SoakingHog Pool! ðŸŠ
      "The Premier USDC/WETH Swimming Hole"
-═══════════════════════════════════════════════
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-      ┌─────────────────────────────────┐
-      │    ~ ~ ~ ~ POOL VIEW ~ ~ ~ ~    │
-      │   🏊‍♂️        💧        🏊‍♀️       │
-      │  Depth: 8.5ft    Temp: Warm 🌡️  │
-      │   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~   │
-      └─────────────────────────────────┘
+      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+      â”‚    ~ ~ ~ ~ POOL VIEW ~ ~ ~ ~    â”‚
+      â”‚   ðŸŠâ€â™‚ï¸        ðŸ’§        ðŸŠâ€â™€ï¸       â”‚
+      â”‚  Depth: 8.5ft    Temp: Warm ðŸŒ¡ï¸  â”‚
+      â”‚   ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~   â”‚
+      â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
    TVL: $1.2M    Volume 24h: $450K    APR: 12.5%
 ```
 
 **"Join the Party" Section:**
-- Giant inflatable pool toy graphics (🦄 unicorn, 🍕 pizza floaty)
+- Giant inflatable pool toy graphics (ðŸ¦„ unicorn, ðŸ• pizza floaty)
 - Big colorful "DIVE IN!" button
 - Splash animation on click
 - "Party Size" slider (amount to deposit)
 
 ---
 
-### 🌊 Micro-Animations
+### ðŸŒŠ Micro-Animations
 
 1. **Splash Effect**: When depositing/withdrawing
 2. **Ripples**: On pool card hover (tap on mobile)
@@ -396,7 +396,7 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 
 ---
 
-### 🎵 Sound Design (Optional)
+### ðŸŽµ Sound Design (Optional)
 
 - Splash sound on join/exit (can be toggled off)
 - Gentle water ambiance (very subtle, toggle)
@@ -406,7 +406,7 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 
 ---
 
-## 📱 Mobile-First Design Strategy
+## ðŸ“± Mobile-First Design Strategy
 
 ### Core Principles
 
@@ -428,31 +428,31 @@ The Lifeguard is PoolParty's intelligent protection system that actively monitor
 ### Mobile Screen Hierarchy
 
 ```
-┌─────────────────────────┐
-│ 🏊 Pool Party           │ ← Sticky header (minimal)
-├─────────────────────────┤
-│ Portfolio: $12,450  ↗️  │ ← Total value (large, prominent)
-│ +$45 (+0.36%) 24h       │
-├─────────────────────────┤
-│ 🔴 2 alerts             │ ← Critical alerts (expandable)
-│ 🟡 1 suggestion         │
-├─────────────────────────┤
-│ ┌───────────────────┐   │
-│ │ ETH/USDC 0.3%     │   │ ← Swipeable cards
-│ │ 🟢 78  $5,200     │   │   (swipe left = actions)
-│ │ +$23 fees         │   │
-│ └───────────────────┘   │
-│                         │
-│ ┌───────────────────┐   │
-│ │ USDC/DAI 0.01%    │   │
-│ │ 🟢 85  $7,250     │   │
-│ │ +$14 fees         │   │
-│ └───────────────────┘   │
-│                         │
-│        [...]            │
-├─────────────────────────┤
-│ [🏠] [💰] [🔔] [⚙️]    │ ← Bottom nav (fixed)
-└─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸŠ Pool Party           â”‚ â† Sticky header (minimal)
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Portfolio: $12,450  â†—ï¸  â”‚ â† Total value (large, prominent)
+â”‚ +$45 (+0.36%) 24h       â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ ðŸ”´ 2 alerts             â”‚ â† Critical alerts (expandable)
+â”‚ ðŸŸ¡ 1 suggestion         â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚ â”‚ ETH/USDC 0.3%     â”‚   â”‚ â† Swipeable cards
+â”‚ â”‚ ðŸŸ¢ 78  $5,200     â”‚   â”‚   (swipe left = actions)
+â”‚ â”‚ +$23 fees         â”‚   â”‚
+â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                         â”‚
+â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚ â”‚ USDC/DAI 0.01%    â”‚   â”‚
+â”‚ â”‚ ðŸŸ¢ 85  $7,250     â”‚   â”‚
+â”‚ â”‚ +$14 fees         â”‚   â”‚
+â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚                         â”‚
+â”‚        [...]            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ [ðŸ ] [ðŸ’°] [ðŸ””] [âš™ï¸]    â”‚ â† Bottom nav (fixed)
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Mobile Interactions
@@ -469,10 +469,10 @@ LongPress:  Show advanced menu
 
 **Bottom Navigation:**
 ```
-🏠 Home     - Dashboard with all positions
-💰 Pools    - Browse and join pools
-🔔 Alerts   - All notifications and suggestions
-⚙️ Settings - Preferences and automation
+ðŸ  Home     - Dashboard with all positions
+ðŸ’° Pools    - Browse and join pools
+ðŸ”” Alerts   - All notifications and suggestions
+âš™ï¸ Settings - Preferences and automation
 ```
 
 **Touch Targets:**
@@ -485,28 +485,28 @@ LongPress:  Show advanced menu
 
 #### 1. Collapsible Position Cards
 ```
-┌─────────────────────────┐
-│ ETH/USDC 0.3%      [˅]  │ ← Collapsed (default)
-│ 🟢 78  $5,200           │
-│ +$23 today              │
-└─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ETH/USDC 0.3%      [Ë…]  â”‚ â† Collapsed (default)
+â”‚ ðŸŸ¢ 78  $5,200           â”‚
+â”‚ +$23 today              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
-    ↓ Tap to expand ↓
+    â†“ Tap to expand â†“
 
-┌─────────────────────────┐
-│ ETH/USDC 0.3%      [˄]  │ ← Expanded
-│ Lifeguard: 🟢 78/100    │
-├─────────────────────────┤
-│ Value: $5,200           │
-│ Range: 🟢 In range      │
-│ ├──●───┤ $3.2K - $3.8K  │
-│                         │
-│ Fees (7d): +$23         │
-│ IL: -$5                 │
-│ Net P&L: +$18 ✅        │
-├─────────────────────────┤
-│ [💰 Collect] [🔧 Adjust]│
-└─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ETH/USDC 0.3%      [Ë„]  â”‚ â† Expanded
+â”‚ Lifeguard: ðŸŸ¢ 78/100    â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Value: $5,200           â”‚
+â”‚ Range: ðŸŸ¢ In range      â”‚
+â”‚ â”œâ”€â”€â—â”€â”€â”€â”¤ $3.2K - $3.8K  â”‚
+â”‚                         â”‚
+â”‚ Fees (7d): +$23         â”‚
+â”‚ IL: -$5                 â”‚
+â”‚ Net P&L: +$18 âœ…        â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ [ðŸ’° Collect] [ðŸ”§ Adjust]â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 #### 2. Slide-Up Modals (Not Full Page)
@@ -533,27 +533,27 @@ Prioritize on mobile:
 
 **Push Notifications:**
 ```
-🚨 Pool Party Alert
+ðŸš¨ Pool Party Alert
 ETH/USDC out of range
 Tap to rebalance
 
-[Tap] → Opens app to position detail
-[Swipe] → Mark as read
-[Long press] → Snooze 1hr/3hr/6hr
+[Tap] â†’ Opens app to position detail
+[Swipe] â†’ Mark as read
+[Long press] â†’ Snooze 1hr/3hr/6hr
 ```
 
 **In-App Alert Cards:**
 ```
-┌─────────────────────────┐
-│ 🔴 Out of Range         │ ← Color-coded border
-│ ETH/USDC • Just now     │
-│                         │
-│ Not earning fees        │
-│ Lifeguard suggests:     │
-│ Rebalance to $3.1K-$3.7K│
-│                         │
-│ [Rebalance] [Dismiss]   │ ← Full-width buttons
-└─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸ”´ Out of Range         â”‚ â† Color-coded border
+â”‚ ETH/USDC â€¢ Just now     â”‚
+â”‚                         â”‚
+â”‚ Not earning fees        â”‚
+â”‚ Lifeguard suggests:     â”‚
+â”‚ Rebalance to $3.1K-$3.7Kâ”‚
+â”‚                         â”‚
+â”‚ [Rebalance] [Dismiss]   â”‚ â† Full-width buttons
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Responsive Breakpoints
@@ -624,13 +624,13 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 **1. Quick Actions Widget (iOS/Android)**
 ```
 Home Screen Widget:
-┌─────────────────┐
-│ Pool Party      │
-│ $12,450  +0.3% │
-│                 │
-│ 🔴 2 alerts    │
-│ [Open App]      │
-└─────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Pool Party      â”‚
+â”‚ $12,450  +0.3% â”‚
+â”‚                 â”‚
+â”‚ ðŸ”´ 2 alerts    â”‚
+â”‚ [Open App]      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 **2. Face ID / Touch ID**
@@ -681,7 +681,7 @@ const haptic = {
 
 ---
 
-## 🧠 Part 2: The Lifeguard Features (Intelligent Advisor)
+## ðŸ§  Part 2: The Lifeguard Features (Intelligent Advisor)
 
 ### Overview
 
@@ -716,10 +716,10 @@ function calculatePoolSafetyScore(pool: Pool): {
   // Audit status (critical)
   if (!pool.hasAudit) {
     score -= 30;
-    flags.push("⛔ No security audit");
+    flags.push("â›” No security audit");
   } else if (pool.auditAge > 365) {
     score -= 10;
-    flags.push("⚠️ Audit outdated");
+    flags.push("âš ï¸ Audit outdated");
   }
 
   // Liquidity checks
@@ -749,7 +749,7 @@ function calculatePoolSafetyScore(pool: Pool): {
   // Historical issues
   if (pool.pastExploits > 0) {
     score -= 25;
-    flags.push("⛔ Protocol has been exploited before");
+    flags.push("â›” Protocol has been exploited before");
   }
 
   // Oracle dependencies
@@ -765,36 +765,36 @@ function calculatePoolSafetyScore(pool: Pool): {
     rating: score >= 80 ? 'A' : score >= 60 ? 'B' : score >= 40 ? 'C' : score >= 20 ? 'D' : 'F',
     flags,
     recommendation:
-      score >= 70 ? "✅ Lifeguard approved for all users" :
-      score >= 50 ? "⚠️ Acceptable for experienced users" :
-      score >= 30 ? "⚠️ Only for risk-tolerant, experienced users" :
-      "⛔ Not recommended - significant risks"
+      score >= 70 ? "âœ… Lifeguard approved for all users" :
+      score >= 50 ? "âš ï¸ Acceptable for experienced users" :
+      score >= 30 ? "âš ï¸ Only for risk-tolerant, experienced users" :
+      "â›” Not recommended - significant risks"
   };
 }
 ```
 
 **UI Display:**
 ```
-┌─────────────────────────────────────┐
-│ 🛡️ Lifeguard Safety Analysis       │
-├─────────────────────────────────────┤
-│                                     │
-│ Overall Score: 78/100 🟢            │
-│ Rating: B - Generally Safe          │
-│                                     │
-│ ✓ Audited by Trail of Bits (2024)  │
-│ ✓ 2+ years operational history      │
-│ ✓ $125M TVL (high liquidity)       │
-│ ⚠️ Admin keys present               │
-│ ⚠️ Upgradeable contract             │
-│                                     │
-│ Lifeguard Verdict:                  │
-│ Safe for most users. Admin keys are │
-│ controlled by 6-of-9 multisig with  │
-│ 48hr timelock.                      │
-│                                     │
-│ [See full report] [Proceed anyway]  │
-└─────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸ›¡ï¸ Lifeguard Safety Analysis       â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                     â”‚
+â”‚ Overall Score: 78/100 ðŸŸ¢            â”‚
+â”‚ Rating: B - Generally Safe          â”‚
+â”‚                                     â”‚
+â”‚ âœ“ Audited by Trail of Bits (2024)  â”‚
+â”‚ âœ“ 2+ years operational history      â”‚
+â”‚ âœ“ $125M TVL (high liquidity)       â”‚
+â”‚ âš ï¸ Admin keys present               â”‚
+â”‚ âš ï¸ Upgradeable contract             â”‚
+â”‚                                     â”‚
+â”‚ Lifeguard Verdict:                  â”‚
+â”‚ Safe for most users. Admin keys are â”‚
+â”‚ controlled by 6-of-9 multisig with  â”‚
+â”‚ 48hr timelock.                      â”‚
+â”‚                                     â”‚
+â”‚ [See full report] [Proceed anyway]  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -903,24 +903,24 @@ function calculatePositionHealth(position: Position): {
 
 **Position Card with Health Score:**
 ```
-┌────────────────────────────────────┐
-│ ETH/USDC 0.3%  ⛓ Ethereum 🦄 V3   │
-│ Lifeguard Health: 🟢 78/100        │
-├────────────────────────────────────┤
-│ Value: $12,450                     │
-│                                    │
-│ Health Breakdown:                  │
-│ ├─ Profit: 🟢 85 (Excellent)       │
-│ ├─ Range: 🟡 72 (Good)             │
-│ ├─ Efficiency: 🟢 81 (Good)        │
-│ └─ Protocol: 🟢 95 (Excellent)     │
-│                                    │
-│ 💡 Lifeguard suggests:             │
-│ Widen range by 2% to improve       │
-│ in-range time from 72% to 85%      │
-│                                    │
-│ [Apply Suggestion] [Dismiss]       │
-└────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ETH/USDC 0.3%  â›“ Ethereum ðŸ¦„ V3   â”‚
+â”‚ Lifeguard Health: ðŸŸ¢ 78/100        â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Value: $12,450                     â”‚
+â”‚                                    â”‚
+â”‚ Health Breakdown:                  â”‚
+â”‚ â”œâ”€ Profit: ðŸŸ¢ 85 (Excellent)       â”‚
+â”‚ â”œâ”€ Range: ðŸŸ¡ 72 (Good)             â”‚
+â”‚ â”œâ”€ Efficiency: ðŸŸ¢ 81 (Good)        â”‚
+â”‚ â””â”€ Protocol: ðŸŸ¢ 95 (Excellent)     â”‚
+â”‚                                    â”‚
+â”‚ ðŸ’¡ Lifeguard suggests:             â”‚
+â”‚ Widen range by 2% to improve       â”‚
+â”‚ in-range time from 72% to 85%      â”‚
+â”‚                                    â”‚
+â”‚ [Apply Suggestion] [Dismiss]       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -931,19 +931,19 @@ function calculatePositionHealth(position: Position): {
 
 ```typescript
 Pool Health =
-  (30 × Volume/TVL ratio score) +
-  (25 × Safety score) +
-  (20 × Range efficiency potential) +
-  (15 × Fee tier appropriateness) +
-  (10 × Age/maturity score)
+  (30 Ã— Volume/TVL ratio score) +
+  (25 Ã— Safety score) +
+  (20 Ã— Range efficiency potential) +
+  (15 Ã— Fee tier appropriateness) +
+  (10 Ã— Age/maturity score)
 ```
 
 **Visual Representation:**
-- 90-100: ⭐⭐⭐⭐⭐ "💎 Premium Pool - Dive In!" (Blue glow)
-- 75-89: ⭐⭐⭐⭐ "🟢 Great Pool - Safe Waters" (Green glow)
-- 60-74: ⭐⭐⭐ "🟡 Good Pool - Watch Depth" (Yellow border)
-- 40-59: ⭐⭐ "🟠 Risky Pool - Caution Advised" (Orange border)
-- 0-39: ⭐ "🔴 Dangerous Pool - Avoid!" (Red warning)
+- 90-100: â­â­â­â­â­ "ðŸ’Ž Premium Pool - Dive In!" (Blue glow)
+- 75-89: â­â­â­â­ "ðŸŸ¢ Great Pool - Safe Waters" (Green glow)
+- 60-74: â­â­â­ "ðŸŸ¡ Good Pool - Watch Depth" (Yellow border)
+- 40-59: â­â­ "ðŸŸ  Risky Pool - Caution Advised" (Orange border)
+- 0-39: â­ "ðŸ”´ Dangerous Pool - Avoid!" (Red warning)
 
 ---
 
@@ -960,15 +960,15 @@ Pool Health =
 - **Poor (3/10)**: Ratio < 0.1 (stagnant pool)
 
 **Tooltip:**
-> 🏊 **Pool Activity Check**
+> ðŸŠ **Pool Activity Check**
 >
 > This pool has HIGH trading volume relative to its size.
 > - More trades = More fees for you!
 > - Current: $450K volume / $1.2M TVL = 37.5%
-> - Status: ✅ Excellent fee generation
+> - Status: âœ… Excellent fee generation
 
 **Warning (if poor):**
-> ⚠️ **Shallow Pool Warning**
+> âš ï¸ **Shallow Pool Warning**
 >
 > Low trading activity detected. You may earn minimal fees.
 > Consider pools with higher volume-to-TVL ratios.
@@ -986,17 +986,17 @@ Pool Health =
 - **Extreme**: Volatile altcoins
 
 **Tooltip:**
-> 💧 **Impermanent Loss Forecast**
+> ðŸ’§ **Impermanent Loss Forecast**
 >
-> Risk Level: MEDIUM 🟡
+> Risk Level: MEDIUM ðŸŸ¡
 > - USDC and WETH prices may diverge
 > - Estimated IL at +20% WETH price: -2.5%
 > - Your fees need to outpace IL
 >
-> 📊 Current APR (12.5%) > IL Risk ✅
+> ðŸ“Š Current APR (12.5%) > IL Risk âœ…
 
 **Warning (if extreme):**
-> 🚨 **Dangerous Waters!**
+> ðŸš¨ **Dangerous Waters!**
 >
 > HIGH impermanent loss risk detected!
 > - Volatile token pair
@@ -1014,7 +1014,7 @@ Pool Health =
 Range Width = (tickUpper - tickLower) / tickSpacing
 Optimal Width = Based on volatility (7-30 days)
 
-Efficiency = 100 - (abs(Range Width - Optimal Width) / Optimal Width × 100)
+Efficiency = 100 - (abs(Range Width - Optimal Width) / Optimal Width Ã— 100)
 ```
 
 **Scoring:**
@@ -1024,26 +1024,26 @@ Efficiency = 100 - (abs(Range Width - Optimal Width) / Optimal Width × 100)
 - **Poor (<50)**: Very wide or very narrow
 
 **Tooltip (Good Range):**
-> 🎯 **Perfect Position!**
+> ðŸŽ¯ **Perfect Position!**
 >
 > Your range is optimally sized for this pool.
-> - Current Price: In your range ✅
+> - Current Price: In your range âœ…
 > - Range Width: Just right for volatility
 > - Fee Capture: Maximized!
 
 **Warning (Too Wide):**
-> 📏 **Range Too Wide**
+> ðŸ“ **Range Too Wide**
 >
 > Your range is very wide - you're diluting your fees!
-> - Current: ±50% price range
-> - Optimal: ±15% for this pair
+> - Current: Â±50% price range
+> - Optimal: Â±15% for this pair
 > - Fix: Narrow your range to earn 3x more fees
 
 **Warning (Too Narrow):**
-> ⚠️ **Range Too Tight!**
+> âš ï¸ **Range Too Tight!**
 >
 > Risk: Price may exit your range soon
-> - Current: ±2% range
+> - Current: Â±2% range
 > - Volatility: 8% daily
 > - Likely to go out of range: 85%
 
@@ -1063,14 +1063,14 @@ Optimal Fee Tier:
 ```
 
 **Tooltip (Correct Tier):**
-> 💎 **Perfect Fee Tier**
+> ðŸ’Ž **Perfect Fee Tier**
 >
 > 0.3% fee is ideal for USDC/WETH
 > - Balances volume and fee income
-> - Competitive with other pools ✅
+> - Competitive with other pools âœ…
 
 **Warning (Wrong Tier):**
-> 🤔 **Fee Tier Mismatch**
+> ðŸ¤” **Fee Tier Mismatch**
 >
 > This pool has a 1% fee tier, but:
 > - USDC/WETH is a blue chip pair
@@ -1089,20 +1089,20 @@ Optimal Fee Tier:
 - **Out of Range**: Price has exited your range
 
 **Tooltip (Approaching):**
-> 🏊 **Getting Shallow!**
+> ðŸŠ **Getting Shallow!**
 >
 > Price is nearing your range edge:
 > - Current: $1,850 USDC/WETH
 > - Your Upper Tick: $1,900
 > - Distance: 2.7%
 >
-> ⚠️ Consider adjusting your range or monitoring closely
+> âš ï¸ Consider adjusting your range or monitoring closely
 
 **Warning (Out of Range):**
-> 🚨 **You're On The Deck!**
+> ðŸš¨ **You're On The Deck!**
 >
 > Your position is OUT OF RANGE
-> - Earning 0 fees ❌
+> - Earning 0 fees âŒ
 > - Price: $2,100
 > - Your Range: $1,500 - $1,900
 >
@@ -1127,23 +1127,23 @@ Optimal Fee Tier:
 - **Experimental (25)**: <7 days, unstable
 
 **Tooltip (Mature):**
-> 🏛️ **Established Pool**
+> ðŸ›ï¸ **Established Pool**
 >
 > This pool has a proven track record:
 > - Age: 156 days
 > - TVL Stability: Very stable
 > - Volume: Consistent
-> - Status: ✅ Safe to join
+> - Status: âœ… Safe to join
 
 **Warning (New):**
-> 🆕 **New Pool Alert**
+> ðŸ†• **New Pool Alert**
 >
 > This pool is very new:
 > - Age: 3 days
 > - TVL: $50K (may be volatile)
 > - Volume: Unproven
 >
-> ⚠️ Higher risk - wait for stability or start small
+> âš ï¸ Higher risk - wait for stability or start small
 
 ---
 
@@ -1160,20 +1160,20 @@ Optimal Fee Tier:
 - **Dangerous (>90%)**: Whale-dominated
 
 **Tooltip (Healthy):**
-> 👥 **Well Distributed**
+> ðŸ‘¥ **Well Distributed**
 >
 > This pool has healthy LP distribution:
 > - Top 10 LPs: 35% of TVL
 > - Your impact: Minimal
-> - Whale risk: Low ✅
+> - Whale risk: Low âœ…
 
 **Warning (Concentrated):**
-> 🐋 **Whale Alert!**
+> ðŸ‹ **Whale Alert!**
 >
 > This pool is dominated by large LPs:
 > - Top 10 LPs: 88% of TVL
 > - Risk: Large withdrawals could drain pool
-> - Caution advised ⚠️
+> - Caution advised âš ï¸
 
 ---
 
@@ -1186,16 +1186,16 @@ Optimal Fee Tier:
 ```typescript
 if (poolHealthScore >= 75) {
   border = "3px solid #32CD32" // Green glow
-  badge = "⭐ HOT POOL"
+  badge = "â­ HOT POOL"
 }
 
 if (volumeToTVL < 0.1) {
-  overlay = "🥶 COLD POOL" // Blue tint
+  overlay = "ðŸ¥¶ COLD POOL" // Blue tint
   warning = "Low activity"
 }
 
 if (poolAge < 7) {
-  badge = "🆕 NEW"
+  badge = "ðŸ†• NEW"
   border = "2px dashed #FFD700"
 }
 ```
@@ -1205,20 +1205,20 @@ if (poolAge < 7) {
 ```typescript
 if (outOfRange) {
   background = "linear-gradient(135deg, #FF6B9D, #FF1493)" // Hot pink
-  status = "🚨 OUT OF RANGE"
+  status = "ðŸš¨ OUT OF RANGE"
   pulseAnimation = true
 }
 
 if (approachingEdge) {
   background = "linear-gradient(135deg, #FFD700, #FF8C42)" // Orange
-  status = "⚠️ NEAR EDGE"
+  status = "âš ï¸ NEAR EDGE"
   badge = "Monitor Closely"
 }
 
 if (inRange && rangeEfficiency > 80) {
   background = "linear-gradient(135deg, #00D4FF, #32CD32)" // Aqua to green
-  status = "✅ OPTIMAL"
-  badge = "🎯 Perfect!"
+  status = "âœ… OPTIMAL"
+  badge = "ðŸŽ¯ Perfect!"
 }
 ```
 
@@ -1228,20 +1228,20 @@ if (inRange && rangeEfficiency > 80) {
 
 #### Smart Alerts (Lifeguard Categories)
 
-**🔴 Critical Alerts** (Immediate Action Required):
+**ðŸ”´ Critical Alerts** (Immediate Action Required):
 1. **Position Out of Range**
    ```
-   🚨 Lifeguard Alert: Position Not Earning!
+   ðŸš¨ Lifeguard Alert: Position Not Earning!
    Your USDC/WETH position is out of range
    Pool: SoakingHog | Fee Tier: 0.3%
    Current Price: $2,100 (above your $1,900 limit)
-   Earning: $0/day ❌
+   Earning: $0/day âŒ
    [Rebalance Now] [View Position]
    ```
 
 2. **Depeg Detected**
    ```
-   🔴 CRITICAL: Stablecoin Depeg Detected!
+   ðŸ”´ CRITICAL: Stablecoin Depeg Detected!
    USDC trading at $0.985 (-1.5% from peg)
    Duration: 8 minutes
    Lifeguard recommends: EXIT IMMEDIATELY
@@ -1250,17 +1250,17 @@ if (inRange && rangeEfficiency > 80) {
 
 3. **Smart Contract Risk**
    ```
-   ⛔ Security Alert
+   â›” Security Alert
    New vulnerability discovered in pool protocol
    Severity: High
    Recommended action: Withdraw liquidity
    [View Details] [Withdraw Now]
    ```
 
-**🟡 Warning Alerts** (Review Soon):
+**ðŸŸ¡ Warning Alerts** (Review Soon):
 4. **Approaching Range Edge**
    ```
-   ⚠️ Lifeguard Notice: Getting Shallow!
+   âš ï¸ Lifeguard Notice: Getting Shallow!
    Price nearing your range edge (18% away)
    Current: $1,850 | Your Upper Limit: $1,900
    Expected to exit range in: 2-4 hours
@@ -1269,7 +1269,7 @@ if (inRange && rangeEfficiency > 80) {
 
 5. **Profitability Warning**
    ```
-   ⚠️ Underwater Position
+   âš ï¸ Underwater Position
    Fees < IL break-even for 8 days
    Net P&L: -$23 (-0.5%)
    Lifeguard suggests: Consider exiting or widening range
@@ -1278,17 +1278,17 @@ if (inRange && rangeEfficiency > 80) {
 
 6. **Gas Optimization**
    ```
-   ⏰ Optimal Rebalancing Window
+   â° Optimal Rebalancing Window
    Gas prices: 15 gwei (Low)
    Estimated savings: $12 vs normal
    Lifeguard suggests: Rebalance now
    [Rebalance] [Schedule Later]
    ```
 
-**🔵 Info Alerts** (FYI):
+**ðŸ”µ Info Alerts** (FYI):
 7. **Fee Collection Reminder**
    ```
-   💰 Fees Ready to Collect!
+   ðŸ’° Fees Ready to Collect!
    You have $45.67 in uncollected fees across 3 pools
    Collecting now costs: $8 gas
    Net benefit: $37.67
@@ -1297,8 +1297,8 @@ if (inRange && rangeEfficiency > 80) {
 
 8. **Opportunity Detected**
    ```
-   🌟 Lifeguard Found Better Pool!
-   USDC/WETH 0.05% - Rating: ⭐⭐⭐⭐⭐
+   ðŸŒŸ Lifeguard Found Better Pool!
+   USDC/WETH 0.05% - Rating: â­â­â­â­â­
    APR: +3.2% vs your current position
    Migration cost: $18 | Break-even: 28 days
    [Compare Pools] [Migrate] [Dismiss]
@@ -1306,11 +1306,11 @@ if (inRange && rangeEfficiency > 80) {
 
 9. **Weekly Performance Summary**
    ```
-   📊 Your Pool Party Week in Review
-   • Total fees earned: $127 (+23% vs last week)
-   • All positions healthy (avg: 78/100)
-   • Lifeguard prevented 1 out-of-range event
-   • 2 optimization suggestions available
+   ðŸ“Š Your Pool Party Week in Review
+   â€¢ Total fees earned: $127 (+23% vs last week)
+   â€¢ All positions healthy (avg: 78/100)
+   â€¢ Lifeguard prevented 1 out-of-range event
+   â€¢ 2 optimization suggestions available
    [View Full Report]
    ```
 
@@ -1352,53 +1352,53 @@ The Lifeguard educates users through contextual learning, not overwhelming docum
 
 **Every DeFi term has an interactive tooltip:**
 ```
-┌─────────────────────────────────┐
-│ Impermanent Loss (IL)     [?]  │
-├─────────────────────────────────┤
-│ 📚 Simple Explanation:          │
-│ IL happens when token prices    │
-│ change while you're providing   │
-│ liquidity. Think of it like     │
-│ automatically selling winners   │
-│ and buying losers.              │
-│                                 │
-│ 🏊 Pool Party Analogy:          │
-│ If you dive into a pool with    │
-│ equal amounts of two tokens,    │
-│ but one "floats up" (price ↑),  │
-│ you'll have less of it when you │
-│ get out.                        │
-│                                 │
-│ 💡 Lifeguard Protection:        │
-│ We help you pick pools where    │
-│ fees typically beat IL, and     │
-│ alert you if IL gets too high.  │
-│                                 │
-│ Current Position IL: -$12       │
-│ Fees Earned: +$47               │
-│ Net: +$35 ✅                    │
-│                                 │
-│ [See Example] [Learn More]      │
-└─────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Impermanent Loss (IL)     [?]  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ ðŸ“š Simple Explanation:          â”‚
+â”‚ IL happens when token prices    â”‚
+â”‚ change while you're providing   â”‚
+â”‚ liquidity. Think of it like     â”‚
+â”‚ automatically selling winners   â”‚
+â”‚ and buying losers.              â”‚
+â”‚                                 â”‚
+â”‚ ðŸŠ Pool Party Analogy:          â”‚
+â”‚ If you dive into a pool with    â”‚
+â”‚ equal amounts of two tokens,    â”‚
+â”‚ but one "floats up" (price â†‘),  â”‚
+â”‚ you'll have less of it when you â”‚
+â”‚ get out.                        â”‚
+â”‚                                 â”‚
+â”‚ ðŸ’¡ Lifeguard Protection:        â”‚
+â”‚ We help you pick pools where    â”‚
+â”‚ fees typically beat IL, and     â”‚
+â”‚ alert you if IL gets too high.  â”‚
+â”‚                                 â”‚
+â”‚ Current Position IL: -$12       â”‚
+â”‚ Fees Earned: +$47               â”‚
+â”‚ Net: +$35 âœ…                    â”‚
+â”‚                                 â”‚
+â”‚ [See Example] [Learn More]      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 #### Onboarding Wizard
 
 **Step 1: Experience Level**
 ```
-Welcome to Pool Party! 🏊‍♂️
+Welcome to Pool Party! ðŸŠâ€â™‚ï¸
 
 The Lifeguard wants to customize your experience.
 What's your DeFi experience level?
 
-○ New to DeFi
-  └─ We'll recommend safe options and explain everything
+â—‹ New to DeFi
+  â””â”€ We'll recommend safe options and explain everything
 
-○ Some experience
-  └─ You choose pools, Lifeguard guides and protects
+â—‹ Some experience
+  â””â”€ You choose pools, Lifeguard guides and protects
 
-○ Experienced
-  └─ Full control with advanced features unlocked
+â—‹ Experienced
+  â””â”€ Full control with advanced features unlocked
 
 [Continue]
 ```
@@ -1407,22 +1407,22 @@ What's your DeFi experience level?
 ```
 How much risk are you comfortable with?
 
-○ Conservative (Recommended for beginners)
-  └─ Stablecoins only
-  └─ Expected APR: 5-8%
-  └─ IL Risk: Very Low
+â—‹ Conservative (Recommended for beginners)
+  â””â”€ Stablecoins only
+  â””â”€ Expected APR: 5-8%
+  â””â”€ IL Risk: Very Low
 
-○ Balanced
-  └─ Mix of stable and volatile pairs
-  └─ Expected APR: 10-15%
-  └─ IL Risk: Medium
+â—‹ Balanced
+  â””â”€ Mix of stable and volatile pairs
+  â””â”€ Expected APR: 10-15%
+  â””â”€ IL Risk: Medium
 
-○ Aggressive
-  └─ Volatile pairs for higher rewards
-  └─ Expected APR: 15-30%+
-  └─ IL Risk: High
+â—‹ Aggressive
+  â””â”€ Volatile pairs for higher rewards
+  â””â”€ Expected APR: 15-30%+
+  â””â”€ IL Risk: High
 
-💡 You can change this later
+ðŸ’¡ You can change this later
 [Continue]
 ```
 
@@ -1430,18 +1430,18 @@ How much risk are you comfortable with?
 ```
 How much time can you dedicate to managing positions?
 
-○ Set and forget (Recommended)
-  └─ Lifeguard automation: ON
-  └─ Auto-rebalancing with approval
-  └─ Weekly check-ins suggested
+â—‹ Set and forget (Recommended)
+  â””â”€ Lifeguard automation: ON
+  â””â”€ Auto-rebalancing with approval
+  â””â”€ Weekly check-ins suggested
 
-○ Weekly monitoring
-  └─ Manual rebalancing
-  └─ Lifeguard suggestions
+â—‹ Weekly monitoring
+  â””â”€ Manual rebalancing
+  â””â”€ Lifeguard suggestions
 
-○ Active daily management
-  └─ Full manual control
-  └─ Advanced metrics
+â—‹ Active daily management
+  â””â”€ Full manual control
+  â””â”€ Advanced metrics
 
 [Continue]
 ```
@@ -1450,33 +1450,33 @@ How much time can you dedicate to managing positions?
 ```
 Based on your answers, Lifeguard recommends:
 
-┌─────────────────────────────────────┐
-│ 🏊 Your First Pool: USDC/DAI       │
-│                                     │
-│ Why this pool?                      │
-│ ✓ Both tokens are stablecoins      │
-│   (prices stay near $1.00)          │
-│ ✓ Very low impermanent loss risk   │
-│   (<0.1% historically)              │
-│ ✓ Steady 5-8% APY                  │
-│ ✓ Battle-tested (3+ years)         │
-│ ✓ Lifeguard Safety Score: 85/100   │
-│                                     │
-│ Expected outcomes (for $1,000):     │
-│ • Monthly fees: ~$5-7               │
-│ • IL risk: Very low                 │
-│ • Time needed: 5 min/month          │
-│                                     │
-│ Risks to know:                      │
-│ ⚠️ Stablecoin depeg (rare)          │
-│ ⚠️ Smart contract risk (mitigated)  │
-│                                     │
-│ 🛡️ Lifeguard will:                  │
-│ ✓ Monitor for depeg 24/7            │
-│ ✓ Alert if anything changes         │
-│ ✓ Suggest optimal range             │
-│ ✓ Track all fees and IL             │
-└─────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸŠ Your First Pool: USDC/DAI       â”‚
+â”‚                                     â”‚
+â”‚ Why this pool?                      â”‚
+â”‚ âœ“ Both tokens are stablecoins      â”‚
+â”‚   (prices stay near $1.00)          â”‚
+â”‚ âœ“ Very low impermanent loss risk   â”‚
+â”‚   (<0.1% historically)              â”‚
+â”‚ âœ“ Steady 5-8% APY                  â”‚
+â”‚ âœ“ Battle-tested (3+ years)         â”‚
+â”‚ âœ“ Lifeguard Safety Score: 85/100   â”‚
+â”‚                                     â”‚
+â”‚ Expected outcomes (for $1,000):     â”‚
+â”‚ â€¢ Monthly fees: ~$5-7               â”‚
+â”‚ â€¢ IL risk: Very low                 â”‚
+â”‚ â€¢ Time needed: 5 min/month          â”‚
+â”‚                                     â”‚
+â”‚ Risks to know:                      â”‚
+â”‚ âš ï¸ Stablecoin depeg (rare)          â”‚
+â”‚ âš ï¸ Smart contract risk (mitigated)  â”‚
+â”‚                                     â”‚
+â”‚ ðŸ›¡ï¸ Lifeguard will:                  â”‚
+â”‚ âœ“ Monitor for depeg 24/7            â”‚
+â”‚ âœ“ Alert if anything changes         â”‚
+â”‚ âœ“ Suggest optimal range             â”‚
+â”‚ âœ“ Track all fees and IL             â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 [Proceed with this pool] [See other options]
 ```
@@ -1485,35 +1485,35 @@ Based on your answers, Lifeguard recommends:
 
 **When IL Occurs:**
 ```
-┌─────────────────────────────────┐
-│ 📚 Lifeguard Learning Moment    │
-├─────────────────────────────────┤
-│ Your ETH/USDC position just     │
-│ experienced impermanent loss.   │
-│                                 │
-│ What happened:                  │
-│ ETH moved from $3,400 to $3,600 │
-│ (+5.9%). Your LP automatically  │
-│ rebalanced, selling some ETH    │
-│ at lower prices.                │
-│                                 │
-│ The good news:                  │
-│ You earned $23 in fees during   │
-│ this move, covering 82% of IL.  │
-│ This is normal and expected!    │
-│                                 │
-│ 💡 Pro Tip:                     │
-│ If ETH returns to $3,400, the   │
-│ IL disappears completely. This  │
-│ is why it's called "impermanent"│
-│                                 │
-│ Your Position Status:           │
-│ IL: -$28                        │
-│ Fees: +$23                      │
-│ Net: -$5 (temporary)            │
-│                                 │
-│ [Got it] [Learn more] [Don't show again]│
-└─────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸ“š Lifeguard Learning Moment    â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Your ETH/USDC position just     â”‚
+â”‚ experienced impermanent loss.   â”‚
+â”‚                                 â”‚
+â”‚ What happened:                  â”‚
+â”‚ ETH moved from $3,400 to $3,600 â”‚
+â”‚ (+5.9%). Your LP automatically  â”‚
+â”‚ rebalanced, selling some ETH    â”‚
+â”‚ at lower prices.                â”‚
+â”‚                                 â”‚
+â”‚ The good news:                  â”‚
+â”‚ You earned $23 in fees during   â”‚
+â”‚ this move, covering 82% of IL.  â”‚
+â”‚ This is normal and expected!    â”‚
+â”‚                                 â”‚
+â”‚ ðŸ’¡ Pro Tip:                     â”‚
+â”‚ If ETH returns to $3,400, the   â”‚
+â”‚ IL disappears completely. This  â”‚
+â”‚ is why it's called "impermanent"â”‚
+â”‚                                 â”‚
+â”‚ Your Position Status:           â”‚
+â”‚ IL: -$28                        â”‚
+â”‚ Fees: +$23                      â”‚
+â”‚ Net: -$5 (temporary)            â”‚
+â”‚                                 â”‚
+â”‚ [Got it] [Learn more] [Don't show again]â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -1539,7 +1539,7 @@ function validateTransactionSafety(tx: Transaction): {
     return {
       safe: false,
       reason: `Transaction will fail: ${simulation.error}`,
-      recommendation: '⛔ DO NOT PROCEED'
+      recommendation: 'â›” DO NOT PROCEED'
     };
   }
 
@@ -1568,7 +1568,7 @@ function validateTransactionSafety(tx: Transaction): {
     return {
       safe: false,
       reason: 'Target contract flagged as malicious',
-      recommendation: '⛔ DO NOT PROCEED - SCAM DETECTED'
+      recommendation: 'â›” DO NOT PROCEED - SCAM DETECTED'
     };
   }
 
@@ -1606,78 +1606,78 @@ function validateTransactionSafety(tx: Transaction): {
 
 **Transaction Review Screen:**
 ```
-┌─────────────────────────────────────────────┐
-│ 🛡️ Lifeguard Transaction Safety Review     │
-├─────────────────────────────────────────────┤
-│                                             │
-│ Action: Add liquidity to USDC/DAI          │
-│ Amount: 1,000 USDC + 1,000 DAI             │
-│                                             │
-│ Lifeguard Safety Checks:                   │
-│ ✅ Simulation successful                    │
-│ ✅ Gas cost reasonable ($8.42)              │
-│ ✅ Smart contract verified (Uniswap V3)     │
-│ ✅ Price within expected range              │
-│ ✅ No security flags                        │
-│ ⚠️  High gas period (peak hours)            │
-│    └─ Could save $3 by waiting 2-4 hours   │
-│                                             │
-│ You will receive:                           │
-│ • LP NFT #482,391                           │
-│ • Initial position value: $2,000            │
-│ • Estimated APY: 6.2% (30d average)         │
-│ • Range: 0.998 - 1.002 USDC per DAI         │
-│                                             │
-│ This transaction will:                      │
-│ 1. Approve USDC spending (if needed)        │
-│ 2. Approve DAI spending (if needed)          │
-│ 3. Deposit both tokens to pool             │
-│ 4. Mint LP NFT to your wallet              │
-│                                             │
-│ Total cost: ~$8.42 gas                      │
-│                                             │
-│ 🛡️ Lifeguard Verdict: SAFE TO PROCEED      │
-│                                             │
-│ [Cancel] [⏰ Schedule for off-peak] [Proceed]│
-└─────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ðŸ›¡ï¸ Lifeguard Transaction Safety Review     â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                             â”‚
+â”‚ Action: Add liquidity to USDC/DAI          â”‚
+â”‚ Amount: 1,000 USDC + 1,000 DAI             â”‚
+â”‚                                             â”‚
+â”‚ Lifeguard Safety Checks:                   â”‚
+â”‚ âœ… Simulation successful                    â”‚
+â”‚ âœ… Gas cost reasonable ($8.42)              â”‚
+â”‚ âœ… Smart contract verified (Uniswap V3)     â”‚
+â”‚ âœ… Price within expected range              â”‚
+â”‚ âœ… No security flags                        â”‚
+â”‚ âš ï¸  High gas period (peak hours)            â”‚
+â”‚    â””â”€ Could save $3 by waiting 2-4 hours   â”‚
+â”‚                                             â”‚
+â”‚ You will receive:                           â”‚
+â”‚ â€¢ LP NFT #482,391                           â”‚
+â”‚ â€¢ Initial position value: $2,000            â”‚
+â”‚ â€¢ Estimated APY: 6.2% (30d average)         â”‚
+â”‚ â€¢ Range: 0.998 - 1.002 USDC per DAI         â”‚
+â”‚                                             â”‚
+â”‚ This transaction will:                      â”‚
+â”‚ 1. Approve USDC spending (if needed)        â”‚
+â”‚ 2. Approve DAI spending (if needed)          â”‚
+â”‚ 3. Deposit both tokens to pool             â”‚
+â”‚ 4. Mint LP NFT to your wallet              â”‚
+â”‚                                             â”‚
+â”‚ Total cost: ~$8.42 gas                      â”‚
+â”‚                                             â”‚
+â”‚ ðŸ›¡ï¸ Lifeguard Verdict: SAFE TO PROCEED      â”‚
+â”‚                                             â”‚
+â”‚ [Cancel] [â° Schedule for off-peak] [Proceed]â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
 
-## 🏗️ Implementation Plan
+## ðŸ—ï¸ Implementation Plan
 
-### Phase 1: Theme Foundation (Week 1-2) - ✅ **COMPLETE**
+### Phase 1: Theme Foundation (Week 1-2) - âœ… **COMPLETE**
 
-**Status:** ✅ 100% Complete (October 17, 2025)
+**Status:** In Progress
 
-See [Progress Tracker](#📊-progress-tracker) above for detailed completion status.
+See [Progress Tracker](#ðŸ“Š-progress-tracker) above for detailed completion status.
 
 **Tasks Completed:**
-1. ✅ Created Pool Party color palette and design tokens
-2. ✅ Implemented PositionCard component with collapsible UI
-3. ✅ Implemented wave/ripple/splash animations (CSS only)
-4. ✅ Added Pool Party branding (🏊 emoji, themed text)
-5. ✅ Redesigned wallet page with membership-style cards
+1. âœ… Created Pool Party color palette and design tokens
+2. âœ… Implemented PositionCard component with collapsible UI
+3. âœ… Implemented wave/ripple/splash animations (CSS only)
+4. âœ… Added Pool Party branding (ðŸŠ emoji, themed text)
+5. âœ… Redesigned wallet page with membership-style cards
 
 **Files Created:**
-- ✅ `src/lib/lifeguard/healthScore.ts` (full implementation)
-- ✅ `src/components/PositionCard.tsx` (mobile-first)
+- âœ… `src/lib/lifeguard/healthScore.ts` (full implementation)
+- âœ… `src/components/PositionCard.tsx` (mobile-first)
 
 **Files Modified:**
-- ✅ `src/app/globals.css` (complete Pool Party theme)
-- ✅ `src/components/WalletPositions.tsx` (card redesign)
+- âœ… `src/app/globals.css` (complete Pool Party theme)
+- âœ… `src/components/WalletPositions.tsx` (card redesign)
 
 **Not Implemented (Deferred):**
-- ⏸️ `PoolCard.tsx` for dashboard (pool browsing) - Defer to Phase 3
-- ⏸️ `PoolHeroSection.tsx` - Defer to Phase 3
-- ⏸️ `WaterAnimation.tsx` - Using CSS animations instead
-- ⏸️ `src/app/page.tsx` dashboard redesign - Defer to Phase 3
-- ⏸️ `src/app/pool/[id]/page.tsx` - Defer to Phase 3
-- ⏸️ `tailwind.config.js` - Using CSS custom properties instead
+- â¸ï¸ `PoolCard.tsx` for dashboard (pool browsing) - Defer to Phase 3
+- â¸ï¸ `PoolHeroSection.tsx` - Defer to Phase 3
+- â¸ï¸ `WaterAnimation.tsx` - Using CSS animations instead
+- â¸ï¸ `src/app/page.tsx` dashboard redesign - Defer to Phase 3
+- â¸ï¸ `src/app/pool/[id]/page.tsx` - Defer to Phase 3
+- â¸ï¸ `tailwind.config.js` - Using CSS custom properties instead
 
 ---
 
-### Phase 2: Advisor Metrics Engine (Week 3-4) - ⏳ **IN PROGRESS**
+### Phase 2: Advisor Metrics Engine (Week 3-4) - â³ **IN PROGRESS**
 
 **Tasks:**
 1. Create advisor scoring algorithms
@@ -1753,7 +1753,7 @@ export function isOutOfRange(position, currentTick)
 
 ---
 
-## 📊 Data Requirements
+## ðŸ“Š Data Requirements
 
 ### Additional Database Fields
 
@@ -1780,7 +1780,7 @@ CREATE TABLE pool_advisor_metrics (
 
 ---
 
-## 🎓 Best Practices Reference (Research-Based)
+## ðŸŽ“ Best Practices Reference (Research-Based)
 
 ### Comprehensive Advisor Metrics & Formulas
 
@@ -1788,7 +1788,7 @@ This section integrates detailed DeFi LP research into actionable metrics and th
 
 ---
 
-#### 📐 Impermanent Loss (IL) Calculations
+#### ðŸ“ Impermanent Loss (IL) Calculations
 
 **Core IL Formula:**
 ```typescript
@@ -1805,7 +1805,7 @@ function calculateIL(priceChangeRatio: number): number {
 
 **Expected IL Over Time:**
 ```typescript
-// For small price changes over time with volatility σ
+// For small price changes over time with volatility Ïƒ
 function expectedIL(volatility: number, timeDays: number): number {
   const t = timeDays / 365; // Convert to years
   return 0.5 * Math.pow(volatility, 2) * t;
@@ -1819,10 +1819,10 @@ function expectedIL(volatility: number, timeDays: number): number {
 
 | Price Change | IL % | Volume Needed (0.05% fee) | Volume Needed (0.3% fee) | Volume Needed (1% fee) |
 |--------------|------|---------------------------|--------------------------|------------------------|
-| ±10% (r=1.1) | 0.41% | 2.2x TVL | 1.37x TVL | 0.41x TVL |
-| ±20% (r=1.2) | 0.41% | 8.2x TVL | 1.37x TVL | 0.41x TVL |
-| ±50% (r=1.5) | 2.02% | 40x TVL | 6.73x TVL | 2.02x TVL |
-| ±100% (r=2.0) | 5.72% | 114x TVL | 19.1x TVL | 5.72x TVL |
+| Â±10% (r=1.1) | 0.41% | 2.2x TVL | 1.37x TVL | 0.41x TVL |
+| Â±20% (r=1.2) | 0.41% | 8.2x TVL | 1.37x TVL | 0.41x TVL |
+| Â±50% (r=1.5) | 2.02% | 40x TVL | 6.73x TVL | 2.02x TVL |
+| Â±100% (r=2.0) | 5.72% | 114x TVL | 19.1x TVL | 5.72x TVL |
 
 **Implementation:**
 ```typescript
@@ -1863,7 +1863,7 @@ export function assessILRisk(
 
 ---
 
-#### 📊 Volume-to-TVL Ratio Analysis
+#### ðŸ“Š Volume-to-TVL Ratio Analysis
 
 **Scoring Thresholds (Daily Ratio):**
 ```typescript
@@ -1919,7 +1919,7 @@ export function scoreVolumeToTVL(dailyVolume: number, tvl: number): {
 
 ---
 
-#### 🎯 Range Width Optimization
+#### ðŸŽ¯ Range Width Optimization
 
 **Blueprint A: Blue-Chip Volatile Pairs (ETH/USDC, WBTC/USDC)**
 
@@ -1930,7 +1930,7 @@ export function calculateOptimalRange(
   strategyType: 'conservative' | 'moderate' | 'aggressive'
 ): { lowerTick: number; upperTick: number; width: number } {
 
-  // Use ±2 standard deviations for ~95% coverage
+  // Use Â±2 standard deviations for ~95% coverage
   const stdDevMultiplier = strategyType === 'conservative' ? 3 :
                             strategyType === 'moderate' ? 2 : 1.5;
 
@@ -1947,7 +1947,7 @@ export function calculateOptimalRange(
 }
 
 // Example: ETH at $1600, daily vol = 4%
-// Moderate strategy: ±(4% × 2) = ±8% range
+// Moderate strategy: Â±(4% Ã— 2) = Â±8% range
 // Range: $1,472 to $1,728
 ```
 
@@ -1960,7 +1960,7 @@ export function calculateStablecoinRange(): {
   depegThreshold: number;
 } {
   return {
-    lowerPrice: 0.998,  // ±0.2% range
+    lowerPrice: 0.998,  // Â±0.2% range
     upperPrice: 1.002,
     depegThreshold: 0.995 // Exit if <$0.995
   };
@@ -1974,7 +1974,7 @@ export function calculateLongTailRange(currentPrice: number): {
   lowerPrice: number;
   upperPrice: number;
 } {
-  // Very wide range: ±80% to capture extreme volatility
+  // Very wide range: Â±80% to capture extreme volatility
   return {
     lowerPrice: currentPrice * 0.2,  // -80%
     upperPrice: currentPrice * 3.0   // +200%
@@ -2018,7 +2018,7 @@ export function evaluateRangeEfficiency(
 
 ---
 
-#### 🚨 Exit Triggers & Warning Thresholds
+#### ðŸš¨ Exit Triggers & Warning Thresholds
 
 **1. Stablecoin Depeg Detection**
 ```typescript
@@ -2137,7 +2137,7 @@ export const HEALTH_THRESHOLDS = {
 
 ---
 
-#### 🎲 Rebalancing Decision Logic
+#### ðŸŽ² Rebalancing Decision Logic
 
 **Trigger Conditions:**
 ```typescript
@@ -2206,7 +2206,7 @@ export function shouldRebalance(
 
 ---
 
-#### 🏊 Pool Selection Framework
+#### ðŸŠ Pool Selection Framework
 
 **Entry Criteria Checklist:**
 
@@ -2278,7 +2278,7 @@ export function shouldEnterPool(pool: Pool, criteria: PoolScreeningCriteria): {
 
 ---
 
-#### 💎 Fee Tier Selection Matrix
+#### ðŸ’Ž Fee Tier Selection Matrix
 
 ```typescript
 export function selectOptimalFeeTier(
@@ -2345,16 +2345,16 @@ export function selectOptimalFeeTier(
 
 | Metric | Warning | Critical | Emergency Action |
 |--------|---------|----------|------------------|
-| **Stablecoin Depeg** | >0.5% off peg | >1% off peg | >2% off peg → EXIT NOW |
-| **Volatility (Hourly)** | >4% move | >6% move | >8% → Pull liquidity |
-| **Volatility (Annual)** | >80% | >100% | >150% → Exit position |
-| **Out of Range** | >6 hours | >24 hours | >7 days → Close position |
-| **PnL vs HODL** | -3% | -5% | -7% → Cut losses |
-| **Pool Health Score** | <60 | <50 | <40 → Exit immediately |
-| **Volume Drop** | -30% | -50% | -70% → Consider exit |
-| **TVL Drop** | -20% in week | -40% in week | -60% in day → Vampire attack |
-| **Whale Concentration** | >50% | >75% | >90% → High withdrawal risk |
-| **Pool Age (new)** | <7 days | <3 days | <1 day → Extreme risk |
+| **Stablecoin Depeg** | >0.5% off peg | >1% off peg | >2% off peg â†’ EXIT NOW |
+| **Volatility (Hourly)** | >4% move | >6% move | >8% â†’ Pull liquidity |
+| **Volatility (Annual)** | >80% | >100% | >150% â†’ Exit position |
+| **Out of Range** | >6 hours | >24 hours | >7 days â†’ Close position |
+| **PnL vs HODL** | -3% | -5% | -7% â†’ Cut losses |
+| **Pool Health Score** | <60 | <50 | <40 â†’ Exit immediately |
+| **Volume Drop** | -30% | -50% | -70% â†’ Consider exit |
+| **TVL Drop** | -20% in week | -40% in week | -60% in day â†’ Vampire attack |
+| **Whale Concentration** | >50% | >75% | >90% â†’ High withdrawal risk |
+| **Pool Age (new)** | <7 days | <3 days | <1 day â†’ Extreme risk |
 
 ---
 
@@ -2394,7 +2394,7 @@ export function calculateSafePositionSize(
 
 ---
 
-## 🎯 Success Metrics
+## ðŸŽ¯ Success Metrics
 
 **User Engagement:**
 - Time spent on platform (target: +40%)
@@ -2414,7 +2414,7 @@ export function calculateSafePositionSize(
 
 ---
 
-## 🚀 Launch Strategy
+## ðŸš€ Launch Strategy
 
 ### Beta Testing (2 weeks)
 - 50 power users
@@ -2430,7 +2430,7 @@ export function calculateSafePositionSize(
 
 ---
 
-## 📝 Open Questions
+## ðŸ“ Open Questions
 
 1. Should we add sound effects? (Toggle option)
 2. Dark mode adaptations for water theme?
@@ -2440,10 +2440,10 @@ export function calculateSafePositionSize(
 
 ---
 
-## 🔗 References & Research Foundation
+## ðŸ”— References & Research Foundation
 
 ### Primary Research Document
-📄 **[ADVISOR_RESEARCH_SOURCE.md](./ADVISOR_RESEARCH_SOURCE.md)** - Comprehensive 57,000+ word DeFi LP strategy research covering:
+ðŸ“„ **[ADVISOR_RESEARCH_SOURCE.md](./ADVISOR_RESEARCH_SOURCE.md)** - Comprehensive 57,000+ word DeFi LP strategy research covering:
 - Executive summary of LP strategies across 5 chains
 - Pool screener framework with 20-pool shortlist
 - 8 sources of LP edge (concentrated range precision, active rebalancing, liquidity mining, stablecoin mean-reversion, etc.)
@@ -2455,10 +2455,10 @@ export function calculateSafePositionSize(
 - Tooling and automation recommendations
 
 ### Integration Status
-✅ **Phase 1 Complete** (October 17, 2025): All key metrics, formulas, and thresholds from research integrated into this planning document:
+âœ… **Phase 1 Complete** (October 17, 2025): All key metrics, formulas, and thresholds from research integrated into this planning document:
 - Exact IL formulas and break-even tables
 - Volume-to-TVL scoring thresholds (>1.0 = excellent, <0.1 = poor)
-- Range width calculations for blue-chip (±8%), stable (±0.2%), and long-tail (±80%) pairs
+- Range width calculations for blue-chip (Â±8%), stable (Â±0.2%), and long-tail (Â±80%) pairs
 - Exit triggers: Depeg >0.5%, volatility >100%, out of range >7 days, PnL vs HODL <-5%
 - Rebalancing logic: Out of range, approaching edge (5%), drift (25% of range), or fees >2%
 - Position sizing: Max 20% in single pool, scaled by health score and IL risk
@@ -2477,14 +2477,14 @@ export function calculateSafePositionSize(
 **Critical Path (Weeks 1-4):**
 1. Implement IL calculation engine with exact research formulas
 2. Build Volume-to-TVL scoring (>1.0 = 10/10, >0.5 = 9/10, etc.)
-3. Create range optimization algorithms (±2σ for volatile, ±0.2% for stable)
+3. Create range optimization algorithms (Â±2Ïƒ for volatile, Â±0.2% for stable)
 4. Deploy exit trigger monitoring (depeg, volatility, out-of-range, PnL)
 
 **High Value (Weeks 5-6):**
 5. Rebalancing decision engine with multi-factor triggers
 6. Pool screening framework with entry/exit criteria
 7. Fee tier recommendation matrix
-8. Position sizing calculator (health score × IL risk multiplier)
+8. Position sizing calculator (health score Ã— IL risk multiplier)
 
 **Polish (Weeks 7-8):**
 9. Integrate all metrics into pool party theme UI
@@ -2494,9 +2494,9 @@ export function calculateSafePositionSize(
 
 ---
 
-## 📋 Implementation Checklist
+## ðŸ“‹ Implementation Checklist
 
-**Phase 1: Theme Foundation & Basic Health Scoring** ✅ **COMPLETE**
+**Phase 1: Theme Foundation & Basic Health Scoring** âœ… **COMPLETE**
 - [x] Extract IL formulas and break-even tables
 - [x] Define Volume-to-TVL thresholds
 - [x] Specify range width calculations
@@ -2509,7 +2509,7 @@ export function calculateSafePositionSize(
 - [x] Create collapsible UI with health breakdown
 - [x] Redesign WalletPositions page with Pool Party theme
 
-**Phase 2: Advanced Advisor Metrics** ⏳ **NEXT**
+**Phase 2: Advanced Advisor Metrics** â³ **NEXT**
 - [ ] Create `src/lib/advisor/impermanentLoss.ts` - IL calculations and risk assessment
 - [ ] Create `src/lib/advisor/volumeAnalysis.ts` - Volume-to-TVL scoring
 - [ ] Create `src/lib/advisor/rangeOptimization.ts` - Optimal range calculations
@@ -2519,7 +2519,7 @@ export function calculateSafePositionSize(
 - [ ] Create `src/components/advisor/MetricTooltip.tsx` - Educational tooltips
 - [ ] Create `src/components/advisor/AdvisorBadge.tsx` - Status badges
 
-**Phase 3: UI Integration & Conditional Formatting** 📅 **PLANNED**
+**Phase 3: UI Integration & Conditional Formatting** ðŸ“… **PLANNED**
 - [ ] Add health score badges to pool cards (dashboard)
 - [ ] Implement warning overlays for risky pools
 - [ ] Create exit trigger notifications
@@ -2529,7 +2529,7 @@ export function calculateSafePositionSize(
 - [ ] Pulsing animations for critical warnings
 - [ ] Dashboard filtering by health score
 
-**Phase 4: Notification System** 📅 **PLANNED**
+**Phase 4: Notification System** ðŸ“… **PLANNED**
 - [ ] Build real-time position monitoring
 - [ ] Create notification infrastructure
 - [ ] Implement critical alert system (out of range, depeg, etc.)
@@ -2537,7 +2537,7 @@ export function calculateSafePositionSize(
 - [ ] Create info alerts (fee collection, opportunities, weekly summaries)
 - [ ] Build notification preferences UI
 
-**Phase 5: Testing & Validation** 📅 **PLANNED**
+**Phase 5: Testing & Validation** ðŸ“… **PLANNED**
 - [ ] Backtest IL calculations against historical data
 - [ ] Validate exit triggers with past depeg events
 - [ ] Test range recommendations on live pools
@@ -2548,9 +2548,9 @@ export function calculateSafePositionSize(
 
 ---
 
-## 📝 Quick Reference: What's Done vs What's Next
+## ðŸ“ Quick Reference: What's Done vs What's Next
 
-**✅ DONE (Phase 1):**
+**âœ… DONE (Phase 1):**
 - Pool Party theme (aqua blues, lifeguard colors)
 - Mobile-first UI (Chrome Android optimized)
 - Collapsible position cards
@@ -2558,7 +2558,7 @@ export function calculateSafePositionSize(
 - CSS animations (water effects)
 - Dark mode support
 
-**⏳ NEXT (Phase 2 - Start Here):**
+**â³ NEXT (Phase 2 - Start Here):**
 1. Create `src/lib/advisor/impermanentLoss.ts`
    - Implement formulas from lines 1787-1853 of this document
    - Add IL risk assessment function
@@ -2572,14 +2572,14 @@ export function calculateSafePositionSize(
    - Implement range calculators from lines 1907-1999
    - Add range efficiency evaluation
 
-**📋 Development Workflow:**
+**ðŸ“‹ Development Workflow:**
 1. Read the function specifications in this document
 2. Implement in TypeScript with proper types
 3. Write unit tests
 4. Integrate with existing health scoring
 5. Test in dev environment (http://localhost:3004)
 
-**🔗 Key Document Sections:**
+**ðŸ”— Key Document Sections:**
 - Lines 1787-1853: IL Calculations
 - Lines 1857-1903: Volume-to-TVL Ratio Analysis
 - Lines 1907-1999: Range Width Optimization
@@ -2590,4 +2590,5 @@ export function calculateSafePositionSize(
 - Lines 2288-2305: Risk Thresholds Summary
 
 ---
+
 
