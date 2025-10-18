@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 import { ilFromPriceChange, breakEvenVolumeUsd, ilRiskLevel } from "@/lib/advisor/impermanentLoss";
 
@@ -21,8 +22,8 @@ export default function PoolAdvisor({ poolId, tvlUsd, volume24hUsd, feeTier }: {
   const il10Pct = (il10 * 100).toFixed(2) + "%";
   const il10Risk = ilRiskLevel(il10);
 
-  const [trend, setTrend] = (global as any).React?.useState<{ trend: 'rising'|'flat'|'falling'; pctChange7d: number } | null>(null);
-  (global as any).React?.useEffect?.(() => {
+  const [trend, setTrend] = useState<{ trend: 'rising'|'flat'|'falling'; pctChange7d: number } | null>(null);
+  useEffect(() => {
     let canceled = false;
     async function load() {
       if (!poolId) return;
