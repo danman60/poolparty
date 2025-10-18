@@ -50,7 +50,7 @@ export default async function PoolDetailPage({ params }: Props) {
         {pool && (
           <div className="space-y-1">
             <div className="text-sm opacity-80">
-              {getTokenSymbols(pool)} â€¢ Fee: {fmtFeeTier(pool.fee_tier)}
+              {getTokenSymbols(pool)} • Fee: {fmtFeeTier(pool.fee_tier)}
             </div>
             <div className="text-xs opacity-60 break-all font-mono">Pool Address: {id}</div>
           </div>
@@ -94,21 +94,23 @@ export default async function PoolDetailPage({ params }: Props) {
         </div>
       )}
 
-      <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
-        <div className="text-sm opacity-70">APR Calculator</div>
-        <APRCalculator initialTVL={pool?.tvl_usd ?? null} initialVolume24h={pool?.volume_usd_24h ?? null} feeBps={pool?.fee_tier ?? null} />
-      </div>
+      {pool && (
+        <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
+          <div className="text-sm opacity-70">APR Calculator</div>
+          <APRCalculator initialTVL={pool?.tvl_usd ?? null} initialVolume24h={pool?.volume_usd_24h ?? null} feeBps={pool?.fee_tier ?? null} />
+        </div>
+      )}
 
       {pool && (
         <div className="rounded-lg border border-black/10 dark:border-white/10 p-4 space-y-3">
-          <PoolAdvisor tvlUsd={pool?.tvl_usd ?? null} volume24hUsd={pool?.volume_usd_24h ?? null} feeTier={pool?.fee_tier ?? null} />
+          <PoolAdvisor poolId={id} tvlUsd={pool?.tvl_usd ?? null} volume24hUsd={pool?.volume_usd_24h ?? null} feeTier={pool?.fee_tier ?? null} />
         </div>
       )}
 
       {FEATURE_MINT && pool && (
         <div className="rounded-lg border-2 border-blue-500/50 dark:border-blue-400/50 bg-blue-50/30 dark:bg-blue-950/20 p-6 space-y-4">
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold">ðŸ’§ Join This Pool</h2>
+            <h2 className="text-xl font-semibold">Join This Pool</h2>
             <p className="text-sm opacity-80">Provide liquidity to earn trading fees from {getTokenSymbols(pool)} swaps</p>
           </div>
           <MintPosition poolId={id} feeTier={pool?.fee_tier ?? null} token0={pool?.token0_id} token1={pool?.token1_id} />
@@ -119,17 +121,17 @@ export default async function PoolDetailPage({ params }: Props) {
 }
 
 function short(addr: string) {
-  if (!addr) return "â€”";
-  return `${addr.slice(0, 6)}â€¦${addr.slice(-4)}`;
+  if (!addr) return "-";
+  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
 }
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v === 0 ? "â€”" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v === 0 ? "-" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
 function fmtFeeTier(feeTier: number | null | undefined): string {
-  if (feeTier == null) return "â€”";
+  if (feeTier == null) return "-";
   return `${(feeTier / 10000).toFixed(2)}%`;
 }
 
@@ -138,14 +140,14 @@ function generatePoolName(poolId: string): string {
   const adjectives = [
     "Soaking", "Dancing", "Happy", "Bouncing", "Sparkling", "Golden", "Silver",
     "Mystic", "Cosmic", "Turbo", "Swift", "Mighty", "Gentle", "Wild", "Calm",
-    "Blazing", "Frozen", "Electric", "Quantum", "Stell-Lucky", "Bold",
+    "Blazing", "Frozen", "Electric", "Quantum", "Stellar", "Lucky", "Bold",
     "Clever", "Rapid", "Silent", "Loud", "Bright", "Dark", "Shiny", "Fluffy"
   ];
   const animals = [
-    "Hog", "Fox", "Be-Bull", "Whale", "Shark", "Dolphin", "Eagle",
+    "Hog", "Fox", "Bear", "Bull", "Whale", "Shark", "Dolphin", "Eagle",
     "Tiger", "Lion", "Panda", "Koala", "Otter", "Badger", "Raccoon", "Wolf",
     "Hawk", "Falcon", "Dragon", "Phoenix", "Unicorn", "Pegasus", "Griffin",
-    "Kraken", "Narwh-Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
+    "Kraken", "Narwhal", "Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
   ];
 
   // Use pool ID to deterministically select words
@@ -165,8 +167,4 @@ function getTokenSymbols(pool: any): string {
   }
   return `${short(pool.token0_id)} / ${short(pool.token1_id)}`;
 }
-
-
-
-
 
