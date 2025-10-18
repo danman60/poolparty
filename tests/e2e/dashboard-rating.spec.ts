@@ -32,4 +32,9 @@ test('dashboard shows Rating column and rating filter updates URL', async ({ pag
   // Change rating filter and verify URL updates
   await page.getByLabel(/Min rating/i).selectOption('excellent')
   await expect.poll(() => page.url()).toContain('rating=excellent')
+
+  // Only excellent rows remain (based on mock, 0xpoolA is high V:TVL, 0xpoolB is low)
+  const rows = page.locator('tbody tr')
+  await expect(rows).toHaveCount(1)
+  await expect(rows.first().locator('a').first()).toHaveAttribute('href', '/pool/0xpoolA')
 })
