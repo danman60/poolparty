@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
@@ -62,6 +62,7 @@ export default function PoolsTable() {
   const [fee, setFee] = useState<FeeFilter>("all");
   const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("tvl");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [ratingMin, setRatingMin] = useState<"all" | "good" | "excellent">("all");
   const [page, setPage] = useState(1);
   const limit = 10;
 
@@ -85,7 +86,14 @@ export default function PoolsTable() {
   const rowsRaw = useMemo(() => data?.data ?? [], [data?.data]);
   const rows = useMemo(() => {
     // Always apply client-side sort so header sorting and direction work consistently
-    const arr = [...rowsRaw];
+    let arr = [...rowsRaw];
+    if (ratingMin !== "all") {
+      arr = arr.filter((r) => {
+        const st = toStatus(previewRating(r));
+        if (ratingMin === "excellent") return st === "excellent";
+        return st === "excellent" || st === "good";
+      });
+    }
     const dir = sortDir === "asc" ? 1 : -1;
     arr.sort((a, b) => {
       switch (sortKey) {
@@ -153,7 +161,7 @@ export default function PoolsTable() {
 
   function caret(key: typeof sortKey) {
     if (sortKey !== key) return "";
-    return sortDir === "asc" ? "▲" : "▼";
+    return sortDir === "asc" ? "â–²" : "â–¼";
   }
 
   const total = data?.meta?.total ?? 0;
@@ -173,6 +181,16 @@ export default function PoolsTable() {
               {t === "all" ? "All" : `${t}`}
             </option>
           ))}
+        </select>
+        <label className="text-sm opacity-80 ml-4">Min rating</label>
+        <select
+          className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
+          value={ratingMin}
+          onChange={(e) => setRatingMin(e.target.value as any)}
+        >
+          <option value="all">All</option>
+          <option value="good">Good+</option>
+          <option value="excellent">Excellent only</option>
         </select>
         <div className="ml-auto text-xs opacity-60">Click table headers to sort</div>
       </div>
@@ -222,7 +240,7 @@ export default function PoolsTable() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={6} className="px-3 py-6 text-center opacity-70">Loading pools…</td>
+                <td colSpan={6} className="px-3 py-6 text-center opacity-70">Loading pools...€¦</td>
               </tr>
             )}
             {error && !isLoading && (
@@ -277,8 +295,8 @@ export default function PoolsTable() {
 }
 
 function short(addr: string) {
-  if (!addr) return "—";
-  return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+  if (!addr) return "â€”";
+  return `${addr.slice(0, 6)}â€¦${addr.slice(-4)}`;
 }
 
 // Generate a fun, deterministic pool name from pool ID
@@ -312,7 +330,7 @@ function getPoolName(pool: PoolRow): string {
 function getTokenPair(pool: PoolRow): string {
   const token0Symbol = pool.token0?.symbol;
   const token1Symbol = pool.token1?.symbol;
-  const feeTier = pool.fee_tier ? ` • ${(pool.fee_tier / 10000).toFixed(2)}%` : '';
+  const feeTier = pool.fee_tier ? ` â€¢ ${(pool.fee_tier / 10000).toFixed(2)}%` : '';
 
   if (token0Symbol && token1Symbol) {
     return `${token0Symbol} / ${token1Symbol}${feeTier}`;
@@ -321,17 +339,17 @@ function getTokenPair(pool: PoolRow): string {
 }
 
 function fmtFeeTier(feeTier: number | null): string {
-  if (feeTier == null) return "—";
+  if (feeTier == null) return "â€”";
   return `${(feeTier / 10000).toFixed(2)}%`;
 }
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v === 0 ? "—" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v === 0 ? "â€”" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }
 
 function fmtTime(iso?: string | null) {
-  if (!iso) return "—";
+  if (!iso) return "â€”";
   try {
     const d = new Date(iso);
     return d.toLocaleString();
@@ -350,13 +368,13 @@ function aprValue(p: PoolRow) {
 
 function fmtApr(p: PoolRow) {
   const v = aprValue(p);
-  if (v <= 0) return "—";
+  if (v <= 0) return "â€”";
   return (v * 100).toLocaleString(undefined, { maximumFractionDigits: 2 }) + "%";
 }
 
 function renderVtvlBadge(p: PoolRow) {
   const tvl = p.tvl_usd ?? 0;
-  if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL —</div>;
+  if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL â€”</div>;
   const vol = p.volume_usd_24h ?? 0;
   const { score, rating } = scoreVolumeToTVL(vol, tvl);
   const status = score >= 9 ? 'excellent' : score >= 7 ? 'good' : score >= 5 ? 'warning' : score >= 3 ? 'danger' : 'critical';
@@ -367,5 +385,6 @@ function renderVtvlBadge(p: PoolRow) {
     </div>
   );
 }
+
 
 
