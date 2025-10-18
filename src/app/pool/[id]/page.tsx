@@ -1,4 +1,4 @@
-﻿import PoolSparkline from "@/components/PoolSparkline";
+import PoolSparkline from "@/components/PoolSparkline";
 import APRCalculator from "@/components/APRCalculator";
 import PoolMetricsCharts from "@/components/PoolMetricsCharts";
 import MintPosition from "@/components/MintPosition";
