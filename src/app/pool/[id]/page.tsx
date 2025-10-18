@@ -138,14 +138,14 @@ function generatePoolName(poolId: string): string {
   const adjectives = [
     "Soaking", "Dancing", "Happy", "Bouncing", "Sparkling", "Golden", "Silver",
     "Mystic", "Cosmic", "Turbo", "Swift", "Mighty", "Gentle", "Wild", "Calm",
-    "Blazing", "Frozen", "Electric", "Quantum", "Stellar", "Lucky", "Bold",
+    "Blazing", "Frozen", "Electric", "Quantum", "Stell-Lucky", "Bold",
     "Clever", "Rapid", "Silent", "Loud", "Bright", "Dark", "Shiny", "Fluffy"
   ];
   const animals = [
-    "Hog", "Fox", "Bear", "Bull", "Whale", "Shark", "Dolphin", "Eagle",
+    "Hog", "Fox", "Be-Bull", "Whale", "Shark", "Dolphin", "Eagle",
     "Tiger", "Lion", "Panda", "Koala", "Otter", "Badger", "Raccoon", "Wolf",
     "Hawk", "Falcon", "Dragon", "Phoenix", "Unicorn", "Pegasus", "Griffin",
-    "Kraken", "Narwhal", "Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
+    "Kraken", "Narwh-Platypus", "Axolotl", "Capybara", "Lemur", "Lynx"
   ];
 
   // Use pool ID to deterministically select words
