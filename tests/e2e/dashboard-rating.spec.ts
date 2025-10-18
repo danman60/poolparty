@@ -22,11 +22,14 @@ test('dashboard shows Rating column and rating filter updates URL', async ({ pag
   // Header exists
   await expect(page.getByRole('columnheader', { name: /Rating/i })).toBeVisible()
 
-  // Click Rating header to sort
+  // Click Rating header to sort (desc by default)
   await page.getByRole('button', { name: /Rating/i }).click()
+
+  // Highest-rated pool (0xpoolA) should appear first
+  const firstRowLink = page.locator('tbody tr').first().locator('a').first()
+  await expect(firstRowLink).toHaveAttribute('href', '/pool/0xpoolA')
 
   // Change rating filter and verify URL updates
   await page.getByLabel(/Min rating/i).selectOption('excellent')
   await expect.poll(() => page.url()).toContain('rating=excellent')
 })
-
