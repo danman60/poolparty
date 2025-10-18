@@ -206,20 +206,10 @@ export default function WalletPositions() {
             <ExportPositionsCsvButton positions={visiblePositions} prices={prices} label={`Export Positions CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
             <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={`Export Fees CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
             <BatchCollectFeesButton positions={positions} />
-            <BatchClosePositionsButton positions={positions} />
-          </div>
+            <BatchCollectFeesButton positions={visiblePositions} />
+            <BatchClosePositionsButton positions={visiblePositions} />
           <div className="flex flex-wrap gap-3 items-center">
-            <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={Export Fees CSV} disabled={visiblePositions.length === 0} />
-            <BatchCollectFeesButton positions={positions} />
-            <BatchClosePositionsButton positions={positions} />
-          </div>
-          </div>
-
           <div className="pt-1">
-            <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={Export Fees CSV} disabled={visiblePositions.length === 0} />
-            <BatchCollectFeesButton positions={positions} />
-          </div>
-
           <div className="space-y-3 mt-2">
             {FEATURE_WALLET_STATS && (
             <WalletVisibleStats positions={visiblePositions} prices={prices} />
