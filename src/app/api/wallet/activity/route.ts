@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSupabaseServer } from "@/lib/supabase/server";
+import { getServerSupabase } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { wallet, tokenId, action, hash, chain } = body || {};
 
-    const supabase = getSupabaseServer();
+    const supabase = getServerSupabase();
     if (!supabase) return NextResponse.json({ ok: false, dryRun: true }, { status: 200 });
 
     const { error } = await supabase
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     const tokenId = searchParams.get("tokenId");
     const before = searchParams.get("before");
 
-    const supabase = getSupabaseServer();
+    const supabase = getServerSupabase();
     if (!supabase) return NextResponse.json({ ok: true, data: [], dryRun: true });
 
     let query = supabase
@@ -47,3 +47,4 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, error: e?.message || String(e) }, { status: 500 });
   }
 }
+
