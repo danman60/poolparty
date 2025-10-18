@@ -2,22 +2,23 @@
 
 import { useAccount } from "wagmi";
 import { useEffect, useMemo, useState } from "react";
+import MetricTooltip from "@/components/advisor/MetricTooltip";
+import { fetchTokenPrices, type PriceMap } from "@/lib/prices";
+import { FEATURE_TRENDS, FEATURE_WALLET_STATS } from "@/lib/flags";
+
 import PositionCard from "./PositionCard";
 import PortfolioSummary from "./PortfolioSummary";
 import PortfolioEarnings from "./PortfolioEarnings";
 import RecentActivity from "./RecentActivity";
 import ServerActivity from "./ServerActivity";
 import WalletAtGlance from "./WalletAtGlance";
-import BatchCollectFeesButton from "./BatchCollectFeesButton";
 import WalletVisibleStats from "./WalletVisibleStats";
-import { fetchTokenPrices, type PriceMap } from "@/lib/prices";
 import WalletActivityTrends from "./WalletActivityTrends";
-import { FEATURE_TRENDS, FEATURE_WALLET_STATS } from "@/lib/flags";
-import MetricTooltip from "@/components/advisor/MetricTooltip";
-import BatchClosePositionsButton from "./BatchClosePositionsButton";
 import ExportPositionsCsvButton from "./ExportPositionsCsvButton";
-
 import ExportFeesCsvButton from "./ExportFeesCsvButton";
+import BatchCollectFeesButton from "./BatchCollectFeesButton";
+import BatchClosePositionsButton from "./BatchClosePositionsButton";
+
 type Position = {
   id: string;
   poolId?: string;
@@ -64,12 +65,9 @@ export default function WalletPositions() {
       }
     }
     load();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [address, isConnected]);
 
-  // Compute token addresses for price lookup
   const tokenAddresses = useMemo(() => {
     const addrs = new Set<string>();
     for (const p of positions) {
@@ -86,7 +84,6 @@ export default function WalletPositions() {
     });
   }, [positions, onlyFees]);
 
-  // Compute total visible fees USD
   const visibleFeesUsd = useMemo(() => {
     if (!prices) return 0;
     let sum = 0;
@@ -102,7 +99,6 @@ export default function WalletPositions() {
     return sum;
   }, [visiblePositions, prices]);
 
-  // Fetch token prices for summary once positions are loaded
   useEffect(() => {
     let cancelled = false;
     async function loadPrices() {
@@ -122,14 +118,13 @@ export default function WalletPositions() {
 
   return (
     <div className="space-y-3 safe-bottom">
-      {/* Header with Pool Party style */}
       <div className="flex items-center justify-between px-1">
         <h2 className="text-lg font-semibold">Your Pools</h2>
         <div className="text-xs opacity-60 px-2 py-1 rounded-full bg-[var(--surface)] border border-[var(--border)]">
           {positions.length} {positions.length === 1 ? 'position' : 'positions'}
         </div>
       </div>
-      {/* Controls */}
+
       <div className="flex items-center gap-3 text-sm px-1">
         <MetricTooltip label="Filters">
           Toggle to show only positions that currently have uncollected fees. Exports and batch actions operate on the visible set.
@@ -158,18 +153,14 @@ export default function WalletPositions() {
         )}
       </div>
 
-      {/* Loading state with shimmer */}
       {loading && (
         <div className="space-y-3">
           <div className="skeleton h-24 w-full">??</div>
           <div className="skeleton h-24 w-full">??</div>
-          <div className="text-sm opacity-70 text-center py-2">
-            Loading your pool party...
-          </div>
+          <div className="text-sm opacity-70 text-center py-2">Loading your pool party...</div>
         </div>
       )}
 
-      {/* Error state */}
       {error && (
         <div className="rounded-lg border-2 border-[var(--lifeguard-danger)] bg-red-50 dark:bg-red-950/20 p-4">
           <div className="text-sm text-[var(--lifeguard-danger)]">
@@ -179,7 +170,6 @@ export default function WalletPositions() {
         </div>
       )}
 
-      {/* Empty state */}
       {!loading && !error && positions.length === 0 && (
         <div className="card-pool p-8 text-center space-y-3">
           <div className="text-4xl">??</div>
@@ -190,9 +180,12 @@ export default function WalletPositions() {
         </div>
       )}
 
-      {/* Summary, activity, and positions list */}
       {!loading && !error && positions.length > 0 && (
         <>
+          {FEATURE_WALLET_STATS && (
+            <WalletAtGlance positions={visiblePositions} prices={prices} />
+          )}
+
           <div className="grid gap-3 md:grid-cols-2">
             <PortfolioSummary positions={positions} prices={prices} />
             <PortfolioEarnings positions={positions} prices={prices} />
@@ -201,18 +194,19 @@ export default function WalletPositions() {
           <div className="grid gap-3 md:grid-cols-2">
             <RecentActivity />
             <ServerActivity />
-          <WalletActivityTrends />
-          <div className="flex flex-wrap gap-3 items-center">
+          </div>
+          {FEATURE_TRENDS && <WalletActivityTrends />}
+
+          <div className="flex flex-wrap gap-3 items-center px-1">
             <ExportPositionsCsvButton positions={visiblePositions} prices={prices} label={`Export Positions CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
             <ExportFeesCsvButton positions={visiblePositions} prices={prices} label={`Export Fees CSV${onlyFees ? ' (filtered)' : ''}`} disabled={visiblePositions.length === 0} />
-            <BatchCollectFeesButton positions={positions} />
             <BatchCollectFeesButton positions={visiblePositions} />
             <BatchClosePositionsButton positions={visiblePositions} />
-          <div className="flex flex-wrap gap-3 items-center">
-          <div className="pt-1">
+          </div>
+
           <div className="space-y-3 mt-2">
             {FEATURE_WALLET_STATS && (
-            <WalletVisibleStats positions={visiblePositions} prices={prices} />
+              <WalletVisibleStats positions={visiblePositions} prices={prices} />
             )}
             {visiblePositions.map((p) => (
               <PositionCard key={p.id} position={p} prices={prices} />
@@ -220,7 +214,6 @@ export default function WalletPositions() {
           </div>
         </>
       )}
-
     </div>
   );
 }
