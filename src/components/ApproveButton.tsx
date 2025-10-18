@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { ERC20_ABI } from "@/lib/abis/ERC20";
@@ -28,7 +28,8 @@ export default function ApproveButton({ token, spender, label, onSuccess }: { to
 
   return (
     <Button variant="outline" size="sm" onClick={onClick} disabled={!isConnected || isPending || isConfirming} aria-label={label || 'Approve'}>
-      {isPending ? 'Confirm…' : isConfirming ? 'Approving…' : isSuccess ? 'Approved' : label || 'Approve'}
+      {isPending ? 'Confirmâ€¦' : isConfirming ? 'Approvingâ€¦' : isSuccess ? 'Approved' : label || 'Approve'}
     </Button>
   );
 }
+
