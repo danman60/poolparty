@@ -3,6 +3,7 @@
 Recent Updates (October 18, 2025)
 - Added sortable Dashboard columns (Pool, Fee, TVL, Vol 24h, APR, Updated)
 - Implemented Increase Liquidity via IncreaseLiquidityButton on position cards
+- Added "Min rating" filter on Dashboard (All, Good+, Excellent only)
 
 ## Core Features
 
