@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
+import AdvisorBadge from "./advisor/AdvisorBadge";
 import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 
 type PoolRow = {
@@ -139,7 +140,7 @@ export default function PoolsTable() {
                     <div className="font-medium">{getPoolName(p)}</div>
                     <div className="text-xs opacity-60 font-mono">{getTokenPair(p)}</div>
                   </a>
-                  {renderVtvlText(p)}
+                  {renderVtvlBadge(p)}
                 </td>
                 <td className="px-3 py-2 text-right">{fmtFeeTier(p.fee_tier)}</td>
                 <td className="px-3 py-2 text-right">{fmtUsd(p.tvl_usd)}</td>
@@ -241,12 +242,18 @@ function fmtApr(p: PoolRow) {
   return (v * 100).toLocaleString(undefined, { maximumFractionDigits: 2 }) + "%";
 }
 
-function renderVtvlText(p: PoolRow) {
+function renderVtvlBadge(p: PoolRow) {
   const tvl = p.tvl_usd ?? 0;
   if (tvl <= 0) return <div className="mt-1 text-[11px] opacity-50">V:TVL —</div>;
   const vol = p.volume_usd_24h ?? 0;
-  const { rating } = scoreVolumeToTVL(vol, tvl);
-  return <div className="mt-1 text-[11px] opacity-70">V:TVL {rating}</div>;
+  const { score, rating } = scoreVolumeToTVL(vol, tvl);
+  const status = score >= 9 ? 'excellent' : score >= 7 ? 'good' : score >= 5 ? 'warning' : score >= 3 ? 'danger' : 'critical';
+  return (
+    <div className="mt-1 flex items-center gap-2 text-[11px]">
+      <span className="opacity-60">V:TVL</span>
+      <AdvisorBadge status={status as any} label={rating} />
+    </div>
+  );
 }
 
 

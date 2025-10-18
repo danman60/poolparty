@@ -57,10 +57,9 @@ export default function PositionCard({ position }: PositionCardProps) {
             {/* Lifeguard Health Badge */}
             <div className="flex items-center gap-2 flex-shrink-0">
               <AdvisorBadge status={healthStatus.color as any} score={healthScore} />
-              <AdvisorBadge status={healthStatus.color as any} score={healthScore} />
               <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
               <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
-            </div>
+          </div>
           </div>
 
           {/* Quick Stats - Collapsed View */}
@@ -225,3 +224,6 @@ function getProfitabilityDisplay(position: Position, score: number) {
     </span>
   );
 }
+
+
+
