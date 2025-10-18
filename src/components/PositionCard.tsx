@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CollectFeesButton from "./CollectFeesButton";
 import DecreaseLiquidityButton from "./DecreaseLiquidityButton";
+import IncreaseLiquidityButton from "./IncreaseLiquidityButton";
 import { calculateHealthScore } from "@/lib/lifeguard/healthScore";
 import AdvisorBadge from "./advisor/AdvisorBadge";
 
@@ -59,9 +60,8 @@ export default function PositionCard({ position }: PositionCardProps) {
               <AdvisorBadge status={healthStatus.color as any} score={healthScore} />
               <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
               <span className="text-lg opacity-60">{expanded ? '▾' : '▸'}</span>
+            </div>
           </div>
-          </div>
-
           {/* Quick Stats - Collapsed View */}
           {!expanded && (
             <div className="flex items-center gap-4 text-sm">
@@ -134,6 +134,11 @@ export default function PositionCard({ position }: PositionCardProps) {
           <div className="grid grid-cols-2 gap-3 pt-2">
             <CollectFeesButton tokenId={position.id} />
             <DecreaseLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
+            <IncreaseLiquidityButton
+              tokenId={position.id}
+              token0={{ address: position.token0.id as `0x${string}`, symbol: position.token0.symbol, decimals: Number(position.token0.decimals) }}
+              token1={{ address: position.token1.id as `0x${string}`, symbol: position.token1.symbol, decimals: Number(position.token1.decimals) }}
+            />
           </div>
         </div>
       )}
@@ -224,6 +229,8 @@ function getProfitabilityDisplay(position: Position, score: number) {
     </span>
   );
 }
+
+
 
 
 

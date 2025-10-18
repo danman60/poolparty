@@ -30,16 +30,17 @@ type FeeFilter = (typeof FEE_TIERS)[number];
 
 export default function PoolsTable() {
   const [fee, setFee] = useState<FeeFilter>("all");
-  const [sort, setSort] = useState<"tvl" | "volume" | "apr">("tvl");
+  const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "updated">("tvl");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const apiSort = sort === "apr" ? "tvl" : sort;
+  const apiSort = sortKey === "volume" ? "volume" : sortKey === "tvl" ? "tvl" : "tvl";
 
   const { data, isLoading, error } = useQuery<ApiResponse>({
-    queryKey: ["pools", { fee, sort: apiSort, page, limit }],
+    queryKey: ["pools", { fee, sort: apiSort, order: sortDir, page, limit }],
     queryFn: async () => {
-      const params = new URLSearchParams({ page: String(page), limit: String(limit), sort: apiSort });
+      const params = new URLSearchParams({ page: String(page), limit: String(limit), sort: apiSort, order: sortDir });
       if (fee !== "all") params.set("fee", fee);
       const res = await fetch(`/api/pools?${params.toString()}`, { cache: "no-store" });
       return res.json();
@@ -53,9 +54,72 @@ export default function PoolsTable() {
 
   const rowsRaw = useMemo(() => data?.data ?? [], [data?.data]);
   const rows = useMemo(() => {
-    if (sort !== "apr") return rowsRaw;
-    return [...rowsRaw].sort((a, b) => aprValue(b) - aprValue(a));
-  }, [rowsRaw, sort]);
+    // Always apply client-side sort so header sorting and direction work consistently
+    const arr = [...rowsRaw];
+    const dir = sortDir === "asc" ? 1 : -1;
+    arr.sort((a, b) => {
+      switch (sortKey) {
+        case "pool": {
+          const an = getPoolName(a);
+          const bn = getPoolName(b);
+          return an.localeCompare(bn) * dir;
+        }
+        case "fee": {
+          const av = a.fee_tier ?? 0;
+          const bv = b.fee_tier ?? 0;
+          return (av - bv) * dir;
+        }
+        case "tvl": {
+          const av = a.tvl_usd ?? 0;
+          const bv = b.tvl_usd ?? 0;
+          return (av - bv) * dir;
+        }
+        case "volume": {
+          const av = a.volume_usd_24h ?? 0;
+          const bv = b.volume_usd_24h ?? 0;
+          return (av - bv) * dir;
+        }
+        case "apr": {
+          const av = aprValue(a);
+          const bv = aprValue(b);
+          return (av - bv) * dir;
+        }
+        case "updated": {
+          const av = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+          const bv = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+          return (av - bv) * dir;
+        }
+      }
+    });
+    return arr;
+  }, [rowsRaw, sortKey, sortDir]);
+
+  function onHeaderSort(nextKey: typeof sortKey) {
+    if (sortKey === nextKey) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(nextKey);
+      // Default direction: numbers desc, names asc
+      setSortDir(nextKey === "pool" ? "asc" : "desc");
+    }
+    // Reset to first page on sort change
+    setPage(1);
+  }
+
+  function headerAria(key: typeof sortKey) {
+    if (sortKey !== key) return "none";
+    return sortDir === "asc" ? "ascending" : "descending";
+  }
+
+  function sortCaret(key: typeof sortKey) {
+    if (sortKey !== key) return "";
+    return sortDir === "asc" ? "^" : "v";
+  }
+
+  function caret(key: typeof sortKey) {
+    if (sortKey !== key) return "";
+    return sortDir === "asc" ? "▲" : "▼";
+  }
 
   const total = data?.meta?.total ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / limit));
@@ -75,33 +139,7 @@ export default function PoolsTable() {
             </option>
           ))}
         </select>
-        <div className="ml-auto flex items-center gap-2 text-sm">
-          <span className="opacity-80">Sort by</span>
-          <button
-            className={`px-2 py-1 rounded border text-xs ${
-              sort === "tvl" ? "bg-black text-white dark:bg-white dark:text-black" : "border-black/10 dark:border-white/10"
-            }`}
-            onClick={() => setSort("tvl")}
-          >
-            TVL
-          </button>
-          <button
-            className={`px-2 py-1 rounded border text-xs ${
-              sort === "volume" ? "bg-black text-white dark:bg-white dark:text-black" : "border-black/10 dark:border-white/10"
-            }`}
-            onClick={() => setSort("volume")}
-          >
-            Volume 24h
-          </button>
-          <button
-            className={`px-2 py-1 rounded border text-xs ${
-              sort === "apr" ? "bg-black text-white dark:bg-white dark:text-black" : "border-black/10 dark:border-white/10"
-            }`}
-            onClick={() => setSort("apr")}
-          >
-            Fee APR
-          </button>
-        </div>
+        <div className="ml-auto text-xs opacity-60">Click table headers to sort</div>
       </div>
 
       <div className="rounded-lg border border-black/10 dark:border-white/10 overflow-x-auto">
@@ -109,12 +147,36 @@ export default function PoolsTable() {
           <caption className="sr-only">Top pools by TVL, Volume and APR</caption>
           <thead className="bg-black/5 dark:bg-white/5">
             <tr>
-              <th scope="col" className="text-left px-3 py-2">Pool</th>
-              <th scope="col" className="text-right px-3 py-2">Fee</th>
-              <th scope="col" className="text-right px-3 py-2">TVL (USD)</th>
-              <th scope="col" className="text-right px-3 py-2">Vol 24h (USD)</th>
-              <th scope="col" className="text-right px-3 py-2">Fee APR (est)</th>
-              <th scope="col" className="text-right px-3 py-2">Updated</th>
+              <th scope="col" className="text-left px-3 py-2" aria-sort={headerAria("pool")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("pool")}>
+                  Pool <span>{sortCaret("pool")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("fee")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("fee")}>
+                  Fee <span>{sortCaret("fee")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("tvl")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("tvl")}>
+                  TVL (USD) <span>{sortCaret("tvl")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("volume")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("volume")}>
+                  Vol 24h (USD) <span>{sortCaret("volume")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("apr")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("apr")}>
+                  Fee APR (est) <span>{sortCaret("apr")}</span>
+                </button>
+              </th>
+              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("updated")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("updated")}>
+                  Updated <span>{sortCaret("updated")}</span>
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
