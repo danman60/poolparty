@@ -1,5 +1,9 @@
 # PoolParty Feature Status (October 17, 2025)
 
+Recent Updates (October 18, 2025)
+- Added sortable columns to Dashboard (Pool, Fee, TVL, Vol 24h, APR, Updated)
+- Integrated Add Liquidity action into position cards
+
 ## ✅ FULLY IMPLEMENTED & WORKING
 
 ### Pool Discovery & Analytics
