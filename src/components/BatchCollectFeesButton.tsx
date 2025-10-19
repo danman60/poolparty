@@ -17,7 +17,7 @@ type Position = {
   uncollectedFeesToken1: string;
 };
 
-export default function BatchCollectFeesButton({ positions, onComplete }: { positions: Position[]; onComplete?: () => void }) {
+export default function BatchCollectFeesButton({ positions, prices, onComplete }: { positions: Position[]; prices?: Record<string, number>; onComplete?: () => void }) {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { addToast } = useToast();
@@ -35,8 +35,26 @@ export default function BatchCollectFeesButton({ positions, onComplete }: { posi
     });
   }, [positions]);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  function estimateUsd(): number | null {
+    try {
+      if (!prices) return null;
+      let sum = 0;
+      for (const p of targets) {
+        const d0 = Number(p.token0.decimals || 18);
+        const d1 = Number(p.token1.decimals || 18);
+        const px0 = prices[p.token0.id.toLowerCase()] || 0;
+        const px1 = prices[p.token1.id.toLowerCase()] || 0;
+        const f0 = Number(BigInt(p.uncollectedFeesToken0 || '0')) / Math.pow(10, d0);
+        const f1 = Number(BigInt(p.uncollectedFeesToken1 || '0')) / Math.pow(10, d1);
+        sum += f0 * px0 + f1 * px1;
+      }
+      return sum;
+    } catch { return null; }
+  }
 
   const canRun = isConnected && chainId === mainnet.id && targets.length > 0 && !submitting && !!address;
 
@@ -81,7 +99,7 @@ export default function BatchCollectFeesButton({ positions, onComplete }: { posi
       <Button
         variant="outline"
         size="lg"
-        onClick={runBatch}
+        onClick={() => setConfirmOpen(true)}
         disabled={!canRun}
         title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : targets.length === 0 ? "No fees to collect" : "Collect fees from all positions"}
         aria-label="Collect fees from all positions"
@@ -89,6 +107,20 @@ export default function BatchCollectFeesButton({ positions, onComplete }: { posi
         {submitting ? `Collecting ${progress}/${targets.length}...` : `Collect All Fees (${targets.length})`}
       </Button>
       {!isConnected && <div className="text-xs opacity-60">Connect wallet to enable</div>}
+
+      {confirmOpen && !submitting && (
+        <div className="ml-2 p-3 rounded-lg border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/30 text-xs space-y-2">
+          <div className="font-medium">Confirm Batch Collect</div>
+          <div>Positions: {targets.length}</div>
+          {prices && (
+            <div>Estimated USD: {(() => { const v = estimateUsd(); return v == null || v <= 0 ? '-' : v.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }); })()}</div>
+          )}
+          <div className="flex items-center gap-2 pt-1">
+            <Button size="sm" onClick={() => { setConfirmOpen(false); runBatch(); }}>Confirm</Button>
+            <Button size="sm" variant="outline" onClick={() => setConfirmOpen(false)}>Cancel</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

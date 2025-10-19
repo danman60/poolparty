@@ -18,8 +18,8 @@ type Position = {
   depositedToken1: string;
   uncollectedFeesToken0: string;
   uncollectedFeesToken1: string;
-  collectedFeesToken0: string;
-  collectedFeesToken1: string;
+  collectedFeesToken0?: string;
+  collectedFeesToken1?: string;
   tickLower: { tickIdx: string } | null;
   tickUpper: { tickIdx: string } | null;
 };

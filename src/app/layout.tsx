@@ -3,10 +3,13 @@ import Link from "next/link";
 import { Web3Providers } from "@/lib/wagmi";
 import ToastProvider from "@/components/ToastProvider";
 import { FEATURE_STATUS } from "@/lib/flags";
+import dynamic from "next/dynamic";
 import EnvBanner from "@/components/EnvBanner";
 import ApolloProviders from "@/components/providers/ApolloProviders";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+const NotificationBell = dynamic(() => import("@/components/NotificationBell"));
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,8 +47,12 @@ export default function RootLayout({
                 <Link href="/status" className="text-sm opacity-80 hover:opacity-100">Status</Link>
               )}
             </div>
-            <div className="text-xs opacity-60">
-              {process.env.NEXT_PUBLIC_COMMIT_SHA ? `#${process.env.NEXT_PUBLIC_COMMIT_SHA.slice(0, 7)}` : 'MVP'}
+            <div className="flex items-center gap-3">
+              <div className="text-xs opacity-60 hidden md:block">
+                {process.env.NEXT_PUBLIC_COMMIT_SHA ? `#${process.env.NEXT_PUBLIC_COMMIT_SHA.slice(0, 7)}` : 'MVP'}
+              </div>
+              {/* Lazy-load bell to avoid SSR use client mismatch */}
+              <NotificationBell />
             </div>
           </nav>
         </header>

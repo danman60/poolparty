@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 type Status = 'excellent' | 'good' | 'warning' | 'danger' | 'critical';
 
 export default function AdvisorBadge({ status, score, label }: { status: Status; score?: number; label?: string }) {
@@ -24,4 +26,3 @@ function statusLabel(s: Status) {
     case 'critical': return 'Critical';
   }
 }
-

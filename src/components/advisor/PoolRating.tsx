@@ -3,8 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import AdvisorBadge from "./AdvisorBadge";
 import MetricTooltip from "./MetricTooltip";
+import HealthBar from "./HealthBar";
 import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 import { ilFromPriceChange, ilRiskLevel } from "@/lib/advisor/impermanentLoss";
+import { analyzeFeeTier } from "@/lib/advisor/feeTier";
+import { screenPool } from "@/lib/advisor/poolScreening";
+import { pairMetaFromSymbols } from "@/lib/advisor/pairMeta";
 import type { Trend } from "@/lib/advisor/volumeAnalysis";
 
 type Status = 'excellent' | 'good' | 'warning' | 'danger' | 'critical';
@@ -25,6 +29,7 @@ export default function PoolRating({ poolId, tvlUsd, volume24hUsd, feeTier }: { 
   const vScore = scoreVolumeToTVL(vol, tvl); // 0-10
 
   const [momentum, setMomentum] = useState<{ trend: Trend; pctChange7d: number } | null>(null);
+  const [symbols, setSymbols] = useState<{ a?: string; b?: string } | null>(null);
   useEffect(() => {
     let canceled = false;
     async function load() {
@@ -43,25 +48,35 @@ export default function PoolRating({ poolId, tvlUsd, volume24hUsd, feeTier }: { 
     return () => { canceled = true };
   }, [poolId]);
 
-  const overall = useMemo(() => {
-    let s = vScore.score * 10; // 0-100 base
-    // Momentum adjustment
-    const m = momentum?.trend;
-    if (m === 'rising') s += 10;
-    else if (m === 'falling') s -= 10;
+  useEffect(() => {
+    let canceled = false;
+    async function loadSymbols() {
+      try {
+        const res = await fetch(`/api/pools/${poolId}`, { cache: 'force-cache' });
+        const json = await res.json();
+        const symA = json?.pool?.token0?.symbol as string | undefined;
+        const symB = json?.pool?.token1?.symbol as string | undefined;
+        if (!canceled) setSymbols({ a: symA, b: symB });
+      } catch {}
+    }
+    loadSymbols();
+    return () => { canceled = true };
+  }, [poolId]);
 
-    // IL penalty at 10% move
-    const il = ilFromPriceChange(10); // ~1.23%
-    const risk = ilRiskLevel(il);
-    if (risk === 'medium') s -= 5;
-    else if (risk === 'high') s -= 15;
-    else if (risk === 'extreme') s -= 30;
+  const details = useMemo(() => {
+    const il = ilFromPriceChange(10);
+    const meta = pairMetaFromSymbols(symbols?.a, symbols?.b);
+    const tier = analyzeFeeTier((feeTier ?? 0), meta);
+    const screening = screenPool({
+      volumeToTvlScore: vScore.score,
+      momentumTrend: momentum?.trend ?? 'flat',
+      feeTierBonus: tier.bonus,
+      ilAt10Pct: il,
+    });
+    return { score: screening.score, breakdown: screening.breakdown, tierNote: tier.note } as const;
+  }, [vScore.score, momentum?.trend, feeTier, symbols?.a, symbols?.b]);
 
-    // Fee tier bonus for 0.3% and 1% (heuristic)
-    if (feeRate >= 0.01) s += 5; else if (feeRate >= 0.003) s += 2;
-
-    return Math.max(0, Math.min(100, Math.round(s)));
-  }, [vScore.score, momentum?.trend, feeRate]);
+  const overall = details.score;
 
   const status = toStatus(overall);
 
@@ -72,6 +87,17 @@ export default function PoolRating({ poolId, tvlUsd, volume24hUsd, feeTier }: { 
         <MetricTooltip label="How is this rated?">
           Overall rating combines Volume:TVL (0–10), 7d volume momentum, a small fee-tier bonus, and an IL@10% penalty. This is a heuristic signal, not financial advice.
         </MetricTooltip>
+        <MetricTooltip label="Breakdown">
+          <div className="space-y-1">
+            <div className="opacity-80">• Volume:TVL: {vScore.score}/10 → +{(details as any)?.breakdown?.vtvl ?? 0} pts</div>
+            <div className="opacity-80">• Momentum: {momentum?.trend ?? 'flat'} → {(((details as any)?.breakdown?.momentum ?? 0) >= 0 ? '+' : '') + (((details as any)?.breakdown?.momentum ?? 0))} pts</div>
+            <div className="opacity-80">• Fee tier → +{(details as any)?.breakdown?.fee ?? 0} pts</div>
+            <div className="opacity-80">• IL @ 10% move → {(details as any)?.breakdown?.il ?? 0} pts</div>
+          </div>
+        </MetricTooltip>
+        <div className="w-24">
+          <HealthBar score={overall} status={status} />
+        </div>
       </div>
       <div className="text-xs opacity-60">
         V:TVL score {vScore.score}/10{momentum ? ` • ${momentum.trend} ${momentum.pctChange7d.toFixed(1)}%` : ''}
@@ -79,4 +105,3 @@ export default function PoolRating({ poolId, tvlUsd, volume24hUsd, feeTier }: { 
     </div>
   );
 }
-

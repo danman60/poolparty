@@ -28,6 +28,7 @@ export default function BatchClosePositionsButton({ positions, onComplete }: { p
     });
   }, [positions]);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -106,7 +107,7 @@ export default function BatchClosePositionsButton({ positions, onComplete }: { p
       <Button
         variant="outline"
         size="lg"
-        onClick={runBatch}
+        onClick={() => setConfirmOpen(true)}
         disabled={!canRun}
         title={!isConnected ? "Connect wallet" : chainId !== 1 ? "Switch to Ethereum Mainnet" : targets.length === 0 ? "No positions to close" : "Withdraw, collect, and burn all"}
         aria-label="Close all positions"
@@ -114,6 +115,16 @@ export default function BatchClosePositionsButton({ positions, onComplete }: { p
         {submitting ? `Closing ${progress}/${targets.length}...` : `Close All (${targets.length})`}
       </Button>
       {!isConnected && <div className="text-xs opacity-60">Connect wallet to enable</div>}
+      {confirmOpen && !submitting && (
+        <div className="ml-2 p-3 rounded-lg border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/30 text-xs space-y-2">
+          <div className="font-medium">Confirm Close All</div>
+          <div>Positions: {targets.length}</div>
+          <div className="flex items-center gap-2 pt-1">
+            <Button size="sm" onClick={() => { setConfirmOpen(false); runBatch(); }}>Confirm</Button>
+            <Button size="sm" variant="outline" onClick={() => setConfirmOpen(false)}>Cancel</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,14 +1,20 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CollectFeesButton from "./CollectFeesButton";
 import DecreaseLiquidityButton from "./DecreaseLiquidityButton";
 import RemoveLiquidityButton from "./RemoveLiquidityButton";
 import IncreaseLiquidityButton from "./IncreaseLiquidityButton";
 import { calculateHealthScore } from "@/lib/lifeguard/healthScore";
 import AdvisorBadge from "./advisor/AdvisorBadge";
+import PositionMomentumBadge from "./advisor/PositionMomentumBadge";
+import PositionFeeMomentumBadge from "./advisor/PositionFeeMomentumBadge";
+import WatchlistStar from "./WatchlistStar";
+import MetricTooltip from "./advisor/MetricTooltip";
 import PositionHistory from "./PositionHistory";
 import PositionAprSparkline from "./PositionAprSparkline";
+import PositionAdvisor from "./advisor/PositionAdvisor";
+import HealthBar from "./advisor/HealthBar";
 
 type Position = {
   id: string;
@@ -40,8 +46,45 @@ export default function PositionCard({ position, prices }: PositionCardProps) {
   const healthScore = health.overall;
   const healthStatus = health.status;
 
+  const borderColor = healthStatus.color === 'excellent' ? 'var(--lifeguard-excellent)'
+    : healthStatus.color === 'good' ? 'var(--lifeguard-good)'
+    : healthStatus.color === 'warning' ? 'var(--lifeguard-warning)'
+    : healthStatus.color === 'danger' ? 'var(--lifeguard-danger)'
+    : 'var(--lifeguard-critical)';
+  const bg = `color-mix(in srgb, ${borderColor} 6%, transparent)`;
+  const pulse = (healthStatus.color === 'danger' || healthStatus.color === 'critical') ? ' pulse-soft' : '';
+  const [hasRecentAlert, setHasRecentAlert] = useState(false);
+  useEffect(() => {
+    try {
+      if (!position.poolId || typeof window === 'undefined') return;
+      const load = () => {
+        try {
+          const raw = localStorage.getItem('pp_alerts');
+          const now = Date.now();
+          const cutoff = now - 24*3600*1000;
+          let found = false;
+          if (raw) {
+            const arr = JSON.parse(raw);
+            if (Array.isArray(arr)) {
+              const id = position.poolId?.toLowerCase();
+              if (!id) return;
+              for (const t of arr) {
+                if (t?.poolId && String(t.poolId).toLowerCase() === id && Number(t.ts) >= cutoff) { found = true; break; }
+              }
+            }
+          }
+          setHasRecentAlert(found);
+        } catch {}
+      };
+      load();
+      const onStorage = (e: StorageEvent) => { if (e.key === 'pp_alerts') load(); };
+      window.addEventListener('storage', onStorage);
+      return () => window.removeEventListener('storage', onStorage);
+    } catch {}
+  }, [position.poolId]);
+
   return (
-    <div className={`card-pool ripple ${expanded ? 'splash' : ''}`}>
+    <div className={`card-pool ripple ${expanded ? 'splash' : ''}${pulse}`} style={{ borderLeft: `4px solid ${borderColor}`, background: bg }}>
       {/* Collapsed Header - Always Visible */}
       <button
         onClick={() => setExpanded(!expanded)}
@@ -54,7 +97,13 @@ export default function PositionCard({ position, prices }: PositionCardProps) {
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0">
               <h3 className="text-base font-semibold truncate">
-                {position.token0.symbol} / {position.token1.symbol}
+                <span className="inline-flex items-center gap-2">
+                  {position.poolId && (
+                    <WatchlistStar id={position.poolId} name={`${position.token0.symbol}/${position.token1.symbol}`} />
+                  )}
+                  {position.token0.symbol} / {position.token1.symbol}
+                  {hasRecentAlert && <span className="text-[10px] text-red-600" title="Recent alert" aria-label="Recent alert">⚠️</span>}
+                </span>
               </h3>
               <div className="text-xs opacity-60 mt-0.5">
                 {Number(position.feeTier) / 10000}% fee
@@ -62,9 +111,16 @@ export default function PositionCard({ position, prices }: PositionCardProps) {
             </div>
             {/* Lifeguard Health Badge */}
             <div className="flex items-center gap-2 flex-shrink-0">
+              {position.poolId && <PositionMomentumBadge poolId={position.poolId} />}
+              {position.poolId && <PositionFeeMomentumBadge poolId={position.poolId} />}
               <AdvisorBadge status={healthStatus.color as any} score={healthScore} />
             </div>
           </div>
+          {/* Health bar visual */}
+          <div className="w-[140px] mt-1">
+            <HealthBar score={healthScore} status={healthStatus.color as any} />
+          </div>
+
           {/* Quick Stats - Collapsed View */}
           {!expanded && (
             <div className="flex items-center gap-4 text-sm">
@@ -94,7 +150,12 @@ export default function PositionCard({ position, prices }: PositionCardProps) {
         <div className="px-4 pb-4 space-y-4 border-t border-[var(--border)] pt-4 mt-2 desktop-hidden">
           {/* Health Breakdown */}
           <div className="space-y-2">
-            <div className="text-xs font-semibold opacity-80">Lifeguard Health Breakdown</div>
+            <div className="flex items-center gap-2">
+              <div className="text-xs font-semibold opacity-80">Lifeguard Health Breakdown</div>
+              <MetricTooltip label="How is this computed?">
+                Overall score is a weighted blend: Profitability (40%), Fee Performance (30%), Liquidity Utilization (20%), and Risk Metrics (10%).
+              </MetricTooltip>
+            </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="text-center p-2 rounded-md bg-[var(--surface)]">
                 <div className="opacity-60 mb-1">Profitability</div>
@@ -150,16 +211,27 @@ export default function PositionCard({ position, prices }: PositionCardProps) {
             </div>
           </div>
 
+          {/* Advisor tips for this position */}
+          <PositionAdvisor position={position} prices={prices as any} />
+
           {/* Action Buttons - Mobile Optimized */}
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <CollectFeesButton tokenId={position.id} />
-            <DecreaseLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
-            <IncreaseLiquidityButton
-              tokenId={position.id}
-              token0={{ address: position.token0.id as `0x${string}`, symbol: position.token0.symbol, decimals: Number(position.token0.decimals) }}
-              token1={{ address: position.token1.id as `0x${string}`, symbol: position.token1.symbol, decimals: Number(position.token1.decimals) }}
-            />
-            <RemoveLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
+          <div id={`actions-${position.id}`} className="grid grid-cols-2 gap-3 pt-2">
+            <div id={`action-collect-${position.id}`}>
+              <CollectFeesButton tokenId={position.id} />
+            </div>
+            <div id={`action-decrease-${position.id}`}>
+              <DecreaseLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
+            </div>
+            <div id={`action-increase-${position.id}`} className="col-span-2 md:col-span-1">
+              <IncreaseLiquidityButton
+                tokenId={position.id}
+                token0={{ address: position.token0.id as `0x${string}`, symbol: position.token0.symbol, decimals: Number(position.token0.decimals) }}
+                token1={{ address: position.token1.id as `0x${string}`, symbol: position.token1.symbol, decimals: Number(position.token1.decimals) }}
+              />
+            </div>
+            <div id={`action-remove-${position.id}`}>
+              <RemoveLiquidityButton tokenId={position.id} liquidity={position.liquidity} />
+            </div>
           </div>
 
           {/* Position history */}
