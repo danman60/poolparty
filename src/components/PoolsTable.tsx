@@ -268,7 +268,7 @@ export default function PoolsTable() {
       }
     });
     return arr;
-  }, [rowsRaw, sortKey, sortDir]);
+  }, [rowsRaw, sortKey, sortDir, query, ratingMin]);
 
   const displayedRows = useMemo(() => {
     let base = rows;

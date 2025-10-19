@@ -3,17 +3,27 @@
 import React from "react";
 
 import { useWatchlist } from "./WatchlistStore";
+import { useToast } from "./ToastProvider";
 
 export default function ExportWatchlistCsvButton({ label = "Export Watchlist CSV" }: { label?: string }) {
   const { items } = useWatchlist();
+  const { addToast } = useToast();
+
   function onExport() {
     try {
-      if (!items || items.length === 0) return;
+      if (!items || items.length === 0) {
+        addToast('Watchlist is empty', 'error');
+        return;
+      }
       const headers = ["pool_id","name"];
       const rows = items.map((it) => [it.id, it.name || ""]);
       const csv = toCsv(headers, rows);
       downloadCsv(`watchlist_${new Date().toISOString().slice(0,10)}.csv`, csv);
-    } catch {}
+      addToast(`Exported ${items.length} pools from watchlist`, 'success');
+    } catch (err) {
+      console.error('Watchlist export failed:', err);
+      addToast('Export failed. Please try again.', 'error');
+    }
   }
   return (
     <button

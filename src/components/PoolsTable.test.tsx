@@ -2,6 +2,7 @@ import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import PoolsTable from './PoolsTable'
+import ToastProvider from './ToastProvider'
 
 describe('PoolsTable', () => {
   it('renders loading then no data without supabase', async () => {
@@ -12,7 +13,9 @@ describe('PoolsTable', () => {
     const qc = new QueryClient()
     render(
       <QueryClientProvider client={qc}>
-        <PoolsTable />
+        <ToastProvider>
+          <PoolsTable />
+        </ToastProvider>
       </QueryClientProvider>
     )
     expect(screen.getByText(/Loading pools/i)).toBeInTheDocument()

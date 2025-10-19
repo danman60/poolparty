@@ -5,6 +5,7 @@ import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 import { analyzeFeeTier } from "@/lib/advisor/feeTier";
 import { pairMetaFromSymbols } from "@/lib/advisor/pairMeta";
 import { ilFromPriceChange, ilRiskLevel } from "@/lib/advisor/impermanentLoss";
+import { useToast } from "./ToastProvider";
 
 type Row = {
   id: string;
@@ -38,8 +39,13 @@ function aprValue(p: Row) {
 }
 
 export default function ExportPoolsAdvisorCsvButton({ rows, label, disabled }: { rows: Row[]; label?: string; disabled?: boolean }) {
+  const { addToast } = useToast();
+
   function onExport() {
-    if (disabled || !rows || rows.length === 0) return;
+    if (disabled || !rows || rows.length === 0) {
+      addToast('No pools to export', 'error');
+      return;
+    }
     try {
       const { toCsv, downloadCsv } = require("@/lib/csv");
       const headers = [
@@ -71,7 +77,11 @@ export default function ExportPoolsAdvisorCsvButton({ rows, label, disabled }: {
       });
       const csv = toCsv(headers, csvRows);
       downloadCsv(`pools_advisor_${new Date().toISOString().slice(0,10)}.csv`, csv);
-    } catch {}
+      addToast(`Exported ${rows.length} pools to CSV`, 'success');
+    } catch (err) {
+      console.error('Export failed:', err);
+      addToast('Export failed. Please try again.', 'error');
+    }
   }
   return (
     <button
