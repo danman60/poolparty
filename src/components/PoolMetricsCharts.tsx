@@ -57,10 +57,28 @@ export default function PoolMetricsCharts({ poolId }: { poolId: string }) {
           <ChartCard title="Volume (USD)">
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={rows} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-                <XAxis dataKey="date" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} hide={true} />
-                <YAxis hide domain={["auto", "auto"]} />
-                <Tooltip formatter={(v) => asUsd(Number(v))} labelClassName="text-xs" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                  tickLine={false}
+                  axisLine={false}
+                  hide={true}
+                />
+                <YAxis
+                  hide
+                  domain={["auto", "auto"]}
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                />
+                <Tooltip
+                  formatter={(v) => asUsd(Number(v))}
+                  labelClassName="text-xs"
+                  contentStyle={{
+                    backgroundColor: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '6px'
+                  }}
+                />
                 <Bar dataKey="volumeUSD" fill="#10b981" radius={[2, 2, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -69,10 +87,28 @@ export default function PoolMetricsCharts({ poolId }: { poolId: string }) {
           <ChartCard title="Fees (USD)">
             <ResponsiveContainer width="100%" height={220}>
               <AreaChart data={rows} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-                <XAxis dataKey="date" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} hide={true} />
-                <YAxis hide domain={["auto", "auto"]} />
-                <Tooltip formatter={(v) => asUsd(Number(v))} labelClassName="text-xs" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                  tickLine={false}
+                  axisLine={false}
+                  hide={true}
+                />
+                <YAxis
+                  hide
+                  domain={["auto", "auto"]}
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                />
+                <Tooltip
+                  formatter={(v) => asUsd(Number(v))}
+                  labelClassName="text-xs"
+                  contentStyle={{
+                    backgroundColor: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '6px'
+                  }}
+                />
                 <Area type="monotone" dataKey="feesUSD" stroke="#f59e0b" fill="#f59e0b33" />
               </AreaChart>
             </ResponsiveContainer>
@@ -85,10 +121,28 @@ export default function PoolMetricsCharts({ poolId }: { poolId: string }) {
           <ChartCard title="APR (Annualized)">
             <ResponsiveContainer width="100%" height={220}>
               <AreaChart data={aprRows} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-                <XAxis dataKey="date" tick={{ fontSize: 10 }} tickLine={false} axisLine={false} hide={true} />
-                <YAxis hide domain={["auto", "auto"]} />
-                <Tooltip formatter={(v) => asPct(Number(v))} labelClassName="text-xs" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                  tickLine={false}
+                  axisLine={false}
+                  hide={true}
+                />
+                <YAxis
+                  hide
+                  domain={["auto", "auto"]}
+                  tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+                />
+                <Tooltip
+                  formatter={(v) => asPct(Number(v))}
+                  labelClassName="text-xs"
+                  contentStyle={{
+                    backgroundColor: 'var(--surface)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '6px'
+                  }}
+                />
                 <Area type="monotone" dataKey="aprAnnual" stroke="#3b82f6" fill="#3b82f633" />
               </AreaChart>
             </ResponsiveContainer>

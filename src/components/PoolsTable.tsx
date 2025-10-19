@@ -21,6 +21,8 @@ import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 import { ilFromPriceChange, ilRiskLevel } from "@/lib/advisor/impermanentLoss";
 import HealthBar from "./advisor/HealthBar";
 import { analyzeFeeTier } from "@/lib/advisor/feeTier";
+import { useToast } from "./ToastProvider";
+import Link from "next/link";
 
 type PoolRow = {
   id: string;
@@ -75,6 +77,7 @@ function previewRating(p: PoolRow): number {
 }
 
 export default function PoolsTable() {
+  const { addToast } = useToast();
   const [recentAlertIds, setRecentAlertIds] = React.useState<Set<string>>(new Set());
   React.useEffect(() => {
     try {
@@ -117,6 +120,8 @@ export default function PoolsTable() {
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [ratingMin, setRatingMin] = useState<"all" | "fair" | "good" | "excellent">("all");
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const [momentumOnly, setMomentumOnly] = useState(false);
   const [alertsOnly, setAlertsOnly] = useState(false);
   const [risingIds, setRisingIds] = useState<Set<string>>(new Set());
@@ -198,6 +203,39 @@ export default function PoolsTable() {
     }
     return counts;
   }, [rowsRaw]);
+
+  // Compute filtered counts for the rating buttons (based on current filters except rating)
+  const filteredCounts = useMemo(() => {
+    try {
+      let arr = [...(rowsRaw || [])];
+      // Apply search filter
+      if (debouncedQuery && debouncedQuery.trim()) {
+        const q = debouncedQuery.trim().toLowerCase();
+        arr = arr.filter((r) => {
+          try {
+            const t0 = r?.token0?.symbol?.toLowerCase() || '';
+            const t1 = r?.token1?.symbol?.toLowerCase() || '';
+            const name = getPoolName(r)?.toLowerCase() || '';
+            return t0.includes(q) || t1.includes(q) || name.includes(q);
+          } catch {
+            return false;
+          }
+        });
+      }
+      // Don't apply rating filter here - we want counts for all ratings
+      const counts = { all: arr.length, excellent: 0, good: 0, warning: 0, danger: 0, critical: 0 } as Record<string, number>;
+      for (const r of arr) {
+        try {
+          const sc = previewRating(r);
+          const st = toStatus(sc);
+          counts[st] = (counts[st] || 0) + 1;
+        } catch {}
+      }
+      return counts;
+    } catch {
+      return { all: 0, excellent: 0, good: 0, warning: 0, danger: 0, critical: 0 };
+    }
+  }, [rowsRaw, debouncedQuery]);
   // Publish counts for dashboard header overview
   useEffect(() => {
     try {
@@ -206,81 +244,118 @@ export default function PoolsTable() {
       }
     } catch {}
   }, [advisorCounts]);
+
+  // Debounce search query (250ms)
+  useEffect(() => {
+    setIsSearching(true);
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+      setIsSearching(false);
+    }, 250);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [query]);
+
   const rows = useMemo(() => {
-    // Always apply client-side sort so header sorting and direction work consistently
-    let arr = [...rowsRaw];
-    if (query.trim()) {
-      const q = query.trim().toLowerCase();
-      arr = arr.filter((r) => {
-        const t0 = r.token0?.symbol?.toLowerCase() || '';
-        const t1 = r.token1?.symbol?.toLowerCase() || '';
-        const name = getPoolName(r).toLowerCase();
-        return t0.includes(q) || t1.includes(q) || name.includes(q);
-      });
-    }
-    if (ratingMin !== "all") {
-      arr = arr.filter((r) => {
-        const st = toStatus(previewRating(r));
-        if (ratingMin === "excellent") return st === "excellent";
-        if (ratingMin === "good") return st === "excellent" || st === "good";
-        if (ratingMin === "fair") return st === "excellent" || st === "good" || st === "warning";
-        return true;
-      });
-    }
-    const dir = sortDir === "asc" ? 1 : -1;
-    arr.sort((a, b) => {
-      switch (sortKey) {
-        case "pool": {
-          const an = getPoolName(a);
-          const bn = getPoolName(b);
-          return an.localeCompare(bn) * dir;
-        }
-        case "fee": {
-          const av = a.fee_tier ?? 0;
-          const bv = b.fee_tier ?? 0;
-          return (av - bv) * dir;
-        }
-        case "tvl": {
-          const av = a.tvl_usd ?? 0;
-          const bv = b.tvl_usd ?? 0;
-          return (av - bv) * dir;
-        }
-        case "volume": {
-          const av = a.volume_usd_24h ?? 0;
-          const bv = b.volume_usd_24h ?? 0;
-          return (av - bv) * dir;
-        }
-        case "apr": {
-          const av = aprValue(a);
-          const bv = aprValue(b);
-          return (av - bv) * dir;
-        }
-        case "rating": {
-          const av = previewRating(a);
-          const bv = previewRating(b);
-          return (av - bv) * dir;
-        }
-        case "updated": {
-          const av = a.updated_at ? new Date(a.updated_at).getTime() : 0;
-          const bv = b.updated_at ? new Date(b.updated_at).getTime() : 0;
-          return (av - bv) * dir;
-        }
+    try {
+      // Always apply client-side sort so header sorting and direction work consistently
+      let arr = [...(rowsRaw || [])];
+      if (debouncedQuery && debouncedQuery.trim()) {
+        const q = debouncedQuery.trim().toLowerCase();
+        arr = arr.filter((r) => {
+          try {
+            const t0 = r?.token0?.symbol?.toLowerCase() || '';
+            const t1 = r?.token1?.symbol?.toLowerCase() || '';
+            const name = getPoolName(r)?.toLowerCase() || '';
+            return t0.includes(q) || t1.includes(q) || name.includes(q);
+          } catch {
+            return false;
+          }
+        });
       }
-    });
-    return arr;
-  }, [rowsRaw, sortKey, sortDir, query, ratingMin]);
+      if (ratingMin !== "all") {
+        arr = arr.filter((r) => {
+          try {
+            const st = toStatus(previewRating(r));
+            if (ratingMin === "excellent") return st === "excellent";
+            if (ratingMin === "good") return st === "excellent" || st === "good";
+            if (ratingMin === "fair") return st === "excellent" || st === "good" || st === "warning";
+            return true;
+          } catch {
+            return false;
+          }
+        });
+      }
+      const dir = sortDir === "asc" ? 1 : -1;
+      arr.sort((a, b) => {
+        try {
+          switch (sortKey) {
+            case "pool": {
+              const an = getPoolName(a) || '';
+              const bn = getPoolName(b) || '';
+              return an.localeCompare(bn) * dir;
+            }
+            case "fee": {
+              const av = a.fee_tier ?? 0;
+              const bv = b.fee_tier ?? 0;
+              return (av - bv) * dir;
+            }
+            case "tvl": {
+              const av = a.tvl_usd ?? 0;
+              const bv = b.tvl_usd ?? 0;
+              return (av - bv) * dir;
+            }
+            case "volume": {
+              const av = a.volume_usd_24h ?? 0;
+              const bv = b.volume_usd_24h ?? 0;
+              return (av - bv) * dir;
+            }
+            case "apr": {
+              const av = aprValue(a);
+              const bv = aprValue(b);
+              return (av - bv) * dir;
+            }
+            case "rating": {
+              const av = previewRating(a);
+              const bv = previewRating(b);
+              return (av - bv) * dir;
+            }
+            case "updated": {
+              const av = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+              const bv = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+              return (av - bv) * dir;
+            }
+            default:
+              return 0;
+          }
+        } catch {
+          return 0;
+        }
+      });
+      return arr;
+    } catch (err) {
+      console.error('Error filtering/sorting rows:', err);
+      return rowsRaw || [];
+    }
+  }, [rowsRaw, sortKey, sortDir, debouncedQuery, ratingMin]);
 
   const displayedRows = useMemo(() => {
-    let base = rows;
-    if (alertsOnly) {
-      base = base.filter(r => recentAlertIds.has((r.id || '').toLowerCase()));
+    try {
+      let base = rows || [];
+      if (alertsOnly) {
+        base = base.filter(r => r && recentAlertIds.has((r.id || '').toLowerCase()));
+      }
+      if (momentumOnly) {
+        base = base.filter(r => r && risingIds.has((r.id || '').toLowerCase()));
+      }
+      if (!watchOnly) return base;
+      const set = new Set((watchlist || []).map((w: any) => (w?.id || '').toLowerCase()));
+      return base.filter(r => r && set.has((r.id || '').toLowerCase()));
+    } catch (err) {
+      console.error('Error applying displayedRows filters:', err);
+      return rows || [];
     }
-    if (momentumOnly) {
-      base = base.filter(r => risingIds.has((r.id || '').toLowerCase()));
-    }
-    if (!watchOnly) return base;
-    const set = new Set((watchlist || []).map((w: any) => (w?.id || '').toLowerCase()));
-    return base.filter(r => set.has((r.id || '').toLowerCase()));
   }, [rows, alertsOnly, recentAlertIds, momentumOnly, risingIds, watchOnly, watchlist]);
 
   // Compute rising momentum set when filter enabled
@@ -361,13 +436,20 @@ export default function PoolsTable() {
           ))}
         </select>
         <label className="text-sm opacity-80 ml-4">Search</label>
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="e.g. ETH/USDC"
-          className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
-          aria-label="Search pools"
-        />
+        <div className="relative">
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="e.g. ETH/USDC"
+            className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent pr-6"
+            aria-label="Search pools"
+          />
+          {isSearching && (
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs opacity-60" aria-label="Searching">
+              ...
+            </span>
+          )}
+        </div>
         <label className="text-sm opacity-80 ml-4">Min rating</label>
         <select
           className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
@@ -385,7 +467,7 @@ export default function PoolsTable() {
             aria-pressed={ratingMin==='all'}
             title="Show all"
           >
-            All {rowsRaw.length}
+            All {filteredCounts.all}
           </button>
           <button
             className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='fair'?'opacity-100':'opacity-70 hover:opacity-100'}`}
@@ -393,7 +475,7 @@ export default function PoolsTable() {
             aria-pressed={ratingMin==='fair'}
             title="Show fair and better"
           >
-            Fair+ {advisorCounts.warning + advisorCounts.good + advisorCounts.excellent}
+            Fair+ {filteredCounts.warning + filteredCounts.good + filteredCounts.excellent}
           </button>
           <button
             className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='good'?'opacity-100':'opacity-70 hover:opacity-100'}`}
@@ -401,7 +483,7 @@ export default function PoolsTable() {
             aria-pressed={ratingMin==='good'}
             title="Show good and excellent"
           >
-            Good+ {advisorCounts.good + advisorCounts.excellent}
+            Good+ {filteredCounts.good + filteredCounts.excellent}
           </button>
           <button
             className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='excellent'?'opacity-100':'opacity-70 hover:opacity-100'}`}
@@ -409,7 +491,7 @@ export default function PoolsTable() {
             aria-pressed={ratingMin==='excellent'}
             title="Show excellent only"
           >
-            Excellent {advisorCounts.excellent}
+            Excellent {filteredCounts.excellent}
           </button>
         </div>
         <div className="ml-auto flex items-center gap-3">
@@ -493,7 +575,7 @@ export default function PoolsTable() {
       <WatchlistBar />
 
       <div className="rounded-lg border border-black/10 dark:border-white/10 overflow-x-auto">
-        <table className="w-full min-w-[920px] text-sm" role="table" aria-label="Top pools table">
+        <table className="w-full min-w-[920px] text-sm table-fixed" role="table" aria-label="Top pools table">
           <caption className="sr-only">Top pools by TVL, Volume and APR</caption>
           <thead className="bg-black/5 dark:bg-white/5">
             <tr>
@@ -534,11 +616,38 @@ export default function PoolsTable() {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ minHeight: '600px' }}>
             {isLoading && (
-              <tr>
-                <td colSpan={6} className="px-3 py-6 text-center opacity-70">Loading pools...</td>
-              </tr>
+              <>
+                {[...Array(limit)].map((_, i) => (
+                  <tr key={`skeleton-${i}`} className="border-t border-black/5 dark:border-white/5">
+                    <td className="px-3 py-3">
+                      <div className="space-y-2">
+                        <div className="h-4 w-32 skeleton"></div>
+                        <div className="h-3 w-24 skeleton"></div>
+                      </div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-4 w-16 skeleton ml-auto"></div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-4 w-20 skeleton ml-auto"></div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-4 w-20 skeleton ml-auto"></div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-4 w-16 skeleton ml-auto"></div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-6 w-20 skeleton ml-auto"></div>
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="h-4 w-24 skeleton ml-auto"></div>
+                    </td>
+                  </tr>
+                ))}
+              </>
             )}
             {error && !isLoading && (
               <tr>
@@ -547,26 +656,47 @@ export default function PoolsTable() {
             )}
             {!isLoading && !error && rows.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-3 py-6 text-center opacity-70">No data yet. Populate via /api/ingest/uniswap.</td>
+                <td colSpan={7} className="px-3 py-12 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="text-6xl" role="img" aria-label="Empty pool">🏊‍♂️</div>
+                    <div className="text-lg font-medium opacity-80">No Pools Found</div>
+                    <div className="text-sm opacity-60 max-w-md">
+                      {debouncedQuery ? `No pools match "${debouncedQuery}". Try a different search term.` : "No pool data available yet. Populate via /api/ingest/uniswap."}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            )}
+            {!isLoading && !error && displayedRows.length === 0 && rows.length > 0 && (
+              <tr>
+                <td colSpan={7} className="px-3 py-12 text-center">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="text-6xl" role="img" aria-label="No results">🔍</div>
+                    <div className="text-lg font-medium opacity-80">No Matching Pools</div>
+                    <div className="text-sm opacity-60 max-w-md">
+                      No pools match your current filters. Try adjusting your search or filter criteria.
+                    </div>
+                  </div>
+                </td>
               </tr>
             )}
             {!isLoading && !error && displayedRows.map((p) => { const sc = previewRating(p); const st = toStatus(sc); const color = st==='excellent'?'var(--lifeguard-excellent)':st==='good'?'var(--lifeguard-good)':st==='warning'?'var(--lifeguard-warning)':st==='danger'?'var(--lifeguard-danger)':'var(--lifeguard-critical)'; const bg = `color-mix(in srgb, ${color} 6%, transparent)`; const pulse = (st==='danger'||st==='critical') ? ' pulse-soft' : ''; return (
               <tr key={p.id} className={`border-t border-black/5 dark:border-white/5${pulse}`} style={{ borderLeft: `4px solid ${color}`, background: bg }}>
                 <td className="px-3 py-2">
-                  <a className="hover:underline" href={`/pool/${p.id}`}>
-                    <div className="font-medium flex items-center gap-2">
-                      <WatchlistStar id={p.id} name={getPoolName(p)} />
-                      <span>{getPoolName(p)}</span>
+                  <div className="font-medium flex items-center gap-2">
+                    <WatchlistStar id={p.id} name={getPoolName(p)} />
+                    <Link href={`/pool/${p.id}`} className="hover:underline">
+                      {getPoolName(p)}
+                    </Link>
                       {recentAlertIds.has((p.id || '').toLowerCase()) && (
                         <span className="inline-flex items-center gap-1 text-[10px] text-red-600" title="Recent alert" aria-label="Recent alert">• ï¸ Alert</span>
                       )}
                       <AdvisorBadge status={st as any} score={sc} />
-                    </div>
-                    <div className="w-[120px] mt-1">
-                      <HealthBar score={sc} status={st as any} />
-                    </div>
-                    <div className="text-xs opacity-60 font-mono">{getTokenPair(p)}</div>
-                  </a>
+                  </div>
+                  <div className="w-[120px] mt-1">
+                    <HealthBar score={sc} status={st as any} />
+                  </div>
+                  <div className="text-xs opacity-60 font-mono">{getTokenPair(p)}</div>
                   {renderVtvlBadge(p)}
                   <PoolsMomentumBadge poolId={p.id} />
                   <PoolsFeeMomentumBadge poolId={p.id} />

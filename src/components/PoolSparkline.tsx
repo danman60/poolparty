@@ -17,9 +17,25 @@ export default function PoolSparkline({ data }: { data: Point[] }) {
     <div className="h-48">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={points} margin={{ left: 8, right: 8, top: 8, bottom: 8 }}>
-          <XAxis dataKey="ts" hide tick={{ fontSize: 10 }} />
-          <YAxis hide domain={["auto", "auto"]} />
-          <Tooltip formatter={(v) => asUsd(Number(v))} labelClassName="text-xs" />
+          <XAxis
+            dataKey="ts"
+            hide
+            tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+          />
+          <YAxis
+            hide
+            domain={["auto", "auto"]}
+            tick={{ fontSize: 10, fill: 'var(--foreground)', opacity: 0.7 }}
+          />
+          <Tooltip
+            formatter={(v) => asUsd(Number(v))}
+            labelClassName="text-xs"
+            contentStyle={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: '6px'
+            }}
+          />
           <Line type="monotone" dataKey="tvl" stroke="#3b82f6" dot={false} strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>

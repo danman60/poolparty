@@ -70,8 +70,18 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Spacing scale (mobile-optimized) */
-  --spacing-touch-min: 44px;  /* Minimum touch target */
+  /* Spacing scale (8px grid system) */
+  --spacing-1: 8px;    /* 1 unit */
+  --spacing-2: 16px;   /* 2 units */
+  --spacing-3: 24px;   /* 3 units */
+  --spacing-4: 32px;   /* 4 units */
+  --spacing-5: 40px;   /* 5 units */
+  --spacing-6: 48px;   /* 6 units */
+  --spacing-7: 56px;   /* 7 units */
+  --spacing-8: 64px;   /* 8 units */
+
+  /* Touch targets (mobile-optimized) */
+  --spacing-touch-min: 44px;  /* Minimum touch target (WCAG requirement) */
   --spacing-thumb: 56px;      /* Comfortable thumb reach */
 
   /* Border radius (rounded, friendly) */

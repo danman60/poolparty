@@ -4,13 +4,25 @@ import { createConfig, http } from "wagmi";
 import { fallback } from "viem";
 import { WagmiProvider } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
-import { injected } from "wagmi/connectors";
+import { injected, walletConnect, coinbaseWallet } from "wagmi/connectors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
-  connectors: [injected()],
+  connectors: [
+    injected({
+      shimDisconnect: true,
+    }),
+    walletConnect({
+      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo-project-id",
+      showQrModal: true,
+    }),
+    coinbaseWallet({
+      appName: "PoolParty",
+      appLogoUrl: undefined,
+    }),
+  ],
   transports: {
     [mainnet.id]: fallback([
       http(process.env.NEXT_PUBLIC_RPC_MAINNET || "https://ethereum.publicnode.com"),

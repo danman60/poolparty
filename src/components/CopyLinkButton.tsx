@@ -1,13 +1,19 @@
 "use client";
 
 import React from "react";
+import { useToast } from "./ToastProvider";
 
 export default function CopyLinkButton({ label = "Copy Link" }: { label?: string }) {
+  const { addToast } = useToast();
+
   async function onCopy() {
     try {
       const href = typeof window !== 'undefined' ? window.location.href : '';
       await navigator.clipboard.writeText(href);
-    } catch {}
+      addToast('Link copied to clipboard!', 'success');
+    } catch (err) {
+      addToast('Failed to copy link', 'error');
+    }
   }
   return (
     <button
