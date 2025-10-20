@@ -124,6 +124,7 @@ export default function PoolsTable() {
   const [isSearching, setIsSearching] = useState(false);
   const [momentumOnly, setMomentumOnly] = useState(false);
   const [alertsOnly, setAlertsOnly] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [risingIds, setRisingIds] = useState<Set<string>>(new Set());
   const [watchOnly, setWatchOnly] = useState(false);
   const [page, setPage] = useState(1);
@@ -421,45 +422,24 @@ export default function PoolsTable() {
   const totalPages = Math.max(1, Math.ceil(total / limit));
 
   return (
-    <div className="space-y-3" aria-live="polite">
-      <div className="flex items-center gap-3">
-        <label className="text-sm opacity-80">Fee tier</label>
-        <select
-          className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
-          value={fee}
-          onChange={(e) => setFee(e.target.value as FeeFilter)}
-        >
-          {FEE_TIERS.map((t) => (
-            <option key={t} value={t}>
-              {t === "all" ? "All" : `${t}`}
-            </option>
-          ))}
-        </select>
-        <label className="text-sm opacity-80 ml-4">Search</label>
-        <div className="relative">
+    <div className="space-y-4" aria-live="polite">
+      {/* SIMPLIFIED TOP ROW - Beginner Friendly */}
+      <div className="flex items-center gap-4 flex-wrap">
+        {/* Search - Prominent */}
+        <div className="relative flex-1 min-w-[240px]">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="e.g. ETH/USDC"
-            className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent pr-6"
+            placeholder="Search pools (e.g. ETH/USDC)"
+            className="w-full rounded-lg border border-white/10 px-4 py-2.5 text-sm bg-surface-elevated pr-8"
             aria-label="Search pools"
           />
           {isSearching && (
-            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs opacity-60" aria-label="Searching">
-              ...
-            </span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs opacity-60">...</span>
           )}
         </div>
-        <label className="text-sm opacity-80 ml-4">Min rating</label>
-        <select
-          className="rounded border border-black/10 dark:border-white/10 px-2 py-1 text-sm bg-transparent"
-          value={ratingMin}
-          onChange={(e) => setRatingMin(e.target.value as any)}
-        >
-          <option value="all">All</option>
-          <option value="good">Good+</option>
-          <option value="excellent">Excellent only</option>
-        </select>
+
+        {/* Quick Filter Buttons - Clear & Simple */}
         <div className="inline-flex items-center gap-2">
           <button
             className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-all duration-200 ${
@@ -510,71 +490,87 @@ export default function PoolsTable() {
             Excellent <span className="font-semibold">{filteredCounts.excellent}</span>
           </button>
         </div>
-        <div className="ml-auto flex items-center gap-3">
-          <AdvisorLegend />
-          <div className="text-xs opacity-60">IL default:</div>
-          {([5,10,20,50] as const).map((p) => (
-            <button
-              key={p}
-              className="text-xs underline opacity-70 hover:opacity-100"
-              onClick={() => { try { localStorage.setItem('pp_il_default', String(p)); } catch {} }}
-              aria-label={`Set global IL default ${p}%`}
-              title={`Set global IL default ${p}%`}
-            >
-              {p}%
-            </button>
-          ))}
-          <label className="inline-flex items-center gap-1 text-xs opacity-80">
-            <input type="checkbox" checked={watchOnly} onChange={(e) => setWatchOnly(e.target.checked)} aria-label="Show watchlist only" />
-            Watchlist only
-          </label>
-          <label className="inline-flex items-center gap-1 text-xs opacity-80">
-            <input type="checkbox" checked={momentumOnly} onChange={(e) => setMomentumOnly(e.target.checked)} aria-label="Show rising momentum only" />
-            Rising only
-          </label>
-          <label className="inline-flex items-center gap-1 text-xs opacity-80">
-            <input type="checkbox" checked={alertsOnly} onChange={(e) => setAlertsOnly(e.target.checked)} aria-label="Show recent alerts only" />
-            Alerts only
-          </label>
-          <button
-            className="text-xs underline opacity-70 hover:opacity-100"
-            onClick={() => { try { (displayedRows || []).forEach(r => addWatch({ id: r.id, name: getPoolName(r) })); } catch {} }}
-            aria-label="Add visible pools to watchlist"
-            title="Add visible pools to watchlist"
-          >
-            Add visible to Watchlist
-          </button>
-          <button
-            className="text-xs underline opacity-70 hover:opacity-100"
-            onClick={() => { try { (displayedRows || []).forEach(r => removeWatch(r.id)); } catch {} }}
-            aria-label="Remove visible pools from watchlist"
-            title="Remove visible pools from watchlist"
-          >
-            Remove visible
-          </button>
-          <button
-            className="text-xs underline opacity-70 hover:opacity-100"
-            onClick={() => { try { const { remove } = require('./WatchlistStore'); (displayedRows || []).forEach((r: any) => remove?.remove?.(r.id)); } catch {} }}
-            aria-label="Remove visible pools from watchlist"
-            title="Remove visible pools from watchlist"
-          >
-            Remove visible
-          </button>
-          <ExportPoolsAdvisorCsvButton rows={displayedRows} label="Export Pools Advisor CSV" disabled={!displayedRows?.length} />
-          <CopyPoolsAdvisorSummaryButton rows={displayedRows} label="Copy Advisor Summary" />
-          <ExportWatchlistCsvButton label="Export Watchlist CSV" />
-          <CopyLinkButton label="Copy View Link" />
-          <button
-            className="text-xs underline opacity-70 hover:opacity-100"
-            onClick={() => { setFee('all'); setSortKey('tvl'); setSortDir('desc'); setRatingMin('all'); setPage(1); }}
-            aria-label="Reset table filters"
-            title="Reset"
-          >
-            Reset
-          </button>
-          <span className="text-xs opacity-60">Click table headers to sort</span>
-        </div>
+
+        {/* Advanced Toggle Button */}
+        <button
+          className="ml-auto px-3 py-1.5 rounded-md border border-white/10 bg-surface-elevated text-xs font-medium hover:bg-surface-hover transition-colors"
+          onClick={() => setShowAdvanced(!showAdvanced)}
+          aria-expanded={showAdvanced}
+          title={showAdvanced ? 'Hide advanced options' : 'Show advanced options'}
+        >
+          {showAdvanced ? '▲ Hide Advanced' : '▼ Advanced'}
+        </button>
       </div>
+
+      {/* COLLAPSIBLE ADVANCED SECTION */}
+      {showAdvanced && (
+        <div className="bg-surface-elevated rounded-lg border border-white/10 p-4 space-y-3">
+          <div className="flex items-center gap-4 flex-wrap">
+            <AdvisorLegend />
+
+            <div className="flex items-center gap-2">
+              <div className="text-xs opacity-60">IL default:</div>
+              {([5,10,20,50] as const).map((p) => (
+                <button
+                  key={p}
+                  className="text-xs underline opacity-70 hover:opacity-100"
+                  onClick={() => { try { localStorage.setItem('pp_il_default', String(p)); } catch {} }}
+                  aria-label={`Set global IL default ${p}%`}
+                  title={`Set global IL default ${p}%`}
+                >
+                  {p}%
+                </button>
+              ))}
+            </div>
+
+            <label className="inline-flex items-center gap-1 text-xs opacity-80">
+              <input type="checkbox" checked={watchOnly} onChange={(e) => setWatchOnly(e.target.checked)} aria-label="Show watchlist only" />
+              Watchlist only
+            </label>
+            <label className="inline-flex items-center gap-1 text-xs opacity-80">
+              <input type="checkbox" checked={momentumOnly} onChange={(e) => setMomentumOnly(e.target.checked)} aria-label="Show rising momentum only" />
+              Rising only
+            </label>
+            <label className="inline-flex items-center gap-1 text-xs opacity-80">
+              <input type="checkbox" checked={alertsOnly} onChange={(e) => setAlertsOnly(e.target.checked)} aria-label="Show recent alerts only" />
+              Alerts only
+            </label>
+          </div>
+
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              className="text-xs underline opacity-70 hover:opacity-100"
+              onClick={() => { try { (displayedRows || []).forEach(r => addWatch({ id: r.id, name: getPoolName(r) })); } catch {} }}
+              aria-label="Add visible pools to watchlist"
+              title="Add visible pools to watchlist"
+            >
+              Add visible to Watchlist
+            </button>
+            <button
+              className="text-xs underline opacity-70 hover:opacity-100"
+              onClick={() => { try { (displayedRows || []).forEach(r => removeWatch(r.id)); } catch {} }}
+              aria-label="Remove visible pools from watchlist"
+              title="Remove visible pools from watchlist"
+            >
+              Remove visible from Watchlist
+            </button>
+            <ExportPoolsAdvisorCsvButton rows={displayedRows} label="Export CSV" disabled={!displayedRows?.length} />
+            <CopyPoolsAdvisorSummaryButton rows={displayedRows} label="Copy Summary" />
+            <ExportWatchlistCsvButton label="Export Watchlist" />
+            <CopyLinkButton label="Copy Link" />
+            <button
+              className="text-xs underline opacity-70 hover:opacity-100"
+              onClick={() => { setFee('all'); setSortKey('tvl'); setSortDir('desc'); setRatingMin('all'); setPage(1); }}
+              aria-label="Reset table filters"
+              title="Reset all filters to default"
+            >
+              Reset Filters
+            </button>
+          </div>
+
+          <div className="text-xs opacity-60">💡 Click table headers to sort</div>
+        </div>
+      )}
 
       <div className="w-full h-2 rounded overflow-hidden border border-black/10 dark:border-white/10" title="Advisor distribution">
         {(() => { const total = rowsRaw.length || 1; const seg = (n: number) => `${(n/total)*100}%`; return (
