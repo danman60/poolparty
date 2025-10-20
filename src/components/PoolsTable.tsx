@@ -9,7 +9,6 @@ import ExportPoolsAdvisorCsvButton from "./ExportPoolsAdvisorCsvButton";
 import ExportWatchlistCsvButton from "./ExportWatchlistCsvButton";
 import CopyLinkButton from "./CopyLinkButton";
 import CopyPoolsAdvisorSummaryButton from "./CopyPoolsAdvisorSummaryButton";
-import WhyRatingLink from "./advisor/WhyRatingLink";
 import PoolsMomentumBadge from "./advisor/PoolsMomentumBadge";
 import PoolsFeeMomentumBadge from "./advisor/PoolsFeeMomentumBadge";
 import WatchlistStar from "./WatchlistStar";
@@ -552,12 +551,12 @@ export default function PoolsTable() {
               </th>
               <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("apr")}>
                 <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("apr")} title="Estimated yearly earnings from trading fees">
-                  💰 Earnings Potential <span>{sortCaret("apr")}</span>
+                  <span>💰 Earnings Potential</span> <span className="text-primary-blue">{sortCaret("apr")}</span>
                 </button>
               </th>
               <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("rating")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("rating")} title="Pool health & safety score (0-100)">
-                  ⭐ Safety Score <span>{sortCaret("rating")}</span>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("rating")} title="Pool health and safety score (0-100)">
+                  <span>⭐ Safety Score</span> <span className="text-primary-blue">{sortCaret("rating")}</span>
                 </button>
               </th>
               <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("updated")}>
@@ -659,9 +658,6 @@ export default function PoolsTable() {
                     <div className="text-[10px] opacity-60">Fees</div>
                     <PoolsMiniSparkline poolId={p.id} metric="feesUSD" />
                   </div>
-                  <div className="mt-1">
-                    <WhyRatingLink tvlUsd={p.tvl_usd} volumeUsd24h={p.volume_usd_24h} feeTier={p.fee_tier ?? undefined} rating={st} score={sc} />
-                  </div>
                 </td>
                 <td className="px-3 py-2 text-right">
                   {fmtFeeTier(p.fee_tier)}
@@ -699,6 +695,64 @@ export default function PoolsTable() {
       </div>
 
       <p className="text-xs opacity-60">Tip: Use <code>/api/ingest/uniswap?limit=50</code> to seed data. If Supabase env is missing, the endpoint responds with <code>dryRun: true</code>.</p>
+
+      {/* RATING CALCULATION METHODOLOGY */}
+      <div className="mt-8 pt-6 border-t border-white/10">
+        <details className="text-xs opacity-70">
+          <summary className="cursor-pointer font-semibold mb-2 hover:opacity-100">ℹ️ How Pool Safety Scores Are Calculated</summary>
+          <div className="space-y-3 mt-3 pl-4">
+            <div>
+              <div className="font-semibold text-primary-blue mb-1">Base Score: Volume-to-TVL Ratio (0-100 points)</div>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Ratio &gt; 1.0 = 100 pts (Excellent: very active pool)</li>
+                <li>Ratio 0.5-1.0 = 90 pts (Great activity)</li>
+                <li>Ratio 0.3-0.5 = 70 pts (Good activity)</li>
+                <li>Ratio 0.15-0.3 = 50 pts (Moderate)</li>
+                <li>Ratio 0.05-0.15 = 30 pts (Low activity)</li>
+                <li>Ratio &lt; 0.05 = 10 pts (Very low)</li>
+              </ul>
+              <div className="text-[10px] opacity-60 mt-1">Location: src/components/PoolsTable.tsx:60-77 (previewRating function)</div>
+            </div>
+
+            <div>
+              <div className="font-semibold text-warning-yellow mb-1">Impermanent Loss Penalty (-0 to -30 points)</div>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Assumed 10% price move for preview calculation</li>
+                <li>Low risk (IL &lt; 1%): No penalty</li>
+                <li>Medium risk (IL 1-2.5%): -5 pts</li>
+                <li>High risk (IL 2.5-5%): -15 pts</li>
+                <li>Extreme risk (IL &gt; 5%): -30 pts</li>
+              </ul>
+              <div className="text-[10px] opacity-60 mt-1">Location: src/lib/advisor/impermanentLoss.ts</div>
+            </div>
+
+            <div>
+              <div className="font-semibold text-success-green mb-1">Fee Tier Bonus (+0 to +5 points)</div>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>1% fee tier: +5 pts (high volatility pairs)</li>
+                <li>0.3% fee tier: +2 pts (standard pairs)</li>
+                <li>0.05% fee tier: +0 pts (stablecoins)</li>
+              </ul>
+              <div className="text-[10px] opacity-60 mt-1">Location: src/lib/advisor/feeTier.ts</div>
+            </div>
+
+            <div className="mt-4 p-3 rounded bg-surface-elevated border border-white/5">
+              <div className="font-semibold mb-2">Final Score Categories:</div>
+              <ul className="list-disc pl-5 space-y-1">
+                <li className="text-success-green">⭐⭐⭐⭐⭐ Excellent (85-100): Highly active, low risk, optimal fees</li>
+                <li className="text-info-blue">⭐⭐⭐⭐ Good (70-84): Strong metrics, manageable risk</li>
+                <li className="text-warning-yellow">⭐⭐⭐ Fair (55-69): Moderate activity or higher risk</li>
+                <li className="text-warning-orange">⭐⭐ Risky (40-54): Low activity or significant IL risk</li>
+                <li className="text-danger-red">⭐ Critical (&lt;40): Avoid - very low activity or extreme risk</li>
+              </ul>
+            </div>
+
+            <div className="text-[10px] opacity-60 italic mt-4">
+              💡 To modify scoring algorithm, edit src/components/PoolsTable.tsx (previewRating function) and related advisor modules in src/lib/advisor/
+            </div>
+          </div>
+        </details>
+      </div>
     </div>
   );
 }
