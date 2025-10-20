@@ -50,7 +50,13 @@ export default function WalletPositions() {
   const { address, isConnected } = useAccount();
   const { add: addWatch } = useWatchlist();
   const router = useRouter();
-  const searchParams = useSearchParams();
+  let searchParams;
+  try {
+    searchParams = useSearchParams();
+  } catch (e) {
+    console.warn('useSearchParams failed:', e);
+    searchParams = null;
+  }
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [positions, setPositions] = useState<Position[]>([]);
@@ -184,12 +190,16 @@ export default function WalletPositions() {
     if (advisorFilter !== 'all') {
       list = list.filter((p) => {
         try {
-          const color = calculateHealthScore(p).status.color;
+          if (!p) return false;
+          const healthResult = calculateHealthScore(p);
+          if (!healthResult?.status?.color) return false;
+          const color = healthResult.status.color;
           if (advisorFilter === 'risky') return color === 'danger' || color === 'critical';
           if (advisorFilter === 'good') return color === 'good' || color === 'excellent';
           if (advisorFilter === 'excellent') return color === 'excellent';
           return true;
-        } catch {
+        } catch (err) {
+          console.warn('Error filtering position by advisor:', err);
           return false;
         }
       });

@@ -116,7 +116,7 @@ export default function PoolsTable() {
       search = new URLSearchParams(window.location.search);
     }
   } catch {}
-  const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("tvl");
+  const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("rating");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [ratingMin, setRatingMin] = useState<"all" | "fair" | "good" | "excellent">("all");
   const [query, setQuery] = useState("");
