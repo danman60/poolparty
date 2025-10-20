@@ -161,10 +161,54 @@ export default function MintPosition({ poolId, feeTier, token0, token1 }: { pool
     }
   }
 
-  // no-op
+  function applyRecommendedSettings() {
+    try {
+      // Calculate optimal tick range based on current price
+      if (!currentTick || !tickSpacing) {
+        addToast('Cannot calculate range: waiting for pool data', 'warning');
+        return;
+      }
+
+      // Default to ±10% range (safe for most pools)
+      const rangeWidthTicks = Math.floor(2000 / tickSpacing) * tickSpacing;
+      const suggestedLower = Math.floor((currentTick - rangeWidthTicks) / tickSpacing) * tickSpacing;
+      const suggestedUpper = Math.floor((currentTick + rangeWidthTicks) / tickSpacing) * tickSpacing;
+
+      setTickLower(String(suggestedLower));
+      setTickUpper(String(suggestedUpper));
+      setSlippagePct('0.5'); // Conservative slippage
+
+      addToast(`Applied recommended range: ±10% around current price`, 'success');
+    } catch (err) {
+      addToast('Failed to calculate recommended settings', 'error');
+    }
+  }
 
   return (
     <div className="space-y-3">
+      {/* ONE-CLICK RECOMMENDED SETTINGS */}
+      <div className="rounded-lg bg-primary-blue/10 border border-primary-blue/30 p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <div className="font-semibold text-sm mb-1">💡 Use Recommended Settings</div>
+            <div className="text-xs opacity-80">
+              Auto-fills optimal tick range (±10%) and conservative slippage for this pool
+            </div>
+          </div>
+          <Button
+            size="sm"
+            onClick={applyRecommendedSettings}
+            disabled={!currentTick || !tickSpacing}
+            className="whitespace-nowrap bg-primary-blue hover:bg-primary-blue-hover text-white"
+          >
+            Apply Now
+          </Button>
+        </div>
+        {(!currentTick || !tickSpacing) && (
+          <div className="text-xs opacity-70 mt-2">⏳ Loading pool data...</div>
+        )}
+      </div>
+
       <div className="grid gap-3 md:grid-cols-2">
         <div className="space-y-1">
           <label className="block text-xs opacity-70">Amount token0</label>
@@ -246,6 +290,43 @@ export default function MintPosition({ poolId, feeTier, token0, token1 }: { pool
       {validRange && !aligned && (
         <div className="text-xs opacity-70">Ticks must align by spacing {tickSpacing}.</div>
       )}
+
+      {/* RANGE WARNINGS */}
+      {validRange && currentTick && (() => {
+        const lower = Number(tickLower);
+        const upper = Number(tickUpper);
+        const rangeTicks = upper - lower;
+        const recommendedWidthTicks = Math.floor(2000 / (tickSpacing || 1)) * (tickSpacing || 1);
+        const tooNarrow = rangeTicks < recommendedWidthTicks * 0.5;
+        const tooWide = rangeTicks > recommendedWidthTicks * 3;
+
+        if (tooNarrow) {
+          return (
+            <div className="rounded-lg bg-warning-yellow/10 border border-warning-yellow/30 p-3 text-sm">
+              <div className="font-semibold text-warning-yellow">⚠️ Range Too Narrow</div>
+              <div className="text-xs opacity-80 mt-1">
+                Your range may be too concentrated. This increases IL risk if price moves outside your range.
+                Recommended: ±10% around current price (~{recommendedWidthTicks} ticks).
+              </div>
+            </div>
+          );
+        }
+
+        if (tooWide) {
+          return (
+            <div className="rounded-lg bg-info-blue/10 border border-info-blue/30 p-3 text-sm">
+              <div className="font-semibold text-info-blue">ℹ️ Range Very Wide</div>
+              <div className="text-xs opacity-80 mt-1">
+                Your range is wider than recommended. This reduces IL risk but may earn fewer fees.
+                Recommended: ±10% around current price (~{recommendedWidthTicks} ticks).
+              </div>
+            </div>
+          );
+        }
+
+        return null;
+      })()}
+
       <div className="grid gap-3 md:grid-cols-3">
         <div className="space-y-1">
           <label className="block text-xs opacity-70">Slippage tolerance (%)</label>
