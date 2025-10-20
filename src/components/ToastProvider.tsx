@@ -85,7 +85,7 @@ export default function ToastProvider({ children }: { children: React.ReactNode 
     <ToastCtx.Provider value={value}>
       {children}
       <div aria-live="polite" className="fixed top-3 right-3 z-50 flex flex-col gap-2">
-        {toasts.map((t) => (
+        {toasts.filter(t => Date.now() - t.ts < 4500).slice(-3).map((t) => (
           <div
             key={t.id}
             id={`toast-${t.id}`}

@@ -172,6 +172,19 @@ export default function PoolsTable() {
   const filteredCounts = useMemo(() => {
     try {
       let arr = [...(rowsRaw || [])];
+
+      // FILTER: Only show pools with activity in last 30 days
+      const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+      arr = arr.filter((r) => {
+        try {
+          if (!r.updated_at) return false;
+          const updated = new Date(r.updated_at).getTime();
+          return updated >= thirtyDaysAgo;
+        } catch {
+          return false;
+        }
+      });
+
       // Apply search filter
       if (debouncedQuery && debouncedQuery.trim()) {
         const q = debouncedQuery.trim().toLowerCase();
@@ -225,6 +238,19 @@ export default function PoolsTable() {
     try {
       // Always apply client-side sort so header sorting and direction work consistently
       let arr = [...(rowsRaw || [])];
+
+      // FILTER: Only show pools with activity in last 30 days
+      const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+      arr = arr.filter((r) => {
+        try {
+          if (!r.updated_at) return false; // No timestamp = exclude
+          const updated = new Date(r.updated_at).getTime();
+          return updated >= thirtyDaysAgo;
+        } catch {
+          return false;
+        }
+      });
+
       if (debouncedQuery && debouncedQuery.trim()) {
         const q = debouncedQuery.trim().toLowerCase();
         arr = arr.filter((r) => {
