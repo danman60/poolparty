@@ -60,18 +60,35 @@ function previewRating(p: PoolRow): number {
   const tvl = p.tvl_usd ?? 0;
   const vol = p.volume_usd_24h ?? 0;
   const feeRate = (p.fee_tier ?? 0) / 1_000_000; // 3000 -> 0.003
-  // Volume:TVL score (0-10) -> 0-100
+
+  // REALISTIC DeFi Volume:TVL scoring (recalibrated from conservative thresholds)
+  // Most healthy pools have 0.05-0.2 ratios; >0.3 is excellent; >1.0 is exceptional
   const ratio = tvl > 0 ? vol / tvl : 0;
   let vScore = 1;
-  if (ratio > 1.0) vScore = 10; else if (ratio > 0.5) vScore = 9; else if (ratio > 0.3) vScore = 7; else if (ratio > 0.15) vScore = 5; else if (ratio > 0.05) vScore = 3; else vScore = 1;
+
+  // New realistic thresholds based on actual DeFi market data:
+  if (ratio > 0.5) vScore = 10;        // Exceptional - top tier activity
+  else if (ratio > 0.25) vScore = 9;   // Excellent - very high activity
+  else if (ratio > 0.12) vScore = 8;   // Great - strong activity
+  else if (ratio > 0.06) vScore = 7;   // Good - healthy activity
+  else if (ratio > 0.03) vScore = 5;   // Fair - moderate activity
+  else if (ratio > 0.01) vScore = 3;   // Low - minimal but present
+  else vScore = 1;                     // Poor - very low activity
+
   let score = vScore * 10;
-  // IL penalty at 10% move (heuristic, pool-agnostic)
+
+  // REDUCED IL penalty - IL is NORMAL in DeFi, don't over-penalize
+  // Only penalize extreme cases heavily
   const il = ilFromPriceChange(10);
   const risk = ilRiskLevel(il);
-  if (risk === 'medium') score -= 5; else if (risk === 'high') score -= 15; else if (risk === 'extreme') score -= 30;
-  // Fee tier analysis
+  if (risk === 'medium') score -= 3;      // Was -5, now -3
+  else if (risk === 'high') score -= 8;   // Was -15, now -8
+  else if (risk === 'extreme') score -= 15; // Was -30, now -15
+
+  // Fee tier bonus (unchanged - this is already reasonable)
   const tier = analyzeFeeTier(p.fee_tier ?? 0, {});
   score += tier.bonus;
+
   return Math.max(0, Math.min(100, Math.round(score)));
 }
 
@@ -702,26 +719,29 @@ export default function PoolsTable() {
           <summary className="cursor-pointer font-semibold mb-2 hover:opacity-100">ℹ️ How Pool Safety Scores Are Calculated</summary>
           <div className="space-y-3 mt-3 pl-4">
             <div>
-              <div className="font-semibold text-primary-blue mb-1">Base Score: Volume-to-TVL Ratio (0-100 points)</div>
+              <div className="font-semibold text-primary-blue mb-1">Base Score: Volume-to-TVL Ratio (10-100 points)</div>
+              <div className="text-[11px] opacity-80 mb-2 italic">✨ Recalibrated to realistic DeFi market standards (most healthy pools: 0.05-0.2 ratio)</div>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Ratio &gt; 1.0 = 100 pts (Excellent: very active pool)</li>
-                <li>Ratio 0.5-1.0 = 90 pts (Great activity)</li>
-                <li>Ratio 0.3-0.5 = 70 pts (Good activity)</li>
-                <li>Ratio 0.15-0.3 = 50 pts (Moderate)</li>
-                <li>Ratio 0.05-0.15 = 30 pts (Low activity)</li>
-                <li>Ratio &lt; 0.05 = 10 pts (Very low)</li>
+                <li>Ratio &gt; 0.5 = 100 pts (Exceptional - top 1% of pools)</li>
+                <li>Ratio &gt; 0.25 = 90 pts (Excellent - very high activity)</li>
+                <li>Ratio &gt; 0.12 = 80 pts (Great - strong activity)</li>
+                <li>Ratio &gt; 0.06 = 70 pts (Good - healthy activity, typical blue-chip)</li>
+                <li>Ratio &gt; 0.03 = 50 pts (Fair - moderate, acceptable)</li>
+                <li>Ratio &gt; 0.01 = 30 pts (Low - minimal trading)</li>
+                <li>Ratio ≤ 0.01 = 10 pts (Poor - very low activity)</li>
               </ul>
-              <div className="text-[10px] opacity-60 mt-1">Location: src/components/PoolsTable.tsx:60-77 (previewRating function)</div>
+              <div className="text-[10px] opacity-60 mt-1">Location: src/components/PoolsTable.tsx:59-93 (previewRating function)</div>
             </div>
 
             <div>
-              <div className="font-semibold text-warning-yellow mb-1">Impermanent Loss Penalty (-0 to -30 points)</div>
+              <div className="font-semibold text-warning-yellow mb-1">Impermanent Loss Penalty (-0 to -15 points)</div>
+              <div className="text-[11px] opacity-80 mb-2 italic">✨ Reduced penalties - IL is normal in DeFi, not over-penalized</div>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Assumed 10% price move for preview calculation</li>
                 <li>Low risk (IL &lt; 1%): No penalty</li>
-                <li>Medium risk (IL 1-2.5%): -5 pts</li>
-                <li>High risk (IL 2.5-5%): -15 pts</li>
-                <li>Extreme risk (IL &gt; 5%): -30 pts</li>
+                <li>Medium risk (IL 1-2.5%): -3 pts (was -5)</li>
+                <li>High risk (IL 2.5-5%): -8 pts (was -15)</li>
+                <li>Extreme risk (IL &gt; 5%): -15 pts (was -30)</li>
               </ul>
               <div className="text-[10px] opacity-60 mt-1">Location: src/lib/advisor/impermanentLoss.ts</div>
             </div>
