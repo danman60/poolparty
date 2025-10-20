@@ -591,34 +591,34 @@ export default function PoolsTable() {
           <caption className="sr-only">Top pools by TVL, Volume and APR</caption>
           <thead className="bg-black/5 dark:bg-white/5">
             <tr>
-              <th scope="col" className="text-left px-3 py-2" aria-sort={headerAria("pool")}>
+              <th scope="col" className="text-left px-3 py-3" aria-sort={headerAria("pool")}>
                 <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("pool")}>
                   Pool <span>{sortCaret("pool")}</span>
                 </button>
               </th>
-              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("fee")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("fee")}>
-                  Fee <span>{sortCaret("fee")}</span>
+              <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("fee")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("fee")} title="Fee % charged per swap">
+                  Fee % <span>{sortCaret("fee")}</span>
                 </button>
               </th>
-              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("tvl")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("tvl")}>
-                  TVL (USD) <span>{sortCaret("tvl")}</span>
+              <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("tvl")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("tvl")} title="Total Value Locked - how much money is in the pool">
+                  Pool Size <span>{sortCaret("tvl")}</span>
                 </button>
               </th>
-              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("volume")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("volume")}>
-                  Vol 24h (USD) <span>{sortCaret("volume")}</span>
+              <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("volume")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("volume")} title="24-hour trading volume - how active the pool is">
+                  Activity (24h) <span>{sortCaret("volume")}</span>
                 </button>
               </th>
-              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("apr")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("apr")}>
-                  Fee APR (est) <span>{sortCaret("apr")}</span>
+              <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("apr")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("apr")} title="Estimated yearly earnings from trading fees">
+                  💰 Earnings Potential <span>{sortCaret("apr")}</span>
                 </button>
               </th>
-              <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("rating")}>
-                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("rating")}>
-                  Rating <span>{sortCaret("rating")}</span>
+              <th scope="col" className="text-right px-3 py-3" aria-sort={headerAria("rating")}>
+                <button className="inline-flex items-center gap-1 hover:underline" onClick={() => onHeaderSort("rating")} title="Pool health & safety score (0-100)">
+                  ⭐ Safety Score <span>{sortCaret("rating")}</span>
                 </button>
               </th>
               <th scope="col" className="text-right px-3 py-2" aria-sort={headerAria("updated")}>
