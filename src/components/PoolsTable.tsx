@@ -106,16 +106,6 @@ export default function PoolsTable() {
     } catch {}
   }, []);
   const [fee, setFee] = useState<FeeFilter>("all");
-  // Persist rating/sort in URL (fallback if next/navigation hooks unavailable)
-  let router: any = null as any;
-  let search: URLSearchParams | null = null;
-  try {
-    const nav = require('next/navigation');
-    router = nav?.useRouter?.();
-    if (typeof window !== 'undefined') {
-      search = new URLSearchParams(window.location.search);
-    }
-  } catch {}
   const [sortKey, setSortKey] = useState<"pool" | "fee" | "tvl" | "volume" | "apr" | "rating" | "updated">("rating");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [ratingMin, setRatingMin] = useState<"all" | "fair" | "good" | "excellent">("all");
@@ -147,51 +137,8 @@ export default function PoolsTable() {
     refetchIntervalInBackground: true,
   });
 
-  // Persist rating/search/watch filters to URL for shareability
-  try {
-    const nav2 = require('next/navigation');
-    const r2 = nav2?.useRouter?.();
-    if (r2) {
-      // useEffect must be called in render; this dynamic require pattern preserves SSR compatibility like above
-      const React = require('react');
-      const useEffect = React.useEffect;
-      useEffect(() => {
-        try {
-          const params = (typeof window !== 'undefined') ? new URLSearchParams(window.location.search) : new URLSearchParams();
-          params.set('rating', ratingMin);
-          // persist watchOnly as well
-          params.set('watch', String(watchOnly ? 1 : 0));
-          if (momentumOnly) params.set('momentum', 'rising'); else params.delete('momentum');
-          if (alertsOnly) params.set('alerts', '1'); else params.delete('alerts');
-          if (query && query.trim()) params.set('q', query.trim()); else params.delete('q');
-          r2.replace(`/?${params.toString()}`);
-        } catch {}
-      }, [ratingMin, watchOnly, momentumOnly, alertsOnly, query]);
-    }
-  } catch {}
-
-  // Initialize from URL on first render (cheap guard)
-  try {
-    const sk = search?.get("sort");
-    const od = search?.get("order");
-    const rm = search?.get("rating");
-    const w = search?.get("watch");
-    const q = search?.get("q");
-    const mom = search?.get("momentum");
-    const al = search?.get("alerts");
-    if (sk && ["pool","fee","tvl","volume","apr","rating","updated"].includes(sk) && sortKey !== sk) setSortKey(sk as any);
-    if (od && ["asc","desc"].includes(od) && sortDir !== od) setSortDir(od as any);
-    if (rm && ["all","fair","good","excellent"].includes(rm) && ratingMin !== rm) setRatingMin(rm as any);
-    if (w && ["1","true","yes"].includes(w.toLowerCase())) {
-      // Best effort: guard against SSR
-      try { setWatchOnly(true); } catch {}
-    }
-    if (q && q.length) {
-      try { setQuery(q); } catch {}
-    }
-    if (mom && mom.toLowerCase() === 'rising') { try { setMomentumOnly(true); } catch {} }
-    if (al && ["1","true","yes"].includes(al.toLowerCase())) { try { setAlertsOnly(true); } catch {} }
-  } catch {}
+  // URL persistence removed to fix React hooks violations
+  // Filters are now client-side only for stability
 
   const rowsRaw = useMemo(() => data?.data ?? [], [data?.data]);
   const { items: watchlist, add: addWatch, remove: removeWatch } = useWatchlist();
@@ -398,14 +345,6 @@ export default function PoolsTable() {
     }
     // Reset to first page on sort change
     setPage(1);
-    try {
-      if (router) {
-        const params = search || new URLSearchParams();
-        params.set("sort", nextKey);
-        params.set("order", sortDir === "asc" && sortKey === nextKey ? "desc" : "asc");
-        router.replace(`/?${params.toString()}`);
-      }
-    } catch {}
   }
 
   function headerAria(key: typeof sortKey) {
