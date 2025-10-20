@@ -91,20 +91,65 @@ export default function PoolAdvisor({ poolId, tvlUsd, volume24hUsd, feeTier }: {
           <div className="font-medium">{vScore.rating}</div>
           <div className="text-xs opacity-60">Score {vScore.score}/10 - {vScore.description}</div>
         </div>
-        <div className="rounded-lg border border-black/10 dark:border-white/10 p-3 space-y-2">
+        <div className="card card-compact space-y-3">
           <div className="flex items-center justify-between">
-            <div className="text-xs opacity-60">IL @ move</div>
+            <div className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 flex items-center gap-2">
+              IL @ Price Move
+              <MetricTooltip label="Impermanent Loss">
+                Simulate IL at different price movements. Higher % = more volatile price scenarios.
+              </MetricTooltip>
+            </div>
             <div className="inline-flex gap-1">
               {[5,10,20,50].map(p => (
-                <button key={p} className={`px-2 py-0.5 rounded border border-black/10 dark:border-white/10 text-xs ${ilPct===p?'opacity-100':'opacity-70 hover:opacity-100'}`} onClick={() => setIlPct(p)} aria-label={`Set IL scenario ${p}%`}>
+                <button
+                  key={p}
+                  className={`px-2.5 py-1 rounded-md border text-xs font-medium transition-all duration-200 ${
+                    ilPct === p
+                      ? 'bg-primary-blue text-white border-primary-blue shadow-sm'
+                      : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700'
+                  }`}
+                  onClick={() => setIlPct(p)}
+                  aria-label={`Set IL scenario to ${p}% price move`}
+                  title={`Simulate ${p}% price move`}
+                >
                   {p}%
                 </button>
               ))}
             </div>
           </div>
-          <input type="range" min={1} max={80} step={1} value={ilPct} onChange={(e) => setIlPct(Number(e.target.value))} className="w-full" aria-label="Price move percent" />
-          <div className="font-medium">{ilPctLabel}</div>
-          <div className="text-xs opacity-60">Risk: {ilRisk}</div>
+          <div className="relative">
+            <input
+              type="range"
+              min={1}
+              max={80}
+              step={1}
+              value={ilPct}
+              onChange={(e) => setIlPct(Number(e.target.value))}
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-neutral-200 dark:bg-neutral-700"
+              style={{
+                background: `linear-gradient(to right, var(--primary-blue) 0%, var(--primary-blue) ${((ilPct - 1) / 79) * 100}%, var(--neutral-200) ${((ilPct - 1) / 79) * 100}%, var(--neutral-200) 100%)`
+              }}
+              aria-label="Price move percent slider"
+              title={`Current: ${ilPct}% price move`}
+            />
+            <div
+              className="absolute -top-8 left-0 px-2 py-1 bg-neutral-900 text-white text-xs rounded shadow-lg pointer-events-none"
+              style={{ left: `calc(${((ilPct - 1) / 79) * 100}% - 20px)` }}
+            >
+              {ilPct}%
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="font-medium text-lg">{ilPctLabel} IL</div>
+            <div className={`text-xs font-semibold px-2 py-1 rounded ${
+              ilRisk === 'low' ? 'bg-success-green/20 text-success-green' :
+              ilRisk === 'medium' ? 'bg-warning-yellow/20 text-warning-yellow' :
+              ilRisk === 'high' ? 'bg-warning-orange/20 text-warning-orange' :
+              'bg-danger-red/20 text-danger-red'
+            }`}>
+              Risk: {ilRisk}
+            </div>
+          </div>
         </div>
         <div className="rounded-lg border border-black/10 dark:border-white/10 p-3">
           <div className="text-xs opacity-60 flex items-center gap-2">
