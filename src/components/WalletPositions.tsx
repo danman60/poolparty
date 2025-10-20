@@ -7,6 +7,19 @@ import MetricTooltip from "@/components/advisor/MetricTooltip";
 import { fetchTokenPrices, type PriceMap } from "@/lib/prices";
 import { FEATURE_TRENDS, FEATURE_WALLET_STATS } from "@/lib/flags";
 
+// CRITICAL: Safe BigInt conversion - handles decimal strings from API
+function toBigIntSafe(val: string | number | null | undefined): bigint {
+  if (!val) return 0n;
+  const str = String(val);
+  // Strip decimals if present (e.g., "314.084791547652603416" → "314")
+  const intPart = str.includes('.') ? str.split('.')[0] : str;
+  try {
+    return BigInt(intPart || '0');
+  } catch {
+    return 0n;
+  }
+}
+
 import PositionCard from "./PositionCard";
 import PortfolioSummary from "./PortfolioSummary";
 import PortfolioEarnings from "./PortfolioEarnings";
@@ -171,8 +184,8 @@ export default function WalletPositions() {
       list = list.filter((p) => {
         try {
           return (
-            BigInt(p.uncollectedFeesToken0 || "0") > 0n ||
-            BigInt(p.uncollectedFeesToken1 || "0") > 0n
+            toBigIntSafe(p.uncollectedFeesToken0) > 0n ||
+            toBigIntSafe(p.uncollectedFeesToken1) > 0n
           );
         } catch {
           return false;
@@ -216,8 +229,8 @@ export default function WalletPositions() {
           const d1 = Number(p.token1.decimals || 18);
           const px0 = prices[p.token0.id.toLowerCase()] || 0;
           const px1 = prices[p.token1.id.toLowerCase()] || 0;
-          const f0 = Number(BigInt(p.uncollectedFeesToken0 || '0')) / Math.pow(10, d0);
-          const f1 = Number(BigInt(p.uncollectedFeesToken1 || '0')) / Math.pow(10, d1);
+          const f0 = Number(toBigIntSafe(p.uncollectedFeesToken0)) / Math.pow(10, d0);
+          const f1 = Number(toBigIntSafe(p.uncollectedFeesToken1)) / Math.pow(10, d1);
           return f0 * px0 + f1 * px1;
         } catch { return 0; }
       };
@@ -269,13 +282,13 @@ export default function WalletPositions() {
       const px1 = prices[p.token1.id.toLowerCase()] || 0;
       const f0 =
         Number(
-          (BigInt(p.collectedFeesToken0 || "0") +
-            BigInt(p.uncollectedFeesToken0 || "0")) as bigint
+          (toBigIntSafe(p.collectedFeesToken0) +
+            toBigIntSafe(p.uncollectedFeesToken0)) as bigint
         ) / Math.pow(10, d0);
       const f1 =
         Number(
-          (BigInt(p.collectedFeesToken1 || "0") +
-            BigInt(p.uncollectedFeesToken1 || "0")) as bigint
+          (toBigIntSafe(p.collectedFeesToken1) +
+            toBigIntSafe(p.uncollectedFeesToken1)) as bigint
         ) / Math.pow(10, d1);
       sum += f0 * px0 + f1 * px1;
     }
