@@ -349,6 +349,30 @@ p {
   }
 }
 
+/* Visual Hierarchy - Make Ratings & Profit Potential Stand Out */
+tbody td {
+  padding: 1.25rem 1rem;
+}
+
+/* Make rating scores BIG */
+tbody td:nth-child(6) {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Make APR prominently Blue */
+tbody td:nth-child(5) {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+/* Pool name larger and bolder */
+tbody td:first-child a {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
 /* 📱 Mobile-First Utilities */
 
 /* Touch target minimum size (44x44px) */
