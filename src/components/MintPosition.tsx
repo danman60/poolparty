@@ -165,7 +165,7 @@ export default function MintPosition({ poolId, feeTier, token0, token1 }: { pool
     try {
       // Calculate optimal tick range based on current price
       if (!currentTick || !tickSpacing) {
-        addToast('Cannot calculate range: waiting for pool data', 'warning');
+        addToast('Cannot calculate range: waiting for pool data', 'info');
         return;
       }
 
