@@ -26,6 +26,11 @@ export async function GET(req: NextRequest) {
       token1:token1_id(symbol, name)
     `, { count: "exact" });
 
+  // CRITICAL: Only show active pools (activity in last 30 days OR has volume)
+  // This prevents stale/deprecated pools from cluttering the dashboard
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  query = query.or(`updated_at.gte.${thirtyDaysAgo},volume_usd_24h.gt.0`);
+
   if (fee && /^\d+$/.test(fee)) {
     query = query.eq("fee_tier", Number(fee));
   }
