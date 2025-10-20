@@ -79,7 +79,7 @@ export default function NotificationBell() {
       {open && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 mt-2 w-80 max-h-96 overflow-auto rounded-md border border-black/10 dark:border-white/10 bg-white dark:bg-black shadow-lg p-2 z-50"
+          className="dropdown absolute right-0 mt-2 w-80 max-h-96 overflow-auto"
           role="dialog"
           aria-label="Notifications panel"
         >

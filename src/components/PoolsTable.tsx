@@ -462,36 +462,52 @@ export default function PoolsTable() {
         </select>
         <div className="inline-flex items-center gap-2">
           <button
-            className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='all'?'opacity-100':'opacity-70 hover:opacity-100'}`}
+            className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-all duration-200 ${
+              ratingMin === 'all'
+                ? 'bg-primary-blue text-white border-primary-blue shadow-sm'
+                : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:border-neutral-400'
+            }`}
             onClick={() => setRatingMin('all')}
-            aria-pressed={ratingMin==='all'}
-            title="Show all"
+            aria-pressed={ratingMin === 'all'}
+            title="Show all pools"
           >
-            All {filteredCounts.all}
+            All <span className="font-semibold">{filteredCounts.all}</span>
           </button>
           <button
-            className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='fair'?'opacity-100':'opacity-70 hover:opacity-100'}`}
+            className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-all duration-200 ${
+              ratingMin === 'fair'
+                ? 'bg-warning-yellow text-white border-warning-yellow shadow-sm'
+                : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:border-neutral-400'
+            }`}
             onClick={() => setRatingMin('fair')}
-            aria-pressed={ratingMin==='fair'}
-            title="Show fair and better"
+            aria-pressed={ratingMin === 'fair'}
+            title="Show fair and better pools"
           >
-            Fair+ {filteredCounts.warning + filteredCounts.good + filteredCounts.excellent}
+            Fair+ <span className="font-semibold">{filteredCounts.warning + filteredCounts.good + filteredCounts.excellent}</span>
           </button>
           <button
-            className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='good'?'opacity-100':'opacity-70 hover:opacity-100'}`}
+            className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-all duration-200 ${
+              ratingMin === 'good'
+                ? 'bg-info-blue text-white border-info-blue shadow-sm'
+                : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:border-neutral-400'
+            }`}
             onClick={() => setRatingMin('good')}
-            aria-pressed={ratingMin==='good'}
-            title="Show good and excellent"
+            aria-pressed={ratingMin === 'good'}
+            title="Show good and excellent pools"
           >
-            Good+ {filteredCounts.good + filteredCounts.excellent}
+            Good+ <span className="font-semibold">{filteredCounts.good + filteredCounts.excellent}</span>
           </button>
           <button
-            className={`px-2 py-1 rounded border border-black/10 dark:border-white/10 text-xs ${ratingMin==='excellent'?'opacity-100':'opacity-70 hover:opacity-100'}`}
+            className={`px-3 py-1.5 rounded-md border text-xs font-medium transition-all duration-200 ${
+              ratingMin === 'excellent'
+                ? 'bg-success-green text-white border-success-green shadow-sm'
+                : 'bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 hover:border-neutral-400'
+            }`}
             onClick={() => setRatingMin('excellent')}
-            aria-pressed={ratingMin==='excellent'}
-            title="Show excellent only"
+            aria-pressed={ratingMin === 'excellent'}
+            title="Show excellent pools only"
           >
-            Excellent {filteredCounts.excellent}
+            Excellent <span className="font-semibold">{filteredCounts.excellent}</span>
           </button>
         </div>
         <div className="ml-auto flex items-center gap-3">

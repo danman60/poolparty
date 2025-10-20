@@ -40,18 +40,37 @@ export default function RootLayout({
               <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 bg-black text-white dark:bg-white dark:text-black px-3 py-1 rounded">
                 Skip to content
               </a>
-              <header className="sticky top-0 z-10 border-b border-black/10 dark:border-white/10 bg-white/80 dark:bg-black/50 backdrop-blur" role="banner">
-                <nav aria-label="Primary" className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-                  <div className="flex items-center gap-6">
-                    <Link href="/" className="font-semibold tracking-tight" aria-label="PoolParty Home">PoolParty</Link>
-                    <Link href="/" className="text-sm opacity-80 hover:opacity-100">Dashboard</Link>
-                    <Link href="/wallet" className="text-sm opacity-80 hover:opacity-100">Wallet</Link>
-                    {FEATURE_STATUS && (
-                      <Link href="/status" className="text-sm opacity-80 hover:opacity-100">Status</Link>
-                    )}
+              <header className="sticky top-0 z-10 border-b border-black/10 dark:border-white/10 bg-white/90 dark:bg-black/70 backdrop-blur-md shadow-sm" role="banner">
+                <nav aria-label="Primary" className="container mx-auto max-w-[1280px] px-4 py-3 flex items-center justify-between">
+                  <div className="flex items-center gap-8">
+                    <Link href="/" className="font-bold text-lg tracking-tight text-neutral-900 dark:text-white" aria-label="PoolParty Home">
+                      PoolParty
+                    </Link>
+                    <div className="flex items-center gap-6">
+                      <Link
+                        href="/"
+                        className="nav-link text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-blue dark:hover:text-pool-blue transition-colors px-2 py-1 relative"
+                      >
+                        Dashboard
+                      </Link>
+                      <Link
+                        href="/wallet"
+                        className="nav-link text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-blue dark:hover:text-pool-blue transition-colors px-2 py-1 relative"
+                      >
+                        Wallet
+                      </Link>
+                      {FEATURE_STATUS && (
+                        <Link
+                          href="/status"
+                          className="nav-link text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-blue dark:hover:text-pool-blue transition-colors px-2 py-1 relative"
+                        >
+                          Status
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="text-xs opacity-60 hidden md:block">
+                  <div className="flex items-center gap-4">
+                    <div className="text-xs opacity-60 hidden md:block font-mono">
                       {process.env.NEXT_PUBLIC_COMMIT_SHA ? `#${process.env.NEXT_PUBLIC_COMMIT_SHA.slice(0, 7)}` : 'MVP'}
                     </div>
                     {/* Lazy-load bell to avoid SSR use client mismatch */}
@@ -60,7 +79,7 @@ export default function RootLayout({
                 </nav>
               </header>
               <EnvBanner />
-              <main id="main" className="mx-auto max-w-6xl px-4 py-6" role="main">{children}</main>
+              <main id="main" className="container mx-auto max-w-[1280px] px-4 py-8" role="main">{children}</main>
             </ToastProvider>
           </ApolloProviders>
         </Web3Providers>
