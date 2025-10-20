@@ -37,10 +37,10 @@
   --lifeguard-danger: #f97316;     /* Orange - was red */
   --lifeguard-critical: #ef4444;   /* Red - was hot pink */
 
-  /* Background gradients (subtle pool water) */
-  --gradient-from: #e0f7ff;
-  --gradient-via: #cceeff;
-  --gradient-to: #b3e5fc;
+  /* Background gradients (professional neutral) */
+  --gradient-from: #f8fafc;
+  --gradient-via: #f1f5f9;
+  --gradient-to: #e2e8f0;
 
   /* Position card gradients */
   --card-gradient-from: rgba(0, 212, 255, 0.08);
@@ -115,9 +115,10 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
 
-  /* Shadows (subtle depth) */
+  /* Shadows (enhanced depth) */
   --shadow-pool: 0 4px 12px rgba(0, 212, 255, 0.15);
-  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
 
   /* Animation durations (mobile-optimized - faster) */
   --duration-fast: 150ms;
@@ -143,10 +144,10 @@
     --pool-blue-mid: #007799;
     --pool-blue-deep: #005566;
 
-    /* Darker gradients */
-    --gradient-from: #0c1120;
-    --gradient-via: #0a1a28;
-    --gradient-to: #0f1419;
+    /* Darker gradients (professional neutral) */
+    --gradient-from: #0f172a;
+    --gradient-via: #1e293b;
+    --gradient-to: #334155;
 
     /* Dark mode card gradients */
     --card-gradient-from: rgba(0, 168, 204, 0.12);
@@ -662,12 +663,12 @@ p {
   border-radius: var(--radius-lg);
   padding: 24px; /* 3 × 8px grid */
   margin-bottom: 16px; /* 2 × 8px grid */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
@@ -686,34 +687,37 @@ table {
   background: var(--surface);
   border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
 }
 
 thead {
-  background: var(--neutral-50);
-  border-bottom: 2px solid var(--border);
+  background: var(--neutral-100);
+  border-bottom: 2px solid var(--neutral-300);
 }
 
 thead th {
   text-align: left;
-  padding: 12px;
+  padding: 14px 16px;
   font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--neutral-700);
+  font-weight: 700;
+  color: var(--neutral-800);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 tbody tr {
-  border-bottom: 1px solid var(--border-light);
-  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--neutral-200);
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 tbody tr:hover {
   background-color: var(--neutral-50);
+  box-shadow: inset 0 0 0 1px var(--pool-blue-mid);
 }
 
 tbody tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.025);
 }
 
 tbody tr:nth-child(even):hover {
@@ -721,9 +725,10 @@ tbody tr:nth-child(even):hover {
 }
 
 tbody td {
-  padding: 16px 12px; /* Increased for readability */
+  padding: 18px 16px; /* Increased for better readability */
   font-size: 0.875rem;
   color: var(--neutral-900);
+  vertical-align: middle;
 }
 
 /* Mobile Table Responsiveness */
