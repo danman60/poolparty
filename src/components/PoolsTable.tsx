@@ -696,8 +696,8 @@ export default function PoolsTable() {
                 </td>
               </tr>
             )}
-            {!isLoading && !error && displayedRows.map((p) => { const sc = previewRating(p); const st = toStatus(sc); const color = st==='excellent'?'var(--lifeguard-excellent)':st==='good'?'var(--lifeguard-good)':st==='warning'?'var(--lifeguard-warning)':st==='danger'?'var(--lifeguard-danger)':'var(--lifeguard-critical)'; const bg = `color-mix(in srgb, ${color} 6%, transparent)`; const pulse = (st==='danger'||st==='critical') ? ' pulse-soft' : ''; return (
-              <tr key={p.id} className={`border-t border-black/5 dark:border-white/5${pulse}`} style={{ borderLeft: `4px solid ${color}`, background: bg }}>
+            {!isLoading && !error && displayedRows.map((p) => { const sc = previewRating(p); const st = toStatus(sc); const color = st==='excellent'?'var(--lifeguard-excellent)':st==='good'?'var(--lifeguard-good)':st==='warning'?'var(--lifeguard-warning)':st==='danger'?'var(--lifeguard-danger)':'var(--lifeguard-critical)'; const pulse = (st==='danger'||st==='critical') ? ' pulse-soft' : ''; return (
+              <tr key={p.id} className={`border-t border-black/5 dark:border-white/5${pulse}`} style={{ borderLeft: `4px solid ${color}` }}>
                 <td className="px-3 py-2">
                   <div className="font-medium flex items-center gap-2">
                     <WatchlistStar id={p.id} name={getPoolName(p)} />

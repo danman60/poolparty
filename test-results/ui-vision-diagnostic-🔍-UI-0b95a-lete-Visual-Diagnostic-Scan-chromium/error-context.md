@@ -1,0 +1,248 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - navigation "Primary" [ref=e4]:
+      - generic [ref=e5]:
+        - link "PoolParty Home" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - text: PoolParty
+        - link "Dashboard" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "Wallet" [ref=e8] [cursor=pointer]:
+          - /url: /wallet
+        - link "Status" [ref=e9] [cursor=pointer]:
+          - /url: /status
+      - generic [ref=e10]:
+        - generic [ref=e11]: MVP
+        - button "Notifications" [ref=e13]:
+          - img [ref=e14]
+  - generic [ref=e17]: All environment variables configured ✓
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Dashboard" [level=1] [ref=e21]
+        - generic [ref=e23]:
+          - generic "Checking…" [ref=e24]: Checking…
+          - button "Refresh Data" [ref=e26]
+      - paragraph [ref=e27]: Browse top pools and filter by fee tier.
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: Fee tier
+          - combobox [ref=e32]:
+            - option "All" [selected]
+            - option "500"
+            - option "3000"
+            - option "10000"
+          - generic [ref=e33]: Search
+          - textbox "Search pools" [ref=e35]:
+            - /placeholder: e.g. ETH/USDC
+          - generic [ref=e36]: Min rating
+          - combobox [ref=e37]:
+            - option "All" [selected]
+            - option "Good+"
+            - option "Excellent only"
+          - generic [ref=e38]:
+            - button "All 3" [pressed] [ref=e39]
+            - button "Fair+ 2" [ref=e40]
+            - button "Good+ 2" [ref=e41]
+            - button "Excellent 0" [ref=e42]
+          - generic [ref=e43]:
+            - button "Toggle rating legend" [ref=e45]: Rating Legend
+            - generic [ref=e46]: "IL default:"
+            - button "Set global IL default 5%" [ref=e47]: 5%
+            - button "Set global IL default 10%" [ref=e48]: 10%
+            - button "Set global IL default 20%" [ref=e49]: 20%
+            - button "Set global IL default 50%" [ref=e50]: 50%
+            - generic [ref=e51]:
+              - checkbox "Show watchlist only" [ref=e52]
+              - text: Watchlist only
+            - generic [ref=e53]:
+              - checkbox "Show rising momentum only" [ref=e54]
+              - text: Rising only
+            - generic [ref=e55]:
+              - checkbox "Show recent alerts only" [ref=e56]
+              - text: Alerts only
+            - button "Add visible pools to watchlist" [ref=e57]: Add visible to Watchlist
+            - button "Remove visible pools from watchlist" [ref=e58]: Remove visible
+            - button "Remove visible pools from watchlist" [ref=e59]: Remove visible
+            - button "Export pools advisor metrics to CSV" [ref=e60]: Export Pools Advisor CSV
+            - button "Copy advisor summary for pools" [ref=e61]: Copy Advisor Summary
+            - button "Export watchlist to CSV" [disabled] [ref=e62]: Export Watchlist CSV
+            - button "Copy current page link" [ref=e63]: Copy View Link
+            - button "Reset table filters" [ref=e64]: Reset
+            - generic [ref=e65]: Click table headers to sort
+        - generic "Advisor distribution" [ref=e66]:
+          - generic:
+            - generic "Excellent"
+            - generic "Good"
+            - generic "Fair"
+            - generic "Risky"
+            - generic "Critical"
+        - table "Top pools table" [ref=e68]:
+          - caption [ref=e69]: Top pools by TVL, Volume and APR
+          - rowgroup [ref=e70]:
+            - row "Pool Fee TVL (USD) â–¼ Vol 24h (USD) Fee APR (est) Rating Updated" [ref=e71]:
+              - columnheader "Pool" [ref=e72]:
+                - button "Pool" [ref=e73]: Pool
+              - columnheader "Fee" [ref=e74]:
+                - button "Fee" [ref=e75]: Fee
+              - columnheader "TVL (USD) â–¼" [ref=e76]:
+                - button "TVL (USD) â–¼" [ref=e77]:
+                  - text: TVL (USD)
+                  - generic [ref=e78]: â–¼
+              - columnheader "Vol 24h (USD)" [ref=e79]:
+                - button "Vol 24h (USD)" [ref=e80]: Vol 24h (USD)
+              - columnheader "Fee APR (est)" [ref=e81]:
+                - button "Fee APR (est)" [ref=e82]: Fee APR (est)
+              - columnheader "Rating" [ref=e83]:
+                - button "Rating" [ref=e84]: Rating
+              - columnheader "Updated" [ref=e85]:
+                - button "Updated" [ref=e86]: Updated
+          - rowgroup [ref=e87]:
+            - 'row "Add to watchlist undefinedundefined Good 72 Health 72 WBTC / ETH â€¢ 0.30% V:TVL Good Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived 0.30% Fee tier fit Help: Fee tier fit $15,000,000 $7,500,000 54.75% Good 72 Preview Help: Preview 10/19/2025, 11:53:22 AM" [ref=e88]':
+              - 'cell "Add to watchlist undefinedundefined Good 72 Health 72 WBTC / ETH â€¢ 0.30% V:TVL Good Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived" [ref=e89]':
+                - generic [ref=e90]:
+                  - button "Add to watchlist" [ref=e91]: ☆
+                  - link "undefinedundefined" [ref=e92] [cursor=pointer]:
+                    - /url: /pool/0xpool3
+                  - generic "Good 72" [ref=e93]: "72"
+                - generic "Health 72" [ref=e95]
+                - generic [ref=e97]: WBTC / ETH â€¢ 0.30%
+                - generic [ref=e98]:
+                  - generic [ref=e99]: V:TVL
+                  - generic "Good" [ref=e100]
+                - generic [ref=e101]:
+                  - generic [ref=e102]:
+                    - generic [ref=e103]: Volume trend sparkline
+                    - 'button "Help: Volume trend sparkline" [ref=e104]': "?"
+                  - generic [ref=e105]: Vol
+                  - generic [ref=e106]: …
+                  - generic [ref=e107]:
+                    - generic [ref=e108]: Fees trend sparkline
+                    - 'button "Help: Fees trend sparkline" [ref=e109]': "?"
+                  - generic [ref=e110]: Fees
+                  - generic [ref=e111]: …
+                - generic [ref=e113]:
+                  - button "Why this rating?" [ref=e114]: Why?
+                  - generic [ref=e115]:
+                    - generic [ref=e116]: How it's derived
+                    - 'button "Help: How it''s derived" [ref=e117]': "?"
+              - 'cell "0.30% Fee tier fit Help: Fee tier fit" [ref=e118]':
+                - text: 0.30%
+                - generic [ref=e120]:
+                  - generic [ref=e121]: Fee tier fit
+                  - 'button "Help: Fee tier fit" [ref=e122]': "?"
+              - cell "$15,000,000" [ref=e123]
+              - cell "$7,500,000" [ref=e124]
+              - cell "54.75%" [ref=e125]
+              - 'cell "Good 72 Preview Help: Preview" [ref=e126]':
+                - generic [ref=e127]:
+                  - generic "Good 72" [ref=e128]: "72"
+                  - generic [ref=e129]:
+                    - generic [ref=e130]: Preview
+                    - 'button "Help: Preview" [ref=e131]': "?"
+              - cell "10/19/2025, 11:53:22 AM" [ref=e132]
+            - 'row "Add to watchlist undefinedundefined Good 70 Health 70 WETH / USDC â€¢ 0.05% V:TVL Good Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived 0.05% Fee tier fit Help: Fee tier fit $10,000,000 $5,000,000 9.13% Good 70 Preview Help: Preview 10/19/2025, 11:53:22 AM" [ref=e133]':
+              - 'cell "Add to watchlist undefinedundefined Good 70 Health 70 WETH / USDC â€¢ 0.05% V:TVL Good Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived" [ref=e134]':
+                - generic [ref=e135]:
+                  - button "Add to watchlist" [ref=e136]: ☆
+                  - link "undefinedundefined" [ref=e137] [cursor=pointer]:
+                    - /url: /pool/0xpool1
+                  - generic "Good 70" [ref=e138]: "70"
+                - generic "Health 70" [ref=e140]
+                - generic [ref=e142]: WETH / USDC â€¢ 0.05%
+                - generic [ref=e143]:
+                  - generic [ref=e144]: V:TVL
+                  - generic "Good" [ref=e145]
+                - generic [ref=e146]:
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: Volume trend sparkline
+                    - 'button "Help: Volume trend sparkline" [ref=e149]': "?"
+                  - generic [ref=e150]: Vol
+                  - generic [ref=e151]: …
+                  - generic [ref=e152]:
+                    - generic [ref=e153]: Fees trend sparkline
+                    - 'button "Help: Fees trend sparkline" [ref=e154]': "?"
+                  - generic [ref=e155]: Fees
+                  - generic [ref=e156]: …
+                - generic [ref=e158]:
+                  - button "Why this rating?" [ref=e159]: Why?
+                  - generic [ref=e160]:
+                    - generic [ref=e161]: How it's derived
+                    - 'button "Help: How it''s derived" [ref=e162]': "?"
+              - 'cell "0.05% Fee tier fit Help: Fee tier fit" [ref=e163]':
+                - text: 0.05%
+                - generic [ref=e165]:
+                  - generic [ref=e166]: Fee tier fit
+                  - 'button "Help: Fee tier fit" [ref=e167]': "?"
+              - cell "$10,000,000" [ref=e168]
+              - cell "$5,000,000" [ref=e169]
+              - cell "9.13%" [ref=e170]
+              - 'cell "Good 70 Preview Help: Preview" [ref=e171]':
+                - generic [ref=e172]:
+                  - generic "Good 70" [ref=e173]: "70"
+                  - generic [ref=e174]:
+                    - generic [ref=e175]: Preview
+                    - 'button "Help: Preview" [ref=e176]': "?"
+              - cell "10/19/2025, 11:53:22 AM" [ref=e177]
+            - 'row "Add to watchlist undefinedundefined Risky 50 Health 50 DAI / USDT â€¢ 0.01% V:TVL Fair Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived 0.01% Fee tier fit Help: Fee tier fit $8,000,000 $2,000,000 0.91% Risky 50 Preview Help: Preview 10/19/2025, 11:53:22 AM" [ref=e178]':
+              - 'cell "Add to watchlist undefinedundefined Risky 50 Health 50 DAI / USDT â€¢ 0.01% V:TVL Fair Volume trend sparkline Help: Volume trend sparkline Vol … Fees trend sparkline Help: Fees trend sparkline Fees … Why this rating? How it''s derived Help: How it''s derived" [ref=e179]':
+                - generic [ref=e180]:
+                  - button "Add to watchlist" [ref=e181]: ☆
+                  - link "undefinedundefined" [ref=e182] [cursor=pointer]:
+                    - /url: /pool/0xpool2
+                  - generic "Risky 50" [ref=e183]: "50"
+                - generic "Health 50" [ref=e185]
+                - generic [ref=e187]: DAI / USDT â€¢ 0.01%
+                - generic [ref=e188]:
+                  - generic [ref=e189]: V:TVL
+                  - generic "Fair" [ref=e190]
+                - generic [ref=e191]:
+                  - generic [ref=e192]:
+                    - generic [ref=e193]: Volume trend sparkline
+                    - 'button "Help: Volume trend sparkline" [ref=e194]': "?"
+                  - generic [ref=e195]: Vol
+                  - generic [ref=e196]: …
+                  - generic [ref=e197]:
+                    - generic [ref=e198]: Fees trend sparkline
+                    - 'button "Help: Fees trend sparkline" [ref=e199]': "?"
+                  - generic [ref=e200]: Fees
+                  - generic [ref=e201]: …
+                - generic [ref=e203]:
+                  - button "Why this rating?" [ref=e204]: Why?
+                  - generic [ref=e205]:
+                    - generic [ref=e206]: How it's derived
+                    - 'button "Help: How it''s derived" [ref=e207]': "?"
+              - 'cell "0.01% Fee tier fit Help: Fee tier fit" [ref=e208]':
+                - text: 0.01%
+                - generic [ref=e210]:
+                  - generic [ref=e211]: Fee tier fit
+                  - 'button "Help: Fee tier fit" [ref=e212]': "?"
+              - cell "$8,000,000" [ref=e213]
+              - cell "$2,000,000" [ref=e214]
+              - cell "0.91%" [ref=e215]
+              - 'cell "Risky 50 Preview Help: Preview" [ref=e216]':
+                - generic [ref=e217]:
+                  - generic "Risky 50" [ref=e218]: "50"
+                  - generic [ref=e219]:
+                    - generic [ref=e220]: Preview
+                    - 'button "Help: Preview" [ref=e221]': "?"
+              - cell "10/19/2025, 11:53:22 AM" [ref=e222]
+        - generic [ref=e223]:
+          - button "Previous page" [disabled] [ref=e224]: Prev
+          - generic [ref=e225]: Page 1 of 1
+          - button "Next page" [disabled] [ref=e226]: Next
+        - paragraph [ref=e227]:
+          - text: "Tip: Use"
+          - code [ref=e228]: /api/ingest/uniswap?limit=50
+          - text: to seed data. If Supabase env is missing, the endpoint responds with
+          - code [ref=e229]: "dryRun: true"
+          - text: .
+  - button "Open Next.js Dev Tools" [ref=e235] [cursor=pointer]:
+    - img [ref=e236]
+  - alert [ref=e239]
+```
