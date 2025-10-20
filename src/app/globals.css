@@ -3,18 +3,20 @@
 /* 🏊 Pool Party Theme - Mobile-First Design System */
 
 :root {
-  /* Background colors */
-  --background: #f9fafb;
-  --foreground: #0f172a;  /* Darker for better contrast (WCAG AA) */
+  /* Dark theme backgrounds (Metrix-inspired) */
+  --background: #0a0e27;
+  --foreground: #e4e7eb;
 
-  /* Pool Party aqua blues (light mode) */
-  --pool-blue-light: #e0f7ff;
+  /* Pool Party aqua blues (dark theme) */
+  --pool-blue-light: #1e3a5f;
   --pool-blue: #00d4ff;
   --pool-blue-mid: #0099cc;
   --pool-blue-deep: #006b8c;
 
-  /* Primary interactive colors */
-  --primary-blue: #0ea5e9;
+  /* Primary interactive colors (Pool theme) */
+  --primary-blue: #00d4ff;
+  --primary-blue-hover: #33ddff;
+  --primary-blue-dark: #00a8cc;
   --secondary-cyan: #06b6d4;
   --accent-teal: #14b8a6;
 
@@ -24,48 +26,49 @@
   --pool-lime: #32cd32;
 
   /* Semantic status colors (distinct and accessible) */
-  --success-green: #10b981;     /* Success/Excellent */
-  --info-blue: #3b82f6;         /* Info/Good */
-  --warning-yellow: #f59e0b;    /* Warning/Fair */
-  --warning-orange: #f97316;    /* Caution/Risky */
-  --danger-red: #ef4444;        /* Danger/Critical */
+  --success-green: #10b981;
+  --info-blue: #3b82f6;
+  --warning-yellow: #f59e0b;
+  --warning-orange: #f97316;
+  --danger-red: #ef4444;
 
-  /* Lifeguard status colors (mapped to semantic colors) */
-  --lifeguard-excellent: #10b981;  /* Green - was blue */
-  --lifeguard-good: #3b82f6;       /* Blue - was green */
-  --lifeguard-warning: #f59e0b;    /* Amber */
-  --lifeguard-danger: #f97316;     /* Orange - was red */
-  --lifeguard-critical: #ef4444;   /* Red - was hot pink */
+  /* Lifeguard status colors */
+  --lifeguard-excellent: #10b981;
+  --lifeguard-good: #3b82f6;
+  --lifeguard-warning: #f59e0b;
+  --lifeguard-danger: #f97316;
+  --lifeguard-critical: #ef4444;
 
-  /* Background gradients (professional neutral) */
-  --gradient-from: #f8fafc;
-  --gradient-via: #f1f5f9;
-  --gradient-to: #e2e8f0;
+  /* Background gradients (dark) */
+  --gradient-from: #0a0e27;
+  --gradient-via: #0f1419;
+  --gradient-to: #1a1f35;
 
-  /* Position card gradients */
-  --card-gradient-from: rgba(0, 212, 255, 0.08);
-  --card-gradient-to: rgba(147, 51, 234, 0.08);
+  /* Card gradients (subtle purple tint) */
+  --card-gradient-from: rgba(139, 92, 246, 0.05);
+  --card-gradient-to: rgba(0, 212, 255, 0.05);
 
-  /* Surface colors */
-  --surface: #ffffff;
-  --surface-elevated: #ffffff;
+  /* Surface colors (dark cards) */
+  --surface: #1a1f35;
+  --surface-elevated: #242938;
+  --surface-hover: #2d3348;
 
-  /* Neutral gray scale (for text, borders, backgrounds) */
-  --neutral-50: #f8fafc;
-  --neutral-100: #f1f5f9;
-  --neutral-200: #e2e8f0;
-  --neutral-300: #cbd5e1;
-  --neutral-400: #94a3b8;
-  --neutral-500: #64748b;
-  --neutral-600: #475569;
-  --neutral-700: #334155;
-  --neutral-800: #1e293b;
-  --neutral-900: #0f172a;
+  /* Dark theme gray scale */
+  --neutral-50: #1a1f35;
+  --neutral-100: #242938;
+  --neutral-200: #2d3348;
+  --neutral-300: #3d4458;
+  --neutral-400: #6b7280;
+  --neutral-500: #9ca3af;
+  --neutral-600: #d1d5db;
+  --neutral-700: #e5e7eb;
+  --neutral-800: #f3f4f6;
+  --neutral-900: #ffffff;
 
-  /* Border colors */
-  --border: rgba(0, 0, 0, 0.1);
-  --border-strong: rgba(0, 0, 0, 0.2);
-  --border-light: rgba(0, 0, 0, 0.06);
+  /* Border colors (dark theme) */
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-light: rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -132,34 +135,34 @@
   --animate-float: float 4s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Light mode override (if user prefers light) */
+@media (prefers-color-scheme: light) {
   :root {
-    /* Dark mode adjustments */
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f9fafb;
+    --foreground: #0f172a;
 
-    /* Darker pool blues */
-    --pool-blue-light: #0c2b3d;
-    --pool-blue: #00a8cc;
-    --pool-blue-mid: #007799;
-    --pool-blue-deep: #005566;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --surface-hover: #f3f4f6;
 
-    /* Darker gradients (professional neutral) */
-    --gradient-from: #0f172a;
-    --gradient-via: #1e293b;
-    --gradient-to: #334155;
+    --neutral-50: #f8fafc;
+    --neutral-100: #f1f5f9;
+    --neutral-200: #e2e8f0;
+    --neutral-300: #cbd5e1;
+    --neutral-400: #94a3b8;
+    --neutral-500: #64748b;
+    --neutral-600: #475569;
+    --neutral-700: #334155;
+    --neutral-800: #1e293b;
+    --neutral-900: #0f172a;
 
-    /* Dark mode card gradients */
-    --card-gradient-from: rgba(0, 168, 204, 0.12);
-    --card-gradient-to: rgba(147, 51, 234, 0.12);
+    --border: rgba(0, 0, 0, 0.1);
+    --border-strong: rgba(0, 0, 0, 0.2);
+    --border-light: rgba(0, 0, 0, 0.06);
 
-    /* Dark surfaces */
-    --surface: #1a1a1a;
-    --surface-elevated: #242424;
-
-    /* Dark borders */
-    --border: rgba(255, 255, 255, 0.1);
-    --border-strong: rgba(255, 255, 255, 0.2);
+    --gradient-from: #f8fafc;
+    --gradient-via: #f1f5f9;
+    --gradient-to: #e2e8f0;
   }
 }
 
@@ -177,36 +180,38 @@ body {
   -webkit-tap-highlight-color: transparent; /* Remove tap highlight on Android */
 }
 
-/* Typography Scale - Clear Hierarchy */
+/* Typography Scale - Clear Hierarchy (Dark Theme) */
 h1 {
   font-size: 2.5rem;    /* 40px */
   font-weight: 700;
   line-height: 1.2;
   color: var(--neutral-900);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: 2rem;      /* 32px */
   font-weight: 600;
   line-height: 1.3;
-  color: var(--neutral-900);
-  margin-bottom: 0.75rem;
+  color: var(--neutral-800);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
 }
 
 h3 {
   font-size: 1.5rem;    /* 24px */
   font-weight: 600;
   line-height: 1.3;
-  color: var(--neutral-900);
-  margin-bottom: 0.5rem;
+  color: var(--neutral-700);
+  margin-bottom: 0.75rem;
 }
 
 h4 {
   font-size: 1.25rem;   /* 20px */
   font-weight: 600;
   line-height: 1.4;
-  color: var(--neutral-800);
+  color: var(--neutral-700);
   margin-bottom: 0.5rem;
 }
 
@@ -214,14 +219,14 @@ h5 {
   font-size: 1.125rem;  /* 18px */
   font-weight: 600;
   line-height: 1.4;
-  color: var(--neutral-800);
+  color: var(--neutral-600);
   margin-bottom: 0.5rem;
 }
 
 p {
   font-size: 1rem;      /* 16px */
   line-height: 1.6;
-  color: var(--neutral-900);
+  color: var(--neutral-600);
   margin-bottom: 0.75rem;
 }
 
@@ -397,28 +402,32 @@ p {
 
 .btn-primary {
   background-color: var(--primary-blue);
-  color: white;
+  color: var(--neutral-900);
+  font-weight: 600;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #0284c7;
+  background-color: var(--primary-blue-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.5);
 }
 
 .btn-primary:active:not(:disabled) {
   transform: translateY(0);
+  background-color: var(--primary-blue-dark);
 }
 
 .btn-secondary {
   background-color: var(--neutral-200);
   color: var(--neutral-900);
+  border: 1px solid var(--border);
 }
 
 .btn-secondary:hover:not(:disabled) {
   background-color: var(--neutral-300);
+  border-color: var(--primary-blue);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
 }
 
 .btn-danger {
@@ -611,9 +620,9 @@ p {
 
 /* Accessibility: visible focus for keyboard users */
 :focus-visible {
-  outline: 2px solid var(--pool-blue);
+  outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* Screen-reader only helper */
@@ -656,20 +665,21 @@ p {
   }
 }
 
-/* 🎴 Card System - Standardized */
+/* 🎴 Card System - Dark Theme (Metrix-style) */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 24px; /* 3 × 8px grid */
-  margin-bottom: 16px; /* 2 × 8px grid */
+  padding: 28px;
+  margin-bottom: 20px;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
 }
 
 .card-compact {
@@ -680,54 +690,54 @@ p {
   padding: 32px;
 }
 
-/* 📊 Table Styles - Proper Structure */
+/* 📊 Table Styles - Dark Theme (Metrix-inspired) */
 table {
   width: 100%;
   border-collapse: collapse;
   background: var(--surface);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border);
 }
 
 thead {
-  background: var(--neutral-100);
-  border-bottom: 2px solid var(--neutral-300);
+  background: var(--surface-elevated);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 thead th {
   text-align: left;
-  padding: 14px 16px;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--neutral-800);
+  padding: 16px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neutral-500);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 tbody tr {
-  border-bottom: 1px solid var(--neutral-200);
-  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 tbody tr:hover {
-  background-color: var(--neutral-50);
-  box-shadow: inset 0 0 0 1px var(--pool-blue-mid);
+  background-color: var(--surface-hover);
+  box-shadow: inset 3px 0 0 0 var(--primary-blue);
 }
 
 tbody tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.025);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 tbody tr:nth-child(even):hover {
-  background-color: var(--neutral-50);
+  background-color: var(--surface-hover);
 }
 
 tbody td {
-  padding: 18px 16px; /* Increased for better readability */
-  font-size: 0.875rem;
-  color: var(--neutral-900);
+  padding: 20px;
+  font-size: 0.9375rem;
+  color: var(--neutral-700);
   vertical-align: middle;
 }
 
@@ -759,26 +769,26 @@ tbody td {
   }
 }
 
-/* 📝 Form Input Styles */
+/* 📝 Form Input Styles - Dark Theme */
 input,
 select,
 textarea {
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.5;
-  padding: 10px 12px;
+  padding: 12px 16px;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface);
+  border-radius: 8px;
+  background: var(--surface-elevated);
   color: var(--foreground);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  min-height: 44px; /* Touch target */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  min-height: 44px;
 }
 
 input::placeholder,
 select::placeholder,
 textarea::placeholder {
-  color: var(--neutral-500); /* Better contrast */
+  color: var(--neutral-400);
   opacity: 1;
 }
 
@@ -787,15 +797,23 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  background-color: var(--surface);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+}
+
+input:hover:not(:disabled),
+select:hover:not(:disabled),
+textarea:hover:not(:disabled) {
+  border-color: var(--border-strong);
 }
 
 input:disabled,
 select:disabled,
 textarea:disabled {
   background: var(--neutral-100);
-  color: var(--neutral-500);
+  color: var(--neutral-400);
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 /* 📱 Responsive Layout Utilities */
