@@ -23,6 +23,7 @@ import MetricTooltip from "@/components/advisor/MetricTooltip";
 import { FEATURE_CHARTS, FEATURE_MINT } from "@/lib/flags";
 import { getServerSupabase } from "@/lib/supabase/server";
 import { optimalRange } from "@/lib/advisor/rangeOptimization";
+import { formatLargeNumber } from "@/lib/utils";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -235,7 +236,7 @@ function short(addr: string) {
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v === 0 ? "-" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v === 0 ? "-" : formatLargeNumber(v, { prefix: "$", decimals: 2 });
 }
 
 function fmtFeeTier(feeTier: number | null | undefined): string {
