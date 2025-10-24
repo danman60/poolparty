@@ -102,8 +102,10 @@ export default function APRCalculator({ initialTVL, initialVolume24h, feeBps }: 
         <Stat label={compound ? "Your APY (est)" : "Your APR (simple)"} value={fmtPct(userApy)} />
       </div>
 
-      <div className="rounded border border-black/10 dark:border-white/10 p-3 text-sm">
-        Estimated daily fees (you): <strong>{fmtUsd(dailyFeesUser)}</strong>
+      <div className="rounded-lg p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800">
+        <div className="text-xs font-semibold uppercase tracking-wide opacity-70 mb-1">Estimated Daily Fees</div>
+        <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">{fmtUsd(dailyFeesUser)}</div>
+        <div className="text-xs opacity-60 mt-1">Based on your {share}% share of liquidity</div>
       </div>
 
       <p className="text-xs opacity-60">
