@@ -279,9 +279,28 @@ export default function MintPosition({ poolId, feeTier, token0, token1 }: { pool
       <div className="flex items-center gap-2">
         {token0 && needsApprove0 && <ApproveButton token={token0 as `0x${string}`} spender={to} label={`Approve ${symbol0}`} onSuccess={() => allowancesInfo.refetch?.()} />}
         {token1 && needsApprove1 && <ApproveButton token={token1 as `0x${string}`} spender={to} label={`Approve ${symbol1}`} onSuccess={() => allowancesInfo.refetch?.()} />}
-        <Button size="sm" disabled={!canProceed || isPending || isConfirming} onClick={onMint} title={chainId !== mainnet.id ? 'Switch to Ethereum Mainnet' : 'Mint position'}>
-          {isPending ? 'Confirm...' : isConfirming ? 'Minting...' : isSuccess ? 'Minted' : 'Mint'}
-        </Button>
+        <div className="relative group">
+          <Button
+            size="sm"
+            disabled={!canProceed || isPending || isConfirming}
+            onClick={onMint}
+            title={
+              chainId !== mainnet.id
+                ? 'Switch to Ethereum Mainnet'
+                : !canProceed
+                ? 'Enter token amounts and tick range to enable'
+                : 'Mint position'
+            }
+          >
+            {isPending ? 'Confirm...' : isConfirming ? 'Minting...' : isSuccess ? 'Minted' : 'Mint'}
+          </Button>
+          {!canProceed && !isPending && !isConfirming && (
+            <div className="hidden group-hover:block absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 text-xs bg-neutral-900 text-white rounded-lg whitespace-nowrap pointer-events-none">
+              Enter token amounts and tick range to enable
+              <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-neutral-900"></div>
+            </div>
+          )}
+        </div>
         {hash && <a href={`https://etherscan.io/tx/${hash}`} target="_blank" rel="noreferrer" className="text-xs underline">View</a>}
       </div>
 
