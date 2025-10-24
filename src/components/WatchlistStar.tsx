@@ -24,7 +24,11 @@ export default function WatchlistStar({ id, name }: { id: string; name?: string 
   return (
     <button
       onClick={handleToggle}
-      className={`text-xs ${watched ? 'text-yellow-400' : 'opacity-50 hover:opacity-90'}`}
+      className={`text-xs transition-all duration-200 ${
+        watched
+          ? 'text-yellow-400 hover:scale-110 hover:rotate-12'
+          : 'opacity-50 hover:opacity-90 hover:scale-110 hover:text-yellow-300'
+      }`}
       aria-pressed={watched}
       title={watched ? 'Remove from watchlist' : 'Add to watchlist'}
       aria-label={watched ? 'Remove from watchlist' : 'Add to watchlist'}
