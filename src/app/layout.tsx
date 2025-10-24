@@ -24,6 +24,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "PoolParty",
   description: "DeFi pool analytics and wallet tools",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

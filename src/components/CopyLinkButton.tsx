@@ -1,8 +1,27 @@
 "use client";
 
 import React from "react";
-import { Copy } from "lucide-react";
 import { useToast } from "./ToastProvider";
+
+// Simple copy icon as inline SVG (to avoid lucide-react Turbopack issues)
+function CopyIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </svg>
+  );
+}
 
 export default function CopyLinkButton({ label = "Copy Link" }: { label?: string }) {
   const { addToast } = useToast();
@@ -23,7 +42,7 @@ export default function CopyLinkButton({ label = "Copy Link" }: { label?: string
       title="Copy current page link"
       aria-label="Copy current page link"
     >
-      <Copy className="w-4 h-4" />
+      <CopyIcon />
       {label}
     </button>
   );
