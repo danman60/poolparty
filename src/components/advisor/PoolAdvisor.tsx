@@ -6,10 +6,11 @@ import { ilFromPriceChange, breakEvenVolumeUsd, ilRiskLevel } from "@/lib/adviso
 import { volumeTrend, feeMomentum } from "@/lib/advisor/volumeAnalysis";
 import { useRouter, useSearchParams } from "next/navigation";
 import MetricTooltip from "@/components/advisor/MetricTooltip";
+import { formatLargeNumber } from "@/lib/utils";
 
 function fmtUsd(n?: number | null) {
   const v = n ?? 0;
-  return v <= 0 ? "-" : v.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  return v <= 0 ? "-" : formatLargeNumber(v, { prefix: "$", decimals: 2 });
 }
 
 export default function PoolAdvisor({ poolId, tvlUsd, volume24hUsd, feeTier }: { poolId?: string; tvlUsd?: number | null; volume24hUsd?: number | null; feeTier?: number | null }) {

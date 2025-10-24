@@ -1,8 +1,12 @@
 "use client";
 
+import { useToast } from "./ToastProvider";
+
 type Counts = { excellent: number; good: number; warning: number; danger: number; critical: number };
 
 export default function CopyAdvisorSummaryButton({ counts, visibleFeesUsd }: { counts: Counts; visibleFeesUsd?: number | null }) {
+  const { addToast } = useToast();
+
   async function onCopy() {
     try {
       const total = counts.excellent + counts.good + counts.warning + counts.danger + counts.critical;
@@ -20,7 +24,10 @@ export default function CopyAdvisorSummaryButton({ counts, visibleFeesUsd }: { c
       parts.push(`Tip: Try Fair+ and Rising filters for momentum.`);
       const text = `PoolParty Advisor Summary\n` + parts.join('\n');
       await navigator.clipboard.writeText(text);
-    } catch {}
+      addToast('Advisor summary copied to clipboard!', 'success');
+    } catch (err) {
+      addToast('Failed to copy summary', 'error');
+    }
   }
   return (
     <button

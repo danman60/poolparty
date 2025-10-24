@@ -5,6 +5,7 @@ import { scoreVolumeToTVL } from "@/lib/advisor/volumeToTvl";
 import { analyzeFeeTier } from "@/lib/advisor/feeTier";
 import { pairMetaFromSymbols } from "@/lib/advisor/pairMeta";
 import { ilFromPriceChange } from "@/lib/advisor/impermanentLoss";
+import { useToast } from "./ToastProvider";
 
 type Row = {
   id: string;
@@ -28,6 +29,8 @@ function previewRating(p: Row): number {
 }
 
 export default function CopyPoolsAdvisorSummaryButton({ rows, label = "Copy Advisor Summary" }: { rows: Row[]; label?: string }) {
+  const { addToast } = useToast();
+
   async function onCopy() {
     try {
       const list = (rows || []).map((r) => ({ r, score: previewRating(r) })).sort((a, b) => b.score - a.score);
@@ -57,7 +60,10 @@ export default function CopyPoolsAdvisorSummaryButton({ rows, label = "Copy Advi
       }
       const text = `PoolParty Advisor Summary\n` + lines.join('\n');
       await navigator.clipboard.writeText(text);
-    } catch {}
+      addToast(`Pools advisor summary copied (${total} pools)!`, 'success');
+    } catch (err) {
+      addToast('Failed to copy pools summary', 'error');
+    }
   }
   return (
     <button
